@@ -33,32 +33,32 @@ class StatTrackerTest < MiniTest::Test
     ]
 
     team_info_array = [
-      {team_id: 1, franchiseId:23, shortName: "New Jersey",
-      teamName: "Devils", abbreviation: "NJD"},
-      {team_id: 4, franchiseId:16, shortName: "Philadelphia",
-      teamName: "Flyers", abbreviation: "PHI"}
+      {team_id: 1, franchiseid:23, shortname: "New Jersey",
+      teamname: "Devils", abbreviation: "NJD"},
+      {team_id: 4, franchiseid:16, shortname: "Philadelphia",
+      teamname: "Flyers", abbreviation: "PHI"}
     ]
 
     game_team_array = [
-      {game_id: 2012030221, team_id: 3, HoA: 'away', won: false, settled_in: 'OT',
+      {game_id: 2012030221, team_id: 3, hoa: 'away', won: false, settled_in: 'OT',
         head_coach: 'John Tortorella', goals: 2, shots: 35, hits: 44, pim: 8,
-        powerPlayOpportunities: 3, powerPlayGoals: 0, faceOffWinPercentage: 44.8,
+        powerplayopportunities: 3, powerplaygoals: 0, faceoffwinpercentage: 44.8,
         giveaways: 17, takeaways: 7},
-      {game_id: 2012030221, team_id: 6, HoA: 'home', won: true, settled_in: 'OT',
+      {game_id: 2012030221, team_id: 6, hoa: 'home', won: true, settled_in: 'OT',
         head_coach: 'Claude Julien', goals: 3, shots: 48, hits: 51, pim: 6,
-        powerPlayOpportunities: 4, powerPlayGoals: 1, faceOffWinPercentage: 55.2,
+        powerplayopportunities: 4, powerplaygoals: 1, faceoffwinpercentage: 55.2,
         giveaways: 4, takeaways: 5},
-      {game_id: 2012030222, team_id: 3, HoA: 'away', won: false, settled_in: 'REG',
+      {game_id: 2012030222, team_id: 3, hoa: 'away', won: false, settled_in: 'REG',
         head_coach: 'John Tortorella', goals: 2, shots: 37, hits: 33, pim: 11,
-        powerPlayOpportunities: 5, powerPlayGoals: 0, faceOffWinPercentage: 51.7,
+        powerplayopportunities: 5, powerplaygoals: 0, faceoffwinpercentage: 51.7,
         giveaways: 1, takeaways: 4},
-      {game_id: 2012030222, team_id: 6, HoA: 'home', won: true, settled_in: 'REG',
+      {game_id: 2012030222, team_id: 6, hoa: 'home', won: true, settled_in: 'REG',
         head_coach: 'Claude Julien', goals: 5, shots: 32, hits: 36, pim: 19,
-        powerPlayOpportunities: 1, powerPlayGoals: 0, faceOffWinPercentage: 48.3,
+        powerplayopportunities: 1, powerplaygoals: 0, faceoffwinpercentage: 48.3,
         giveaways: 16, takeaways: 6}
     ]
-
-    assert_equal game_team_array, stat_tracker.game_team
+    # binding.pry
+    assert_equal game_team_array, stat_tracker.game_teams
     assert_equal game_array, stat_tracker.game
     assert_equal team_info_array, stat_tracker.team_info
   end
