@@ -1,0 +1,21 @@
+,game_id,season,type,date_time,away_team_id,home_team_id,away_goals,home_goals,outcome,home_rink_side_start,venue,venue_link,venue_time_zone_id,venue_time_zone_offset,venue_time_zone_tz
+0,2012030221,20122013,P,2013-05-16,3,6,2,3,home win OT,left,TD Garden,/api/v1/venues/null,America/New_York,-4,EDT
+1,2012030222,20122013,P,2013-05-19,3,6,2,5,home win REG,left,TD Garden,/api/v1/venues/null,America/New_York,-4,EDT
+2,2012030223,20122013,P,2013-05-21,6,3,2,1,away win REG,right,Madison Square Garden,/api/v1/venues/null,America/New_York,-4,EDT
+3,2012030224,20122013,P,2013-05-23,6,3,3,4,home win OT,right,Madison Square Garden,/api/v1/venues/null,America/New_York,-4,EDT
+4,2012030225,20122013,P,2013-05-25,3,6,1,3,home win REG,left,TD Garden,/api/v1/venues/null,America/New_York,-4,EDT
+5,2012030311,20122013,P,2013-06-02,6,5,3,0,away win REG,left,CONSOL Energy Center,/api/v1/venues/null,America/New_York,-4,EDT
+6,2012030312,20122013,P,2013-06-04,6,5,6,1,away win REG,left,CONSOL Energy Center,/api/v1/venues/null,America/New_York,-4,EDT
+7,2012030313,20122013,P,2013-06-06,5,6,1,2,home win OT,left,TD Garden,/api/v1/venues/null,America/New_York,-4,EDT
+8,2012030314,20122013,P,2013-06-08,5,6,0,1,home win REG,left,TD Garden,/api/v1/venues/null,America/New_York,-4,EDT
+9,2012030231,20122013,P,2013-05-16,17,16,1,4,home win REG,right,United Center,/api/v1/venues/null,America/Chicago,-5,CDT
+10,2012030232,20122013,P,2013-05-18,17,16,4,1,away win REG,right,United Center,/api/v1/venues/null,America/Chicago,-5,CDT
+11,2012030233,20122013,P,2013-05-20,16,17,1,3,home win REG,right,Joe Louis Arena,/api/v1/venues/null,America/Detroit,-4,EDT
+12,2012030234,20122013,P,2013-05-24,16,17,0,2,home win REG,right,Joe Louis Arena,/api/v1/venues/null,America/Detroit,-4,EDT
+13,2012030235,20122013,P,2013-05-26,17,16,1,4,home win REG,right,United Center,/api/v1/venues/null,America/Chicago,-5,CDT
+14,2012030236,20122013,P,2013-05-28,16,17,4,3,away win REG,right,Joe Louis Arena,/api/v1/venues/null,America/Detroit,-4,EDT
+15,2012030237,20122013,P,2013-05-30,17,16,1,2,home win OT,right,United Center,/api/v1/venues/null,America/Chicago,-5,CDT
+16,2012030121,20122013,P,2013-05-02,9,8,4,2,away win REG,right,Centre Bell,/api/v1/venues/null,America/Montreal,-4,EDT
+17,2012030122,20122013,P,2013-05-03,9,8,1,3,home win REG,right,Centre Bell,/api/v1/venues/null,America/Montreal,-4,EDT
+18,2012030123,20122013,P,2013-05-05,8,9,1,6,home win REG,left,Scotiabank Place,/api/v1/venues/null,America/New_York,-4,EDT
+19,2012030124,20122013,P,2013-05-07,8,9,2,3,home win OT,left,Scotiabank Place,/api/v1/venues/null,America/New_York,-4,EDT
