@@ -17,7 +17,7 @@
 - converted to int/float/bool when appropriate
 
 {game_id, team_id, hoa, won, settled_in, head_coach,
- goals, shots, hits, pim, powerplaygoals, powerplayopportunities, faceoffwinpercentage, giveaways, takeaways, teamname, season, type, date_time, venue_time_zone_tz}
+ goals, shots, hits, pim, powerplaygoals, powerplayopportunities, faceoffwinpercentage, giveaways, takeaways, teamname, season, type, date_time, venue_time_zone_tz, home_goals, away_goals}
 
 
 class StatParser
