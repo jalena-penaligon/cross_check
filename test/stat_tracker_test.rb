@@ -3,7 +3,7 @@ require './lib/stat_tracker.rb'
 
 class StatTrackerTest < MiniTest::Test
   def test_it_exists
-    stat_tracker = StatTracker.new([{a: 1}, {b: 2}, {c: 3}], [:a, :b])
+    stat_tracker = StatTracker.new
     assert_instance_of StatTracker, stat_tracker
   end
 
@@ -57,8 +57,8 @@ class StatTrackerTest < MiniTest::Test
         powerplayopportunities: '1', powerplaygoals: '0', faceoffwinpercentage: '48.3',
         giveaways: '16', takeaways: '6'}
     ]
-    assert_equal Array, stat_tracker.data
+    assert_equal Array, stat_tracker.data.class
     assert_equal 3, stat_tracker.data.count
-    assert_equal '2012030221', stat_tracker.data[0][:game_id]
+    assert_equal '2012030221', stat_tracker.data[0][0][:game_id]
   end
 end
