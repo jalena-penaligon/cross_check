@@ -51,7 +51,8 @@ class StatParserTest < MiniTest::Test
 
   def test_find_hash_to_merge
     hash_to_merge = {id: 1, t:1, s:3}
-    merge_from_array = [{id:1, v:6},{id:2,v:5}]
+    merge_from_array = [{id:1, v:6},
+                        {id:2,v:5}]
     merge_key = :id
 
     expected = {id:1, v:6}
@@ -100,31 +101,31 @@ class StatParserTest < MiniTest::Test
   end
 
   def test_it_has_merged_data
-    skip
+
     expected_data = [ {game_id: 2012030221,  team_id: 3,  hoa: "away",  won: false,
       settled_in: "OT",  head_coach: "John Tortorella",  goals: 2,  shots: 35,
       hits: 44,  pim: 8,  powerplayopportunities: 3,  away_goals: 2,  home_goals: 3,
       powerplaygoals: 0,  faceoffwinpercentage: 44.8,  giveaways: 17,  takeaways: 7,
       season: 20122013,  type: "P",  date_time: "2013-05-16",  venue_time_zone_tz: "EDT",
-      teamname: "Rangers"}, {game_id: 2012030222,  team_id: 3,  hoa: "away",
-      won: false,  settled_in: "REG",  head_coach: "John Tortorella",  goals: 2,
-      shots: 37,  hits: 33,  pim: 11,  powerplayopportunities: 5,  away_goals: 2,
-      home_goals: 5,  powerplaygoals: 0,  faceoffwinpercentage: 51.7,
-      giveaways: 1,  takeaways: 4,  season: 20122013,  type: "P",
-      date_time: "2013-05-19",  venue_time_zone_tz: "EDT",  teamname: "Rangers"},
+      teamname: "Rangers"},
       {game_id: 2012030221,  team_id: 6,  hoa: "home",  won: true,  settled_in: "OT",
       head_coach: "Claude Julien",  goals: 3,  shots: 48,  hits: 51,  pim: 6,
       powerplayopportunities: 4,  away_goals: 2,  home_goals: 3,
       powerplaygoals: 1,  faceoffwinpercentage: 55.2,  giveaways: 4,  takeaways: 5,
       season: 20122013,  type: "P",  date_time: "2013-05-16",
-      venue_time_zone_tz: "EDT",  teamname: "Bruins"},
+      venue_time_zone_tz: "EDT",  teamname: "Bruins"},{game_id: 2012030222,  team_id: 3,  hoa: "away",
+      won: false,  settled_in: "REG",  head_coach: "John Tortorella",  goals: 2,
+      shots: 37,  hits: 33,  pim: 11,  powerplayopportunities: 5,  away_goals: 2,
+      home_goals: 5,  powerplaygoals: 0,  faceoffwinpercentage: 51.7,
+      giveaways: 1,  takeaways: 4,  season: 20122013,  type: "P",
+      date_time: "2013-05-19",  venue_time_zone_tz: "EDT",  teamname: "Rangers"},
       {game_id: 2012030222,  team_id: 6,  hoa: "home",  won: true,  settled_in: "REG",
       head_coach: "Claude Julien",  goals: 5,  shots: 32,  hits: 36,  pim: 19,
       powerplayopportunities: 1,  away_goals: 2,  home_goals: 5,  powerplaygoals: 0,
       faceoffwinpercentage: 48.3,  giveaways: 16,  takeaways: 6,  season: 20122013,
       type: "P",  date_time: "2013-05-19",  venue_time_zone_tz: "EDT",  teamname: "Bruins"}]
 
-    assert_equal expected_data, @stat_parser.merged_data
+      assert_equal expected_data, @stat_parser.merged_data
   end
 
 end
