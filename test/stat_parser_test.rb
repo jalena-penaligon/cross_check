@@ -115,6 +115,14 @@ class StatParserTest < MiniTest::Test
     assert_equal expected, actual
   end
 
+  def test_it_can_convert_values_to_floats
+    simple_hash = { faceoffwinpercentage:"52.5", shots:"5", name:"Blackhawks"}
+
+    actual = @stat_parser.convert_to_float(simple_hash)
+    expected = {faceoffwinpercentage:52.5, shots: "5", name: "Blackhawks"}
+    assert_equal expected, actual
+  end
+
   def test_it_can_delete_keys
       simple_hash = {nil => 0, link:3, shots:5}
 
