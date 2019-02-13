@@ -56,37 +56,38 @@ class StatTrackerTest < MiniTest::Test
     ]
 
     game_team_array = [
-      {game_id: '2012030221', team_id: '3', hoa: 'away', won: 'False', settled_in: 'OT',
+      {nil =>"0", game_id: '2012030221', team_id: '3', hoa: 'away', won: 'False', settled_in: 'OT',
         head_coach: 'John Tortorella', goals: '2', shots: '35', hits: '44', pim: '8',
         powerplayopportunities: '3', powerplaygoals: '0', faceoffwinpercentage: '44.8',
         giveaways: '17', takeaways: '7'},
-      {game_id: '2012030221', team_id: '6', hoa: 'home', won: 'true', settled_in: 'OT',
+      {nil =>"1", game_id: '2012030221', team_id: '6', hoa: 'home', won: 'True', settled_in: 'OT',
         head_coach: 'Claude Julien', goals: '3', shots: '48', hits: '51', pim: '6',
         powerplayopportunities: '4', powerplaygoals: '1', faceoffwinpercentage: '55.2',
         giveaways: '4', takeaways: '5'},
-      {game_id: '2012030222', team_id: '3', hoa: 'away', won: 'false', settled_in: 'REG',
+      {nil =>"2", game_id: '2012030222', team_id: '3', hoa: 'away', won: 'False', settled_in: 'REG',
         head_coach: 'John Tortorella', goals: '2', shots: '37', hits: '33', pim: '11',
         powerplayopportunities: '5', powerplaygoals: '0', faceoffwinpercentage: '51.7',
         giveaways: '1', takeaways: '4'},
-      {game_id: '2012030222', team_id: '6', hoa: 'home', won: 'True', settled_in: 'REG',
+      {nil =>"3", game_id: '2012030222', team_id: '6', hoa: 'home', won: 'True', settled_in: 'REG',
         head_coach: 'Claude Julien', goals: '5', shots: '32', hits: '36', pim: '19',
         powerplayopportunities: '1', powerplaygoals: '0', faceoffwinpercentage: '48.3',
         giveaways: '16', takeaways: '6'}
     ]
 
     team_info_array = [
-      {team_id: '1', franchiseid:'23', shortname: 'New Jersey',
-      teamname: 'Devils', abbreviation: 'NJD'},
-      {team_id: '4', franchiseid:'16', shortname: 'Philadelphia',
-      teamname: 'Flyers', abbreviation: 'PHI'}
+      {nil => "0", team_id: '1', franchiseid:'23', shortname: 'New Jersey',
+      teamname: 'Devils', abbreviation: 'NJD', :link=>"/api/v1/teams/1"},
+      {nil =>"1", team_id: '4', franchiseid:'16', shortname: 'Philadelphia',
+      teamname: 'Flyers', abbreviation: 'PHI', :link=>"/api/v1/teams/4"}
     ]
 
-    actual = open_all_csvs(test_csvs)
+    actual = stat_tracker.open_all_csvs(test_csvs)
 
     assert_equal game_team_array, actual[0]
     assert_equal game_array, actual[1]
     assert_equal team_info_array, actual[2]
   end
+
   def test_from_csv_works
     game_path = './data/game_very_small.csv'
     team_path = './data/team_info.csv'
