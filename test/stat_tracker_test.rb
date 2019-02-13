@@ -32,25 +32,27 @@ class StatTrackerTest < MiniTest::Test
     assert_equal game_array, actual
   end
 
-  def test_from_csv_works
+  def test_open_all_csvs_works
+    stat_tracker = StatTracker.new
     game_path = './data/game_very_small.csv'
-    team_path = './data/team_info.csv'
+    team_path = './data/team_info_very_small.csv'
     game_teams_path = './data/game_teams_stats_very_small.csv'
     test_csvs ={
       games: game_path,
       teams: team_path,
       game_teams: game_teams_path
     }
-
-    stat_tracker = StatTracker.from_csv(test_csvs)
-
-
-
-    team_info_array = [
-      {team_id: '1', franchiseid:'23', shortname: 'New Jersey',
-      teamname: 'Devils', abbreviation: 'NJD'},
-      {team_id: '4', franchiseid:'16', shortname: 'Philadelphia',
-      teamname: 'Flyers', abbreviation: 'PHI'}
+    game_array = [
+      {nil =>"0", game_id: '2012030221', season: '20122013', type: 'P', date_time: '2013-05-16',
+        away_team_id: '3', home_team_id: '6', away_goals: '2', home_goals: '3',
+        outcome: 'home win OT', home_rink_side_start: 'left', venue: 'TD Garden',
+        venue_link: "/api/v1/venues/null", venue_time_zone_id: 'America/New_York', venue_time_zone_offset: '-4',
+        venue_time_zone_tz: 'EDT'},
+      {nil =>"1", game_id: '2012030222', season: '20122013', type: 'P', date_time: '2013-05-19',
+        away_team_id: '3', home_team_id: '6', away_goals: '2', home_goals: '5',
+        outcome: 'home win REG', home_rink_side_start: 'left', venue: 'TD Garden',
+        venue_link: "/api/v1/venues/null", venue_time_zone_id: 'America/New_York', venue_time_zone_offset: '-4',
+        venue_time_zone_tz: 'EDT'}
     ]
 
     game_team_array = [
@@ -71,6 +73,32 @@ class StatTrackerTest < MiniTest::Test
         powerplayopportunities: '1', powerplaygoals: '0', faceoffwinpercentage: '48.3',
         giveaways: '16', takeaways: '6'}
     ]
+
+    team_info_array = [
+      {team_id: '1', franchiseid:'23', shortname: 'New Jersey',
+      teamname: 'Devils', abbreviation: 'NJD'},
+      {team_id: '4', franchiseid:'16', shortname: 'Philadelphia',
+      teamname: 'Flyers', abbreviation: 'PHI'}
+    ]
+
+    actual = open_all_csvs(test_csvs)
+
+    assert_equal game_team_array, actual[0]
+    assert_equal game_array, actual[1]
+    assert_equal team_info_array, actual[2]
+  end
+  def test_from_csv_works
+    game_path = './data/game_very_small.csv'
+    team_path = './data/team_info.csv'
+    game_teams_path = './data/game_teams_stats_very_small.csv'
+    test_csvs ={
+      games: game_path,
+      teams: team_path,
+      game_teams: game_teams_path
+    }
+
+    stat_tracker = StatTracker.from_csv(test_csvs)
+
     assert_equal Array, stat_tracker.data.class
     assert_equal Hash, stat_tracker.data[0].class
     assert_equal 4, stat_tracker.data.length
