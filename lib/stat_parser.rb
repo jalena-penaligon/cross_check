@@ -1,5 +1,6 @@
 require 'pry'
 require './lib/conversions'
+
 class StatParser
   include Conversions
   def initialize(array_raw_data, array_merge_keys)
