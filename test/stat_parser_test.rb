@@ -90,7 +90,7 @@ class StatParserTest < MiniTest::Test
       :percent => 48.8, :hoa=>"home"}
     ]
 
-    actual = @stat_parser.convert_data_types(second_merge,
+    actual = @stat_parser.convert_data_types(array_of_hashes,
                                              to_delete,
                                              to_int,
                                              to_float,
