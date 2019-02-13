@@ -24,28 +24,30 @@ class StatParser
   end
 
   def convert_data_types(array_of_hashes)
-    to_boolean = [:won]
 
     converted_values = array_of_hashes.map do |hash|
         hash = delete_keys(hash)
         hash = convert_to_int(hash)
         hash = convert_to_float(hash)
-
-        to_boolean.each do |key|
-          if hash[key] == "False"
-            hash[key] = false
-          else
-            hash[key] = true
-          end
-        end
-
-
+        hash = convert_to_boolean(hash)
 
       hash
     end
 
   end
 
+  def convert_to_boolean(hash)
+    to_boolean = [:won]
+    to_boolean.each do |key|
+      if hash[key] == "False"
+        hash[key] = false
+      else
+        hash[key] = true
+      end
+      return hash
+    end
+
+  end
   def convert_to_float(hash)
     to_float = [:faceoffwinpercentage]
 
