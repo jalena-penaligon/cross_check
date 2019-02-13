@@ -60,8 +60,8 @@ class StatTrackerTest < MiniTest::Test
         giveaways: '16', takeaways: '6'}
     ]
     assert_equal Array, stat_tracker.data.class
-  
-    # assert_equal 3, stat_tracker.data.count
-    # assert_equal '2012030221', [0][0][:game_id]
+    assert_equal Hash, stat_tracker.data[0].class
+    assert_equal 4, stat_tracker.data.length
+    assert_equal 2012030221, stat_tracker.data[0][:game_id]
   end
 end
