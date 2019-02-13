@@ -18,7 +18,10 @@ class StatTracker
     game = stat_tracker.open_csv(locations[:games])
     team_info = stat_tracker.open_csv(locations[:teams])
 
-    stat_tracker.data = [game_teams, game, team_info]
+    raw_data = [game_teams, game, team_info]
+    stat_parser = StatParser.new(raw_data, stat_tracker.merge_ids)
+    stat_tracker.data = stat_parser.merge_data
+
     return stat_tracker
   end
 
@@ -27,6 +30,5 @@ class StatTracker
     contents_hash = contents.map do |row|
       row.to_hash
     end
-
   end
 end

@@ -2,18 +2,19 @@ require 'pry'
 class StatParser
   attr_reader :merged_data
   def initialize(array_raw_data, array_merge_keys)
-    @merged_data = merge_data(array_raw_data, array_merge_keys)
+    @array_raw_data = array_raw_data
+    @array_merge_keys = array_merge_keys
   end
 
-  def merge_data(array_raw_data, array_merge_keys)
-    #game_team = array_raw_data[0]
-    #game_data = array_raw_data[1]
-    #team_info = array_raw_data[2]
+  def merge_data
+    #game_team = @array_raw_data[0]
+    #game_data = @array_raw_data[1]
+    #team_info = @array_raw_data[2]
 
-    first_merge = merge_hash_arrays(array_raw_data[0], array_raw_data[1], :game_id)
+    first_merge = merge_hash_arrays(@array_raw_data[0], @array_raw_data[1], @array_merge_keys[0])
 
 
-    second_merge = merge_hash_arrays(first_merge, array_raw_data[2], :team_id)
+    second_merge = merge_hash_arrays(first_merge, @array_raw_data[2], @array_merge_keys[1])
 
     to_delete = [nil, :venue_time_zone_id, :venue_time_zone_offset, :home_rink_side_start, :franchiseid,
      :venue_link, :venue, :abbreviation, :link, :shortname, :away_team_id, :home_team_id, :outcome]
@@ -58,6 +59,7 @@ class StatParser
 
 
   def merge_hash_arrays(merge_to_array, merge_from_array, merge_key)
+    # binding.pry
     merge_to_array.map do |hash_to_merge|
       to_merge = find_hash_to_merge(hash_to_merge, merge_from_array, merge_key)
      hash_to_merge.merge(to_merge)
@@ -75,7 +77,7 @@ class StatParser
 end
 
 
-### array_raw_data is three arrays of hashes
+### @array_raw_data is three arrays of hashes
 ### 1st hash is of game_team data
 ### 2nd hash is of  game data
 ### 3rd hash is team_info data

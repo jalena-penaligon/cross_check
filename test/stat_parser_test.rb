@@ -125,7 +125,7 @@ class StatParserTest < MiniTest::Test
       faceoffwinpercentage: 48.3,  giveaways: 16,  takeaways: 6,  season: 20122013,
       type: "P",  date_time: "2013-05-19",  venue_time_zone_tz: "EDT",  teamname: "Bruins"}]
 
-      assert_equal expected_data, @stat_parser.merged_data
+      assert_equal expected_data, @stat_parser.merge_data
   end
 
 end
