@@ -14,12 +14,13 @@ class StatParser
 
   def merge_data
     #[game_team, game, team] = @array_raw_data
+    current_data = @array_raw_data[0]
+    to_merge = @array_raw_data.slice(1..-1)
+    to_merge.zip(@array_merge_keys).each do |array_to_merge, merge_key|
+      current_data = merge_hash_arrays(current_data, array_to_merge, merge_key)
+    end
 
-    first_merge = merge_hash_arrays(@array_raw_data[0], @array_raw_data[1], @array_merge_keys[0])
-
-    second_merge = merge_hash_arrays(first_merge, @array_raw_data[2], @array_merge_keys[1])
-
-    return second_merge
+    return current_data
   end
 
 
