@@ -4,13 +4,15 @@
 ### Responsibilities:
 
 - Create schedule for due-dates
-- Create new test file for StatParser
-- Create new test file for StatTracker
-- Build StatParser
-  - Deciding how to merge data
-  - See `Data Row` description below
-  - StatParser should pre-process to int/bool
+- Create new test file for StatTracker -- to be PR'd
+- PR for StatParser (and push)
+
+- SH - methods for `iteration 2`
+- WP - test for `iteration3`
+- JP - methods for `iteration 3`
+
 - Starting to build iterations
+
 
 **Data Row**
 - All symbols
