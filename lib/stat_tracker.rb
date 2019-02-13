@@ -17,7 +17,7 @@ class StatTracker
     raw_data = stat_tracker.open_all_csvs(locations)
 
     stat_parser = StatParser.new(raw_data, stat_tracker.merge_ids)
-    stat_tracker.data = stat_parser.merge_data
+    stat_tracker.data = stat_parser.parse_data
 
     return stat_tracker
   end

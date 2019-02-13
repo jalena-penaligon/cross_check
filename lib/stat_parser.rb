@@ -1,6 +1,6 @@
 require 'pry'
 class StatParser
-  attr_reader :merged_data
+  include Conversions
   def initialize(array_raw_data, array_merge_keys)
     @array_raw_data = array_raw_data
     @array_merge_keys = array_merge_keys
@@ -8,8 +8,8 @@ class StatParser
 
   def parse_data
     merged_data = merge_data
-
     converted_data = convert_data_types(merged_data)
+    return converted_data
   end
 
   def merge_data
@@ -26,28 +26,31 @@ class StatParser
   def convert_data_types(array_of_hashes)
 
     converted_values = array_of_hashes.map do |hash|
-        hash = delete_keys(hash)
-        hash = convert_to_int(hash)
-        hash = convert_to_float(hash)
-        hash = convert_to_boolean(hash)
+      hash = delete_keys(hash)
+      hash = convert_to_int(hash)
+      hash = convert_to_float(hash)
+      hash = convert_to_boolean(hash)
 
       hash
     end
 
+    return converted_values
   end
 
   def convert_to_boolean(hash)
     to_boolean = [:won]
+
     to_boolean.each do |key|
       if hash[key] == "False"
         hash[key] = false
       else
         hash[key] = true
       end
-      return hash
     end
 
+    return hash
   end
+
   def convert_to_float(hash)
     to_float = [:faceoffwinpercentage]
 
@@ -79,13 +82,13 @@ class StatParser
                 :home_rink_side_start, :franchiseid, :venue_link, :venue,
                 :abbreviation, :link, :shortname, :away_team_id, :home_team_id,
                 :outcome]
+
     to_delete.each do |key|
       hash.delete(key)
     end
 
     return hash
   end
-
 
   def merge_hash_arrays(merge_to_array, merge_from_array, merge_key)
     # binding.pry
@@ -100,8 +103,6 @@ class StatParser
       merge_from_hash[merge_key] == hash_to_merge[merge_key]
     end
   end
-
-
 
 end
 
