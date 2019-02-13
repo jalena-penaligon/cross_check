@@ -71,6 +71,34 @@ class StatParserTest < MiniTest::Test
     assert_equal expected, actual
   end
 
+  def test_it_converted_data_types
+    array_of_hashes = [
+      {nil => "0", :venue_id => "api_thing",:team_id => "6", :won => "True",
+      :percent => "51.2", :hoa=>"away"},
+      {nil => "1", :venue_id => "api_thing2",:team_id => "7", :won => "False",
+      :percent => "48.8", :hoa=>"home"}
+    ]
+    to_delete = [nil,:venue_id]
+    to_int = [:team_id]
+    to_float = [:percent]
+    to_bool = [:won]
+
+    expected = [
+      {:team_id => 6, :won => true,
+      :percent => 51.2, :hoa=>"away"},
+      {:team_id => 7, :won => false,
+      :percent => 48.8, :hoa=>"home"}
+    ]
+
+    actual = @stat_parser.convert_data_types(second_merge,
+                                             to_delete,
+                                             to_int,
+                                             to_float,
+                                             to_boolean)
+
+    assert_equal expected, actual
+  end
+
   def test_it_has_merged_data
     skip
     expected_data = [ {game_id: 2012030221,  team_id: 3,  hoa: "away",  won: false,
