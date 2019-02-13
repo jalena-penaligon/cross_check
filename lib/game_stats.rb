@@ -20,4 +20,12 @@ module GameStats
     end
   total_score = (blowout_score[:away_goals] - blowout_score[:home_goals]).abs
   end
+
+  def percentage_home_wins
+    number_home_wins = @data.select do |hash|
+      hash[:hoa] == "home" && hash[:won] == true
+    end
+    number_of_games = ((@data.count)/2).to_f
+    percent_home_wins = ((number_home_wins.count) / number_of_games).round(3)
+  end
 end
