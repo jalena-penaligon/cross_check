@@ -46,15 +46,14 @@ class GameStatsTest < MiniTest::Test
     assert_equal 0.7, @small_data.percentage_home_wins
     # assert_equal 0.55, @data.percentage_home_wins
   end
-  #
-  # def test_calculate_percentage_visitor_wins
-  #   skip
-  #
-  #   assert_equal 0.0, @v_small_data.percentage_visitor_wins
-  #   assert_equal 0.3, @small_data.percentage_visitor_wins
-  #   assert_equal 0.45, @data.percentage_visitor_wins
-  # end
-  #
+
+  def test_calculate_percentage_visitor_wins
+    # binding.pry
+    assert_equal 0.0, @v_small_data.percentage_visitor_wins
+    assert_equal 0.3, @small_data.percentage_visitor_wins
+    # assert_equal 0.45, @data.percentage_visitor_wins
+  end
+
   # def test_calculate_total_games_by_season
   #   skip
   #
