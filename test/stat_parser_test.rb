@@ -107,6 +107,14 @@ class StatParserTest < MiniTest::Test
       assert_equal expected, actual
   end
 
+  def test_it_can_delete_keys
+      simple_hash = {nil => 0, link:3, shots:5}
+
+      actual = @stat_parser.delete_keys(simple_hash)
+      expected = {shots:5}
+      assert_equal expected, actual
+  end
+
   def test_it_parses_data
 
     expected_data = [ {game_id: 2012030221,  team_id: 3,  hoa: "away",  won: false,
