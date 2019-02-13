@@ -9,17 +9,8 @@ class StatTrackerTest < MiniTest::Test
     assert_instance_of StatTracker, stat_tracker
   end
 
-  def test_from_csv_works
-    game_path = './data/game_very_small.csv'
-    team_path = './data/team_info.csv'
-    game_teams_path = './data/game_teams_stats_very_small.csv'
-    test_csvs ={
-      games: game_path,
-      teams: team_path,
-      game_teams: game_teams_path
-    }
-
-    stat_tracker = StatTracker.from_csv(test_csvs)
+  def test_open_csv_works
+    stat_tracker = StatTracker.new
 
     game_array = [
       {game_id: '2012030221', season: '20122013', type: 'P', date_time: '2013-05-16',
@@ -33,6 +24,25 @@ class StatTrackerTest < MiniTest::Test
         venue_time_zone_id: 'America/New_York', venue_time_zone_offset: '-4',
         venue_time_zone_tz: 'EDT'}
     ]
+
+    game_path = './data/game_very_small.csv'
+
+    assert_equal game_array, stat_tracker.open_csv(game_path)
+  end
+  
+  def test_from_csv_works
+    game_path = './data/game_very_small.csv'
+    team_path = './data/team_info.csv'
+    game_teams_path = './data/game_teams_stats_very_small.csv'
+    test_csvs ={
+      games: game_path,
+      teams: team_path,
+      game_teams: game_teams_path
+    }
+
+    stat_tracker = StatTracker.from_csv(test_csvs)
+
+
 
     team_info_array = [
       {team_id: '1', franchiseid:'23', shortname: 'New Jersey',
