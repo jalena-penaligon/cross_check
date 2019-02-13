@@ -79,10 +79,6 @@ class StatParserTest < MiniTest::Test
       {nil => "1", :venue_link => "api_thing2",:team_id => "7", :won => "False",
       :faceoffwinpercentage => "48.8", :hoa=>"home"}
     ]
-    to_delete = [nil,:venue_id]
-    to_int = [:team_id]
-    to_float = [:percent]
-    to_boolean = [:won]
 
     expected = [
       {:team_id => 6, :won => true,
@@ -91,11 +87,7 @@ class StatParserTest < MiniTest::Test
       :faceoffwinpercentage => 48.8, :hoa=>"home"}
     ]
 
-    actual = @stat_parser.convert_data_types(array_of_hashes)#,
-                                             # to_delete,
-                                             # to_int,
-                                             # to_float,
-                                             # to_boolean)
+    actual = @stat_parser.convert_data_types(array_of_hashes)
 
     assert_equal expected, actual
   end
