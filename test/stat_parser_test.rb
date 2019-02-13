@@ -81,7 +81,7 @@ class StatParserTest < MiniTest::Test
     to_delete = [nil,:venue_id]
     to_int = [:team_id]
     to_float = [:percent]
-    to_bool = [:won]
+    to_boolean = [:won]
 
     expected = [
       {:team_id => 6, :won => true,
