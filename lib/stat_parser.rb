@@ -15,7 +15,16 @@ class StatParser
 
     second_merge = merge_hash_arrays(first_merge, array_raw_data[2], :team_id)
 
-    #converted_data = convert_data_types(second_merge, to_delete, to_int, to_float, to_boolean)
+    to_delete = [nil, :venue_time_zone_id, :venue_time_zone_offset, :home_rink_side_start, :franchiseid,
+     :venue_link, :venue, :abbreviation, :link, :shortname, :away_team_id, :home_team_id, :outcome]
+
+    to_int = [:game_id, :season, :away_goals,:home_goals,
+      :team_id, :goals, :shots, :hits, :pim,
+      :powerplayopportunities, :powerplaygoals, :giveaways, :takeaways]
+    to_float = [:faceoffwinpercentage]
+    to_boolean = [:won]
+    converted_data = convert_data_types(second_merge, to_delete, to_int,
+                                        to_float, to_boolean)
     return second_merge
   end
 
