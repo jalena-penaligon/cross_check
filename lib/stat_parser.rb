@@ -39,17 +39,16 @@ class StatParser
     return converted_values
   end
 
-  def merge_hash_arrays(merge_to_array, merge_from_array, merge_key)
-    # binding.pry
-    merge_to_array.map do |hash_to_merge|
-      to_merge = find_hash_to_merge(hash_to_merge, merge_from_array, merge_key)
-     hash_to_merge.merge(to_merge)
+  def merge_hash_arrays(left_array, right_array, merge_key)
+    left_array.map do |left_hash|
+      right_hash_to_merge = find_hash_to_merge(left_hash, right_array, merge_key)
+     left_hash.merge(right_hash_to_merge)
     end
   end
 
-  def find_hash_to_merge(hash_to_merge, merge_from_array, merge_key)
-    merge_from_array.find do |merge_from_hash|
-      merge_from_hash[merge_key] == hash_to_merge[merge_key]
+  def find_hash_to_merge(left_hash, right_array, merge_key)
+    right_array.find do |right_hash|
+      right_hash[merge_key] == left_hash[merge_key]
     end
   end
 
