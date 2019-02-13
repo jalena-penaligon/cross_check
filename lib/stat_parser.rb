@@ -23,11 +23,7 @@ class StatParser
     return current_data
   end
 
-
   def convert_data_types(array_of_hashes)
-    to_delete = [nil, :venue_time_zone_id, :venue_time_zone_offset, :home_rink_side_start, :franchiseid,
-     :venue_link, :venue, :abbreviation, :link, :shortname, :away_team_id, :home_team_id, :outcome]
-
     to_int = [:game_id, :season, :away_goals,:home_goals,
       :team_id, :goals, :shots, :hits, :pim,
       :powerplayopportunities, :powerplaygoals, :giveaways, :takeaways]
@@ -35,10 +31,7 @@ class StatParser
     to_boolean = [:won]
 
     converted_values = array_of_hashes.map do |hash|
-
-        to_delete.each do |key|
-          hash.delete(key)
-        end
+        hash = delete_keys(hash)
 
         to_int.each do |key|
           if hash.keys.include?(key)
@@ -63,6 +56,18 @@ class StatParser
       hash
     end
 
+  end
+
+  def delete_keys(hash)
+    to_delete = [nil, :venue_time_zone_id, :venue_time_zone_offset,
+                :home_rink_side_start, :franchiseid, :venue_link, :venue,
+                :abbreviation, :link, :shortname, :away_team_id, :home_team_id,
+                :outcome]
+    to_delete.each do |key|
+      hash.delete(key)
+    end
+
+    return hash
   end
 
 
