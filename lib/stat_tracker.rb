@@ -1,7 +1,9 @@
 require 'csv'
 require 'pry'
+require './lib/league_stats'
 
 class StatTracker
+  include LeagueStats
 
   attr_accessor :data,
                 :merge_ids
