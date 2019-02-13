@@ -15,8 +15,38 @@ class StatParser
 
     second_merge = merge_hash_arrays(first_merge, array_raw_data[2], :team_id)
 
+    #converted_data = convert_data_types(second_merge, to_delete, to_int, to_float, to_boolean)
     return second_merge
   end
+
+  def convert_data_types(array_of_hashes, to_delete, to_int, to_float, to_boolean)
+     converted_values = array_of_hashes.map do |hash|
+
+        to_delete.each do |key|
+          hash.delete(key)
+        end
+
+        to_int.each do |key|
+          hash[key] = hash[key].to_i
+        end
+
+        to_boolean.each do |key|
+          if hash[key] == "False"
+            hash[key] = false
+          else
+            hash[key] = true
+          end
+        end
+
+        to_float.each do |key|
+          hash[key] = hash[key].to_f
+        end
+
+      hash
+    end
+
+  end
+
 
   def merge_hash_arrays(merge_to_array, merge_from_array, merge_key)
     merge_to_array.map do |hash_to_merge|
