@@ -111,9 +111,10 @@ class StatParserTest < MiniTest::Test
     simple_hash = {game_id: "0", season:"3", shots:"5", name:"Blackhawks"}
 
     actual = @stat_parser.convert_to_int(simple_hash)
-    expected = {game_id: 0, shots: 5, season: 3, name: "Blackhawks"}}
+    expected = {game_id: 0, shots: 5, season: 3, name: "Blackhawks"}
     assert_equal expected, actual
   end
+
   def test_it_can_delete_keys
       simple_hash = {nil => 0, link:3, shots:5}
 

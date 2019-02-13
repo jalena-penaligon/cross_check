@@ -24,20 +24,12 @@ class StatParser
   end
 
   def convert_data_types(array_of_hashes)
-    to_int = [:game_id, :season, :away_goals,:home_goals,
-      :team_id, :goals, :shots, :hits, :pim,
-      :powerplayopportunities, :powerplaygoals, :giveaways, :takeaways]
-    to_float = [:faceoffwinpercentage]
     to_boolean = [:won]
-
+    to_float = [:faceoffwinpercentage]
     converted_values = array_of_hashes.map do |hash|
         hash = delete_keys(hash)
+        hash = convert_to_int(hash)
 
-        to_int.each do |key|
-          if hash.keys.include?(key)
-            hash[key] = hash[key].to_i
-          end
-        end
 
         to_boolean.each do |key|
           if hash[key] == "False"
@@ -56,6 +48,20 @@ class StatParser
       hash
     end
 
+  end
+
+  def convert_to_int(hash)
+    to_int = [:game_id, :season, :away_goals,:home_goals, :team_id, :goals,
+              :shots, :hits, :pim, :powerplayopportunities, :powerplaygoals,
+              :giveaways, :takeaways]
+
+    to_int.each do |key|
+      if hash.keys.include?(key)
+        hash[key] = hash[key].to_i
+      end
+    end
+
+    return hash
   end
 
   def delete_keys(hash)
