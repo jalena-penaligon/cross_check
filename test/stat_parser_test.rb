@@ -107,6 +107,14 @@ class StatParserTest < MiniTest::Test
       assert_equal expected, actual
   end
 
+  def test_it_can_convert_values_to_boolean
+    simple_hash = {won: "False", season:"3", name:"Blackhawks"}
+
+    actual = @stat_parser.convert_to_boolean(simple_hash)
+    expected = {won:false, season: "3", name: "Blackhawks"}
+    assert_equal expected, actual
+  end
+
   def test_it_can_convert_values_to_int
     simple_hash = {game_id: "0", season:"3", shots:"5", name:"Blackhawks"}
 
