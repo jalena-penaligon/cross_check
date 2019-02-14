@@ -56,7 +56,19 @@ module LeagueStats
     goals
   end
 
+  def goals_allowed_per_game
+    games = games_per_team
+    goals_allowed_per_game = Hash.new
 
-  # def best_defense
-  # end
+    goals_allowed.each do |team, goals|
+      goals_allowed_per_game[team] = (goals /= games[team].to_f)
+    end
+    goals_allowed_per_game
+  end
+
+  def best_defense
+    goals_allowed_per_game.min_by do |team, goals_allowed_per_game|
+      goals_allowed_per_game
+    end.first
+  end
 end
