@@ -164,6 +164,15 @@ module LeagueStats
   end
 
   def winningest_team
+    games = Hash.new(0)
+    @data.each do |game_team|
+      if game_team[:won] == true
+        games[game_team[:teamname]] += 1
+      end
+    end
+    games.max_by do |team, wins|
+      wins
+    end.first
   end
 
   def best_fans
