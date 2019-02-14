@@ -1,10 +1,12 @@
 require 'csv'
 require 'pry'
+require './lib/league_stats'
 require './lib/stat_parser'
 require './lib/game_stats'
 
 
 class StatTracker
+  include LeagueStats
 
   include GameStats
 
