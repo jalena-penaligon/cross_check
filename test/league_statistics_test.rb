@@ -28,12 +28,20 @@ class LeagueStatisticsTest < MiniTest::Test
     # assert_equal 32, @data.count_of_teams
   end
 
-  def test_sum_goals_for_all_teams
-    expected = {"Rangers"=>1, "Bruins"=>1, "Penguins"=>0, "Red Wings"=>1, "Blackhawks"=>2, "Senators"=>3, "Canadiens"=>2}
-    assert_equal expected, @small_data.aggregate_team_goals
+  def test_count_games_played_per_team
+    expected = {"Rangers"=>5, "Bruins"=>9, "Penguins"=>4, "Red Wings"=>7, "Blackhawks"=>7, "Senators"=>4, "Canadiens"=>4}
+    assert_equal expected, @small_data.games_per_team
 
-    expected = {"Rangers"=>2, "Bruins"=>5}
-    assert_equal expected, @v_small_data.aggregate_team_goals
+    expected = {"Rangers"=>2, "Bruins"=>2}
+    assert_equal expected, @v_small_data.games_per_team
+  end
+
+  def test_sum_goals_for_all_teams
+    expected = {"Rangers"=>10, "Bruins"=>28, "Penguins"=>2, "Red Wings"=>15, "Blackhawks"=>16, "Senators"=>14, "Canadiens"=>8}
+    assert_equal expected, @small_data.total_team_goals
+
+    expected = {"Rangers"=>4, "Bruins"=>8}
+    assert_equal expected, @v_small_data.total_team_goals
   end
 
   def test_best_offense
@@ -48,12 +56,20 @@ class LeagueStatisticsTest < MiniTest::Test
     assert_equal "Rangers", @v_small_data.worst_offense
   end
 
-  def test_best_defense
-    skip
-    assert_equal 0, @data.best_defense
-    assert_equal 0, @small_data.best_defense
-    assert_equal 0, @v_small_data.best_defense
-  end
+  # def test_sum_oppontent_goals_for_all_teams
+  #   expected = {"Rangers"=>3, "Bruins"=>0, "Penguins"=>1, "Red Wings"=>2, "Blackhawks"=>1, "Senators"=>2, "Canadiens"=>3}
+  #   assert_equal expected, @small_data.aggregate_opponent_goals
+  #
+  #   expected = {"Rangers"=>5, "Bruins"=>2}
+  #   assert_equal expected, @v_small_data.aggregate_opponent_goals
+  # end
+
+  # def test_best_defense
+  #   skip
+  #   assert_equal 0, @data.best_defense
+  #   assert_equal 0, @small_data.best_defense
+  #   assert_equal 0, @v_small_data.best_defense
+  # end
   #
   # def test_worst_defense
   #   skip
