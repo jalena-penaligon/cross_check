@@ -39,8 +39,8 @@ module GameStats
 
   def count_of_games_by_season
     seasons = Hash.new(0)
-    @data.each do |game_team|
-      seasons[game_team[:season]] += 1
+    @data.each do |game_team_info|
+      seasons[game_team_info[:season]] += 1
     end
 
     seasons.each do |key, value|
@@ -48,11 +48,30 @@ module GameStats
     end
   end
 
-  def average_goals_per_game
-    total_number_of_games = ((@data.count)/2).to_f
-    total_goals = @data.sum do |key, value|
+  def average_goals_per_game(data_to_use = nil)
+    if data_to_use == nil
+      data_to_use = @data
+    end
+    total_number_of_games = ((data_to_use.count)/2).to_f
+    total_goals = data_to_use.sum do |key, value|
       key[:goals]
     end
     average_goals_per_game = (total_goals/total_number_of_games).round(2)
+  end
+
+  def average_goals_by_season
+    unique_seasons = @data.map do |game_team_info|
+      game_team_info[:season]
+    end.uniq
+
+    average_goals_in_season = Hash.new
+
+    unique_seasons.each do |season_id|
+      games_in_season = @data.find_all do |game_team_info|
+        game_team_info[:season] ==  season_id
+      end
+    average_goals_in_season[season_id] = average_goals_per_game(games_in_season)
+    end
+    return average_goals_in_season
   end
 end
