@@ -74,33 +74,41 @@ class StatParserTest < MiniTest::Test
 
   def test_it_converted_data_types
     array_of_hashes = [
-      {nil => "0", :venue_id => "api_thing",:team_id => "6", :won => "True",
-      :percent => "51.2", :hoa=>"away"},
-      {nil => "1", :venue_id => "api_thing2",:team_id => "7", :won => "False",
-      :percent => "48.8", :hoa=>"home"}
+      {nil => "0", :venue_link => "api_thing",:team_id => "6", :won => "True",
+      :faceoffwinpercentage => "51.2", :hoa=>"away"},
+      {nil => "1", :venue_link => "api_thing2",:team_id => "7", :won => "False",
+      :faceoffwinpercentage => "48.8", :hoa=>"home"}
     ]
-    to_delete = [nil,:venue_id]
-    to_int = [:team_id]
-    to_float = [:percent]
-    to_boolean = [:won]
 
     expected = [
       {:team_id => 6, :won => true,
-      :percent => 51.2, :hoa=>"away"},
+      :faceoffwinpercentage => 51.2, :hoa=>"away"},
       {:team_id => 7, :won => false,
-      :percent => 48.8, :hoa=>"home"}
+      :faceoffwinpercentage => 48.8, :hoa=>"home"}
     ]
 
-    actual = @stat_parser.convert_data_types(array_of_hashes,
-                                             to_delete,
-                                             to_int,
-                                             to_float,
-                                             to_boolean)
+    actual = @stat_parser.convert_data_types(array_of_hashes)
 
     assert_equal expected, actual
   end
 
-  def test_it_has_merged_data
+  def test_it_merges_data
+      simple_game_team = [{id:"1",team:"1",score:"3"},
+                          {id:"1",team:"2",score:"5"}]
+      simple_game = [{id:"1",season:"1"},{id:"2",season:"2"}]
+      simple_team_info = [{team:"1",name:"A"},{team:"2",name:"B"}]
+      array_raw_data = [simple_game_team, simple_game, simple_team_info]
+      stat_parser_simple = StatParser.new(array_raw_data, [:id,:team])
+
+      expected = [{id:"1",team:"1",score:"3",season:"1",name:"A"},
+                  {id:"1",team:"2",score:"5",season:"1",name:"B"}]
+      actual = stat_parser_simple.merge_data
+
+      assert_equal expected, actual
+  end
+
+
+  def test_it_parses_data
 
     expected_data = [ {game_id: 2012030221,  team_id: 3,  hoa: "away",  won: false,
       settled_in: "OT",  head_coach: "John Tortorella",  goals: 2,  shots: 35,
@@ -125,7 +133,7 @@ class StatParserTest < MiniTest::Test
       faceoffwinpercentage: 48.3,  giveaways: 16,  takeaways: 6,  season: 20122013,
       type: "P",  date_time: "2013-05-19",  venue_time_zone_tz: "EDT",  teamname: "Bruins"}]
 
-      assert_equal expected_data, @stat_parser.merge_data
+      assert_equal expected_data, @stat_parser.parse_data
   end
 
 end
