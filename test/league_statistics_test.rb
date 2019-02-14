@@ -64,26 +64,40 @@ class LeagueStatisticsTest < MiniTest::Test
     assert_equal expected, @v_small_data.goals_allowed
   end
 
-  # def test_best_defense
-  #   skip
-  #   assert_equal "Kings", @data.best_defense
-  #   assert_equal "Bruins", @small_data.best_defense
-  #   assert_equal "Bruins", @v_small_data.best_defense
-  # end
-  #
-  # def test_worst_defense
-  #   skip
-  #   assert_equal 0, @data.worst_defense
-  #   assert_equal 0, @small_data.worst_defense
-  #   assert_equal 0, @v_small_data.worst_defense
-  # end
-  #
-  # def test_highest_scoring_visitor
-  #   skip
-  #   assert_equal "Capitals", @data.highest_scoring_visitor
-  #   assert_equal "Bruins", @small_data.highest_scoring_visitor
-  #   assert_equal "Rangers", @v_small_data.highest_scoring_visitor
-  # end
+  def test_best_defense
+    # assert_equal "Kings", @data.best_defense
+    assert_equal "Bruins", @small_data.best_defense
+    assert_equal "Bruins", @v_small_data.best_defense
+  end
+
+  def test_worst_defense
+    # assert_equal "Sabres", @data.worst_defense
+    assert_equal "Canadiens", @small_data.worst_defense
+    assert_equal "Rangers", @v_small_data.worst_defense
+  end
+
+  def test_calculate_visitor_goals
+    expected = {"Rangers"=>5, "Bruins"=>14, "Penguins"=>1, "Red Wings"=>7, "Blackhawks"=>5, "Senators"=>5, "Canadiens"=>3}
+    assert_equal expected, @small_data.goals_allowed
+
+    expected = {"Bruins"=>4, "Rangers"=>0}
+    assert_equal expected, @v_small_data.goals_allowed
+  end
+
+  def test_calculate_home_goals
+    expected = {"Rangers"=>5, "Bruins"=>14, "Penguins"=>1, "Red Wings"=>8, "Blackhawks"=>11, "Senators"=>9, "Canadiens"=>5}
+    assert_equal expected, @small_data.goals_allowed
+
+    expected = {"Bruins"=>8, "Rangers"=>0}
+    assert_equal expected, @v_small_data.goals_allowed
+  end
+
+  def test_highest_scoring_visitor
+    skip
+    assert_equal "Capitals", @data.highest_scoring_visitor
+    assert_equal "Bruins", @small_data.highest_scoring_visitor
+    assert_equal "Rangers", @v_small_data.highest_scoring_visitor
+  end
   #
   # def test_highest_scoring_home_team
   #   skip
