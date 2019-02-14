@@ -23,10 +23,11 @@ module GameStats
 
   def percentage_home_wins
     number_home_wins = @data.select do |hash|
-      hash[:hoa] == "home" && hash[:won] == true
+      ((hash[:hoa] == "home") (&& hash[:won] == true))
     end
     total_number_of_games = ((@data.count)/2).to_f
     percent_home_wins = ((number_home_wins.count) / total_number_of_games).round(2)
+    # binding.pry
   end
 
   def percentage_visitor_wins
