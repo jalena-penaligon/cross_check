@@ -113,15 +113,15 @@ class LeagueStatisticsTest < MiniTest::Test
     assert_equal expected, @small_data.count_home_wins
 
     expected = {"Bruins"=>2}
-    assert_equal expected, @v_small_data.count_away_games
+    assert_equal expected, @v_small_data.count_home_wins
   end
 
   def test_count_away_wins
     expected = {"Bruins"=>3, "Red Wings"=>1, "Blackhawks"=>1, "Senators"=>1}
     assert_equal expected, @small_data.count_away_wins
 
-    expected = nil
-    assert_equal expected, @v_small_data.count_away_games
+    expected = {}
+    assert_equal expected, @v_small_data.count_away_wins
   end
 
   def test_calculate_home_win_percentage
@@ -136,7 +136,7 @@ class LeagueStatisticsTest < MiniTest::Test
     expected = {"Bruins"=> 0.75, "Red Wings" => 0.25, "Blackhawks"=> 0.333, "Senators"=> 0.5}
     assert_equal expected, @small_data.away_win_percentage
 
-    expected = nil
+    expected = {}
     assert_equal expected, @v_small_data.away_win_percentage
   end
 
@@ -177,8 +177,8 @@ class LeagueStatisticsTest < MiniTest::Test
   end
 
   def test_worst_fans
-    assert_nil @data.worst_fans
-    assert_nil @small_data.worst_fans
-    assert_nil @v_small_data.worst_fans
+    assert_equal [], @data.worst_fans
+    assert_equal [], @small_data.worst_fans
+    assert_equal [], @v_small_data.worst_fans
   end
 end
