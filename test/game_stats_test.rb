@@ -20,78 +20,85 @@ class GameStatsTest < MiniTest::Test
 
     @v_small_data = StatTracker.from_csv(v_small_data_paths)
     @small_data = StatTracker.from_csv(small_data_paths)
-    # @data = StatTracker.from_csv(data_paths)
+    @data = StatTracker.from_csv(data_paths)
   end
-
-  def test_calcualte_highest_total_score
-    assert_equal 7, @v_small_data.highest_total_score
-    assert_equal 7, @small_data.highest_total_score
-    # assert_equal 15, @data.highest_total_score
-  end
-
-  def test_calcualte_lowest_total_score
-    assert_equal 5, @v_small_data.lowest_total_score
-    assert_equal 1, @small_data.lowest_total_score
-    # assert_equal 0, @data.lowest_total_score
-  end
-
-  def test_calculate_biggest_blowout
-    assert_equal 3, @v_small_data.biggest_blowout
-    assert_equal 5, @small_data.biggest_blowout
-    # assert_equal 10, @data.biggest_blowout
-  end
+  #
+  # def test_calcualte_highest_total_score
+  #   skip
+  #   assert_equal 7, @v_small_data.highest_total_score
+  #   assert_equal 7, @small_data.highest_total_score
+  #   assert_equal 15, @data.highest_total_score
+  # end
+  #
+  # def test_calcualte_lowest_total_score
+  #   skip
+  #   assert_equal 5, @v_small_data.lowest_total_score
+  #   assert_equal 1, @small_data.lowest_total_score
+  #   # assert_equal 0, @data.lowest_total_score
+  # end
+  #
+  # def test_calculate_biggest_blowout
+  #   skip
+  #   assert_equal 3, @v_small_data.biggest_blowout
+  #   assert_equal 5, @small_data.biggest_blowout
+  #   assert_equal 10, @data.biggest_blowout
+  # end
 
   def test_calculate_percentage_home_wins
     assert_equal 1.0, @v_small_data.percentage_home_wins
     assert_equal 0.7, @small_data.percentage_home_wins
-    # assert_equal 0.55, @data.percentage_home_wins
+    assert_equal 0.55, @data.percentage_home_wins
   end
 
-  def test_calculate_percentage_visitor_wins
-    assert_equal 0.0, @v_small_data.percentage_visitor_wins
-    assert_equal 0.3, @small_data.percentage_visitor_wins
-    # assert_equal 0.45, @data.percentage_visitor_wins
-  end
-
-  def test_calculate_total_games_by_season
-    expected = {20122013 => 2}
-    assert_equal expected, @v_small_data.count_of_games_by_season
-
-    expected = {20122013 => 20}
-    assert_equal expected, @small_data.count_of_games_by_season
-
-    # expected = {
-    #             20122013 => 806,
-    #             20132014 => 1323,
-    #             20142015 => 1319,
-    #             20152016 => 1321,
-    #             20162017 => 1317,
-    #             20172018 => 1355
-    #            }
-    # assert_equal expected, @data.count_of_games_by_season
-  end
-
-  def test_calculate_average_goals_per_game
-    assert_equal 6.0, @v_small_data.average_goals_per_game
-    assert_equal 4.65, @small_data.average_goals_per_game
-    # assert_equal 5.44, @data.average_goals_per_game
-  end
-
-  def test_calculate_average_goals_per_season
-    expected = {20122013 => 6.0}
-    assert_equal expected, @v_small_data.average_goals_by_season
-
-    expected = {20122013 => 4.65}
-    assert_equal expected, @small_data.average_goals_by_season
-
-    # expected = {
-                #   20122013 => 5.277916,
-                #   20132014 => 5.361300,
-                #   20142015 => 5.304776,
-                #   20152016 => 5.331567,
-                #   20162017 => 5.431283,
-                #   20172018 => 5.863469
-                # }
-    # assert_equal expected, @data.average_goals_by_season
-  end
+  # def test_calculate_percentage_visitor_wins
+  #   skip
+  #   # assert_equal 0.0, @v_small_data.percentage_visitor_wins
+  #   # assert_equal 0.3, @small_data.percentage_visitor_wins
+  #   assert_equal 0.45, @data.percentage_visitor_wins
+  # end
+  #
+  # def test_calculate_total_games_by_season
+  #   skip
+  #   expected = {20122013 => 2}
+  #   assert_equal expected, @v_small_data.count_of_games_by_season
+  #
+  #   expected = {20122013 => 20}
+  #   assert_equal expected, @small_data.count_of_games_by_season
+  #
+  #   expected = {
+  #               20122013 => 806,
+  #               20132014 => 1323,
+  #               20142015 => 1319,
+  #               20152016 => 1321,
+  #               20162017 => 1317,
+  #               20172018 => 1355
+  #              }
+  #   assert_equal expected, @data.count_of_games_by_season
+  # end
+  #
+  # def test_calculate_average_goals_per_game
+  #   skip
+  #   assert_equal 6.0, @v_small_data.average_goals_per_game
+  #   assert_equal 4.65, @small_data.average_goals_per_game
+  #   assert_equal 5.44, @data.average_goals_per_game
+  # end
+  #
+  # def test_calculate_average_goals_per_season
+  #   skip
+  #   expected = {20122013 => 6.0}
+  #   assert_equal expected, @v_small_data.average_goals_by_season
+  #
+  #   expected = {20122013 => 4.65}
+  #   assert_equal expected, @small_data.average_goals_by_season
+  #
+  #   expected = {
+  #                 20122013 => 5.28,
+  #                 20132014 => 5.36,
+  #                 20142015 => 5.30,
+  #                 20152016 => 5.33,
+  #                 20162017 => 5.43,
+  #                 20172018 => 5.86
+  #               }
+  #   assert_equal expected, @data.average_goals_by_season
+  # end
 end
