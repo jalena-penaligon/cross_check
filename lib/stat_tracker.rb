@@ -1,7 +1,10 @@
 require 'csv'
 require 'pry'
+require './lib/game_stats'
 
 class StatTracker
+
+  include GameStats
 
   attr_accessor :data,
                 :merge_ids
