@@ -1,42 +1,11 @@
 module Conversions
 
-  def convert_to_boolean(hash)
-    to_boolean = [:won]
-
-    to_boolean.each do |key|
-      if hash[key].upcase == "FALSE"
-        hash[key] = false
+  def convert_won_to_boolean(hash)
+      if hash[:won].upcase == "FALSE"
+        hash[:won] = false
       else
-        hash[key] = true
+        hash[:won] = true
       end
-    end
-
-    return hash
-  end
-
-  def convert_to_float(hash)
-    to_float = [:faceoffwinpercentage]
-
-    to_float.each do |key|
-      if hash.keys.include?(key)
-        hash[key] = hash[key].to_f
-      end
-    end
-
-    return hash
-  end
-
-  def convert_to_int(hash)
-    to_int = [:game_id, :season, :away_goals,:home_goals, :team_id, :goals,
-              :shots, :hits, :pim, :powerplayopportunities, :powerplaygoals,
-              :giveaways, :takeaways]
-
-    to_int.each do |key|
-      if hash.keys.include?(key)
-        hash[key] = hash[key].to_i
-      end
-    end
-
     return hash
   end
 

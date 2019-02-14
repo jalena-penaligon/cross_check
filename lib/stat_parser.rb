@@ -29,9 +29,7 @@ class StatParser
 
     converted_values = array_of_hashes.map do |hash|
       hash = delete_keys(hash)
-      hash = convert_to_int(hash)
-      hash = convert_to_float(hash)
-      hash = convert_to_boolean(hash)
+      hash = convert_won_to_boolean(hash)
 
       hash
     end

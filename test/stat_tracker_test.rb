@@ -13,15 +13,15 @@ class StatTrackerTest < MiniTest::Test
     stat_tracker = StatTracker.new
 
     game_array = [
-      {nil =>"0", game_id: '2012030221', season: '20122013', type: 'P', date_time: '2013-05-16',
-        away_team_id: '3', home_team_id: '6', away_goals: '2', home_goals: '3',
+      {nil =>0, game_id: 2012030221, season: 20122013, type: 'P', date_time: '2013-05-16',
+        away_team_id: 3, home_team_id: 6, away_goals: 2, home_goals: 3,
         outcome: 'home win OT', home_rink_side_start: 'left', venue: 'TD Garden',
-        venue_link: "/api/v1/venues/null", venue_time_zone_id: 'America/New_York', venue_time_zone_offset: '-4',
+        venue_link: "/api/v1/venues/null", venue_time_zone_id: 'America/New_York', venue_time_zone_offset: -4,
         venue_time_zone_tz: 'EDT'},
-      {nil =>"1", game_id: '2012030222', season: '20122013', type: 'P', date_time: '2013-05-19',
-        away_team_id: '3', home_team_id: '6', away_goals: '2', home_goals: '5',
+      {nil =>1, game_id: 2012030222, season: 20122013, type: 'P', date_time: '2013-05-19',
+        away_team_id: 3, home_team_id: 6, away_goals: 2, home_goals: 5,
         outcome: 'home win REG', home_rink_side_start: 'left', venue: 'TD Garden',
-        venue_link: "/api/v1/venues/null", venue_time_zone_id: 'America/New_York', venue_time_zone_offset: '-4',
+        venue_link: "/api/v1/venues/null", venue_time_zone_id: 'America/New_York', venue_time_zone_offset: -4,
         venue_time_zone_tz: 'EDT'}
     ]
 
@@ -43,41 +43,41 @@ class StatTrackerTest < MiniTest::Test
       game_teams: game_teams_path
     }
     game_array = [
-      {nil =>"0", game_id: '2012030221', season: '20122013', type: 'P', date_time: '2013-05-16',
-        away_team_id: '3', home_team_id: '6', away_goals: '2', home_goals: '3',
+      {nil =>0, game_id: 2012030221, season: 20122013, type: 'P', date_time: '2013-05-16',
+        away_team_id: 3, home_team_id: 6, away_goals: 2, home_goals: 3,
         outcome: 'home win OT', home_rink_side_start: 'left', venue: 'TD Garden',
-        venue_link: "/api/v1/venues/null", venue_time_zone_id: 'America/New_York', venue_time_zone_offset: '-4',
+        venue_link: "/api/v1/venues/null", venue_time_zone_id: 'America/New_York', venue_time_zone_offset: -4,
         venue_time_zone_tz: 'EDT'},
-      {nil =>"1", game_id: '2012030222', season: '20122013', type: 'P', date_time: '2013-05-19',
-        away_team_id: '3', home_team_id: '6', away_goals: '2', home_goals: '5',
+      {nil =>1, game_id: 2012030222, season: 20122013, type: 'P', date_time: '2013-05-19',
+        away_team_id: 3, home_team_id: 6, away_goals: 2, home_goals: 5,
         outcome: 'home win REG', home_rink_side_start: 'left', venue: 'TD Garden',
-        venue_link: "/api/v1/venues/null", venue_time_zone_id: 'America/New_York', venue_time_zone_offset: '-4',
+        venue_link: "/api/v1/venues/null", venue_time_zone_id: 'America/New_York', venue_time_zone_offset: -4,
         venue_time_zone_tz: 'EDT'}
     ]
 
     game_team_array = [
-      {nil =>"0", game_id: '2012030221', team_id: '3', hoa: 'away', won: 'False', settled_in: 'OT',
-        head_coach: 'John Tortorella', goals: '2', shots: '35', hits: '44', pim: '8',
-        powerplayopportunities: '3', powerplaygoals: '0', faceoffwinpercentage: '44.8',
-        giveaways: '17', takeaways: '7'},
-      {nil =>"1", game_id: '2012030221', team_id: '6', hoa: 'home', won: 'True', settled_in: 'OT',
-        head_coach: 'Claude Julien', goals: '3', shots: '48', hits: '51', pim: '6',
-        powerplayopportunities: '4', powerplaygoals: '1', faceoffwinpercentage: '55.2',
-        giveaways: '4', takeaways: '5'},
-      {nil =>"2", game_id: '2012030222', team_id: '3', hoa: 'away', won: 'False', settled_in: 'REG',
-        head_coach: 'John Tortorella', goals: '2', shots: '37', hits: '33', pim: '11',
-        powerplayopportunities: '5', powerplaygoals: '0', faceoffwinpercentage: '51.7',
-        giveaways: '1', takeaways: '4'},
-      {nil =>"3", game_id: '2012030222', team_id: '6', hoa: 'home', won: 'True', settled_in: 'REG',
-        head_coach: 'Claude Julien', goals: '5', shots: '32', hits: '36', pim: '19',
-        powerplayopportunities: '1', powerplaygoals: '0', faceoffwinpercentage: '48.3',
-        giveaways: '16', takeaways: '6'}
+      {nil =>0, game_id: 2012030221, team_id: 3, hoa: 'away', won: 'False', settled_in: 'OT',
+        head_coach: 'John Tortorella', goals: 2, shots: 35, hits: 44, pim: 8,
+        powerplayopportunities: 3, powerplaygoals: 0, faceoffwinpercentage: 44.8,
+        giveaways: 17, takeaways: 7},
+      {nil =>1, game_id: 2012030221, team_id: 6, hoa: 'home', won: 'True', settled_in: 'OT',
+        head_coach: 'Claude Julien', goals: 3, shots: 48, hits: 51, pim: 6,
+        powerplayopportunities: 4, powerplaygoals: 1, faceoffwinpercentage: 55.2,
+        giveaways: 4, takeaways: 5},
+      {nil =>2, game_id: 2012030222, team_id: 3, hoa: 'away', won: 'False', settled_in: 'REG',
+        head_coach: 'John Tortorella', goals: 2, shots: 37, hits: 33, pim: 11,
+        powerplayopportunities: 5, powerplaygoals: 0, faceoffwinpercentage: 51.7,
+        giveaways: 1, takeaways: 4},
+      {nil =>3, game_id: 2012030222, team_id: 6, hoa: 'home', won: 'True', settled_in: 'REG',
+        head_coach: 'Claude Julien', goals: 5, shots: 32, hits: 36, pim: 19,
+        powerplayopportunities: 1, powerplaygoals: 0, faceoffwinpercentage: 48.3,
+        giveaways: 16, takeaways: 6}
     ]
 
     team_info_array = [
-      {nil => "0", team_id: '1', franchiseid:'23', shortname: 'New Jersey',
+      {nil => 0, team_id: 1, franchiseid:23, shortname: 'New Jersey',
       teamname: 'Devils', abbreviation: 'NJD', :link=>"/api/v1/teams/1"},
-      {nil =>"1", team_id: '4', franchiseid:'16', shortname: 'Philadelphia',
+      {nil =>1, team_id: 4, franchiseid:16, shortname: 'Philadelphia',
       teamname: 'Flyers', abbreviation: 'PHI', :link=>"/api/v1/teams/4"}
     ]
 
