@@ -36,4 +36,15 @@ module GameStats
     total_number_of_games = ((@data.count)/2).to_f
     percent_home_wins = ((number_visitor_wins.count) / total_number_of_games).round(3)
   end
+
+  def count_of_games_by_season
+    seasons = Hash.new(0)
+    @data.each do |game_team|
+      seasons[game_team[:season]] += 1
+    end
+
+    seasons.each do |key, value|
+      seasons[key] = value/2
+    end
+  end
 end
