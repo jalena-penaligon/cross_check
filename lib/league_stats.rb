@@ -6,22 +6,55 @@ module LeagueStats
     end.uniq.count
   end
 
-  def aggregate_team_goals
-    @data.inject({}) do |team_hash, game_team|
-      team_hash[game_team[:teamname]] = game_team[:goals]
-      team_hash
+  def games_per_team
+    games = Hash.new(0)
+    @data.each do |game_team|
+      games[game_team[:teamname]] += 1
     end
+    games
+  end
+
+  def total_team_goals
+    teams = Hash.new(0)
+    @data.each do |game_team|
+      teams[game_team[:teamname]] += game_team[:goals]
+    end
+    teams
+  end
+
+  def goals_per_game_by_team
+    games = games_per_team
+    goals_per_game = Hash.new
+
+    total_team_goals.each do |team, goals|
+      goals_per_game[team] = (goals /= games[team].to_f)
+    end
+    goals_per_game
   end
 
   def best_offense
-    aggregate_team_goals.max_by do |team, scores|
-      scores
+    goals_per_game_by_team.max_by do |team, goals_per_game|
+      goals_per_game
     end.first
   end
 
   def worst_offense
-    aggregate_team_goals.min_by do |team, scores|
-      scores
+    goals_per_game_by_team.min_by do |team, goals_per_game|
+      goals_per_game
     end.first
   end
+
+  # def aggregate_opponent_goals
+  #   @data.inject({}) do |team_hash, game_team|
+  #     # if game_team[:hoa] == "away"
+  #       team_hash[game_team[:teamname]] = game_team[:home_goals]
+  #     # elsif game_team[:hoa] == "home"
+  #     #   team_hash[game_team[:teamname]] = game_team[:away_goals]
+  #     # end
+  #     team_hash
+  #   end
+  # end
+
+  # def best_defense
+  # end
 end
