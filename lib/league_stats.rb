@@ -44,16 +44,18 @@ module LeagueStats
     end.first
   end
 
-  # def aggregate_opponent_goals
-  #   @data.inject({}) do |team_hash, game_team|
-  #     # if game_team[:hoa] == "away"
-  #       team_hash[game_team[:teamname]] = game_team[:home_goals]
-  #     # elsif game_team[:hoa] == "home"
-  #     #   team_hash[game_team[:teamname]] = game_team[:away_goals]
-  #     # end
-  #     team_hash
-  #   end
-  # end
+  def goals_allowed
+    goals = Hash.new(0)
+    @data.each do |game_team|
+      if game_team[:hoa] == "away"
+        goals[game_team[:teamname]] += game_team[:home_goals]
+      elsif game_team[:hoa] == "home"
+        goals[game_team[:teamname]] += game_team[:away_goals]
+      end
+    end
+    goals
+  end
+
 
   # def best_defense
   # end
