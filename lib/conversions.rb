@@ -4,7 +4,7 @@ module Conversions
     to_boolean = [:won]
 
     to_boolean.each do |key|
-      if hash[key] == "False"
+      if hash[key].upcase == "FALSE"
         hash[key] = false
       else
         hash[key] = true
