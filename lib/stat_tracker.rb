@@ -11,6 +11,10 @@ class StatTracker
     @merge_ids = [:game_id, :team_id]
   end
 
+
+### converters [:numeric, :true_false_string_to_bool]
+
+### CSV::Converters[name] = lambda{\str\  do stuff }
   def self.from_csv(locations)
     stat_tracker = StatTracker.new
 
