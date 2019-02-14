@@ -33,9 +33,12 @@ class StatTracker
   end
 
   def open_csv(file_path)
-    contents = CSV.open(file_path, headers: true, header_converters: :symbol)
+    contents = CSV.open(file_path, headers: true,
+                        header_converters: :symbol,
+                        converters: :numeric)
     contents_hash = contents.map do |row|
       row.to_hash
+      require 'pry'; binding.pry
     end
   end
 end
