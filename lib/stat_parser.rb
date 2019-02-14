@@ -1,78 +1,56 @@
 require 'pry'
+require './lib/conversions'
+
 class StatParser
-  attr_reader :merged_data
+  include Conversions
   def initialize(array_raw_data, array_merge_keys)
     @array_raw_data = array_raw_data
     @array_merge_keys = array_merge_keys
   end
 
-  def merge_data
-    #game_team = @array_raw_data[0]
-    #game_data = @array_raw_data[1]
-    #team_info = @array_raw_data[2]
-
-    first_merge = merge_hash_arrays(@array_raw_data[0], @array_raw_data[1], @array_merge_keys[0])
-
-
-    second_merge = merge_hash_arrays(first_merge, @array_raw_data[2], @array_merge_keys[1])
-
-    to_delete = [nil, :venue_time_zone_id, :venue_time_zone_offset, :home_rink_side_start, :franchiseid,
-     :venue_link, :venue, :abbreviation, :link, :shortname, :away_team_id, :home_team_id, :outcome]
-
-    to_int = [:game_id, :season, :away_goals,:home_goals,
-      :team_id, :goals, :shots, :hits, :pim,
-      :powerplayopportunities, :powerplaygoals, :giveaways, :takeaways]
-    to_float = [:faceoffwinpercentage]
-    to_boolean = [:won]
-    converted_data = convert_data_types(second_merge, to_delete, to_int,
-                                        to_float, to_boolean)
-    return second_merge
+  def parse_data
+    merged_data = merge_data
+    converted_data = convert_data_types(merged_data)
+    return converted_data
   end
 
-  def convert_data_types(array_of_hashes, to_delete, to_int, to_float, to_boolean)
-     converted_values = array_of_hashes.map do |hash|
+  def merge_data
+    #[game_team, game, team] = @array_raw_data
+    current_data = @array_raw_data[0]
+    to_merge = @array_raw_data.slice(1..-1)
+    to_merge.zip(@array_merge_keys).each do |array_to_merge, merge_key|
+      current_data = merge_hash_arrays(current_data, array_to_merge, merge_key)
+    end
 
-        to_delete.each do |key|
-          hash.delete(key)
-        end
+    return current_data
+  end
 
-        to_int.each do |key|
-          hash[key] = hash[key].to_i
-        end
+  def convert_data_types(array_of_hashes)
 
-        to_boolean.each do |key|
-          if hash[key] == "False"
-            hash[key] = false
-          else
-            hash[key] = true
-          end
-        end
-
-        to_float.each do |key|
-          hash[key] = hash[key].to_f
-        end
+    converted_values = array_of_hashes.map do |hash|
+      hash = delete_keys(hash)
+      hash = convert_to_int(hash)
+      hash = convert_to_float(hash)
+      hash = convert_to_boolean(hash)
 
       hash
     end
 
+    return converted_values
   end
 
-
-  def merge_hash_arrays(merge_to_array, merge_from_array, merge_key)
-    # binding.pry
-    merge_to_array.map do |hash_to_merge|
-      to_merge = find_hash_to_merge(hash_to_merge, merge_from_array, merge_key)
-     hash_to_merge.merge(to_merge)
+  def merge_hash_arrays(left_array, right_array, merge_key)
+    left_array.map do |left_hash|
+      right_hash_to_merge = find_hash_to_merge(left_hash, right_array, merge_key)
+     left_hash.merge(right_hash_to_merge)
     end
   end
 
-  def find_hash_to_merge(hash_to_merge, merge_from_array, merge_key)
-    merge_from_array.find do |merge_from_hash|
-      merge_from_hash[merge_key] == hash_to_merge[merge_key]
+  def find_hash_to_merge(left_hash, right_array, merge_key)
+    right_array.find do |right_hash|
+      right_hash[merge_key] == left_hash[merge_key]
     end
   end
-
-
 
 end
 
