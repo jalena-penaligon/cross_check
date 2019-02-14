@@ -92,12 +92,28 @@ class LeagueStatisticsTest < MiniTest::Test
     assert_equal expected, @v_small_data.goals_allowed
   end
 
-  def test_highest_scoring_visitor
-    skip
-    assert_equal "Capitals", @data.highest_scoring_visitor
-    assert_equal "Bruins", @small_data.highest_scoring_visitor
-    assert_equal "Rangers", @v_small_data.highest_scoring_visitor
+  def test_count_home_games
+    expected = {"Rangers"=>2, "Bruins"=>5, "Penguins"=>2, "Red Wings"=>3, "Blackhawks"=>4, "Senators"=>2, "Canadiens"=>2}
+    assert_equal expected, @small_data.count_home_games
+
+    expected = {"Bruins"=>2, "Rangers"=>0}
+    assert_equal expected, @v_small_data.count_home_games
   end
+
+  def test_count_away_games
+    expected = {"Rangers"=>3, "Bruins"=>4, "Penguins"=>2, "Red Wings"=>4, "Blackhawks"=>3, "Senators"=>2, "Canadiens"=>2}
+    assert_equal expected, @small_data.count_away_games
+
+    expected = {"Bruins"=>0, "Rangers"=>2}
+    assert_equal expected, @v_small_data.count_away_games
+  end
+
+  # def test_highest_scoring_visitor
+  #   skip
+  #   assert_equal "Capitals", @data.highest_scoring_visitor
+  #   assert_equal "Bruins", @small_data.highest_scoring_visitor
+  #   assert_equal "Rangers", @v_small_data.highest_scoring_visitor
+  # end
   #
   # def test_highest_scoring_home_team
   #   skip
