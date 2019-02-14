@@ -26,7 +26,7 @@ module GameStats
       hash[:hoa] == "home" && hash[:won] == true
     end
     total_number_of_games = ((@data.count)/2).to_f
-    percent_home_wins = ((number_home_wins.count) / total_number_of_games).round(3)
+    percent_home_wins = ((number_home_wins.count) / total_number_of_games).round(2)
   end
 
   def percentage_visitor_wins
@@ -34,7 +34,7 @@ module GameStats
       hash[:hoa] == "away" && hash[:won] == true
     end
     total_number_of_games = ((@data.count)/2).to_f
-    percent_home_wins = ((number_visitor_wins.count) / total_number_of_games).round(3)
+    percent_home_wins = ((number_visitor_wins.count) / total_number_of_games).round(2)
   end
 
   def count_of_games_by_season
@@ -46,5 +46,13 @@ module GameStats
     seasons.each do |key, value|
       seasons[key] = value/2
     end
+  end
+
+  def average_goals_per_game
+    total_number_of_games = ((@data.count)/2).to_f
+    total_goals = @data.sum do |key, value|
+      key[:goals]
+    end
+    average_goals_per_game = (total_goals/total_number_of_games).round(2)
   end
 end
