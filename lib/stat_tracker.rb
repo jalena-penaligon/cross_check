@@ -1,6 +1,6 @@
 require 'csv'
 require 'pry'
-
+require './lib/stat_parser'
 class StatTracker
 
   attr_accessor :data,
