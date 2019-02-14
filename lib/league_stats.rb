@@ -119,11 +119,36 @@ module LeagueStats
     home_goals
   end
 
-  def highest_scoring_visitor
+  def home_goals_per_game
+    home_games = count_home_games
+    home_goals_per_game = Hash.new
 
+    home_goals.each do |team, goals|
+      home_goals_per_game[team] = (goals /= home_games[team].to_f)
+    end
+    home_goals_per_game
+  end
+
+  def visitor_goals_per_game
+    visitor_games = count_home_games
+    visitor_goals_per_game = Hash.new
+
+    visitor_goals.each do |team, goals|
+      visitor_goals_per_game[team] = (goals /= visitor_games[team].to_f)
+    end
+    visitor_goals_per_game
+  end
+
+  def highest_scoring_visitor
+    visitor_goals_per_game.max_by do |team, goals_per_game|
+      goals_per_game
+    end.first
   end
 
   def highest_scoring_home_team
+    home_goals_per_game.max_by do |team, goals_per_game|
+      goals_per_game
+    end.first
   end
 
   def lowest_scoring_visitor
