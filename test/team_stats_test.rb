@@ -70,8 +70,8 @@ class TeamStatsTest < Minitest::Test
   end
 
   def test_biggest_team_blowout
-    assert_equal , @v_small_data.biggest_team_blowout(6)
-    assert_equal , @small_data.biggest_team_blowout()
-    assert_equal , @data.biggest_team_blowout()
+    assert_equal 3, @v_small_data.biggest_team_blowout(6)
+    assert_equal 3, @small_data.biggest_team_blowout(16)
+    assert_equal 8, @data.biggest_team_blowout(24)
   end
 end
