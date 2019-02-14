@@ -78,25 +78,25 @@ class LeagueStatisticsTest < MiniTest::Test
 
   def test_calculate_visitor_goals
     expected = {"Rangers"=>5, "Bruins"=>14, "Penguins"=>1, "Red Wings"=>7, "Blackhawks"=>5, "Senators"=>5, "Canadiens"=>3}
-    assert_equal expected, @small_data.goals_allowed
+    assert_equal expected, @small_data.visitor_goals
 
-    expected = {"Bruins"=>4, "Rangers"=>0}
-    assert_equal expected, @v_small_data.goals_allowed
+    expected = {"Rangers"=>4}
+    assert_equal expected, @v_small_data.visitor_goals
   end
 
   def test_calculate_home_goals
     expected = {"Rangers"=>5, "Bruins"=>14, "Penguins"=>1, "Red Wings"=>8, "Blackhawks"=>11, "Senators"=>9, "Canadiens"=>5}
-    assert_equal expected, @small_data.goals_allowed
+    assert_equal expected, @small_data.home_goals
 
-    expected = {"Bruins"=>8, "Rangers"=>0}
-    assert_equal expected, @v_small_data.goals_allowed
+    expected = {"Bruins"=>8}
+    assert_equal expected, @v_small_data.home_goals
   end
 
   def test_count_home_games
     expected = {"Rangers"=>2, "Bruins"=>5, "Penguins"=>2, "Red Wings"=>3, "Blackhawks"=>4, "Senators"=>2, "Canadiens"=>2}
     assert_equal expected, @small_data.count_home_games
 
-    expected = {"Bruins"=>2, "Rangers"=>0}
+    expected = {"Bruins"=>2}
     assert_equal expected, @v_small_data.count_home_games
   end
 
@@ -104,23 +104,21 @@ class LeagueStatisticsTest < MiniTest::Test
     expected = {"Rangers"=>3, "Bruins"=>4, "Penguins"=>2, "Red Wings"=>4, "Blackhawks"=>3, "Senators"=>2, "Canadiens"=>2}
     assert_equal expected, @small_data.count_away_games
 
-    expected = {"Bruins"=>0, "Rangers"=>2}
+    expected = {"Rangers"=>2}
     assert_equal expected, @v_small_data.count_away_games
   end
 
-  # def test_highest_scoring_visitor
-  #   skip
-  #   assert_equal "Capitals", @data.highest_scoring_visitor
-  #   assert_equal "Bruins", @small_data.highest_scoring_visitor
-  #   assert_equal "Rangers", @v_small_data.highest_scoring_visitor
-  # end
-  #
-  # def test_highest_scoring_home_team
-  #   skip
-  #   assert_equal "Golden Knights", @data.highest_scoring_home_team
-  #   assert_equal "Senators", @small_data.highest_scoring_home_team
-  #   assert_equal "Bruins", @v_small_data.highest_scoring_home_team
-  # end
+  def test_highest_scoring_visitor
+    # assert_equal "Capitals", @data.highest_scoring_visitor
+    assert_equal "Bruins", @small_data.highest_scoring_visitor
+    assert_equal "Rangers", @v_small_data.highest_scoring_visitor
+  end
+
+  def test_highest_scoring_home_team
+    # assert_equal "Golden Knights", @data.highest_scoring_home_team
+    assert_equal "Senators", @small_data.highest_scoring_home_team
+    assert_equal "Bruins", @v_small_data.highest_scoring_home_team
+  end
   #
   # def test_lowest_scoring_visitor
   #   skip
