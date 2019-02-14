@@ -152,9 +152,15 @@ module LeagueStats
   end
 
   def lowest_scoring_visitor
+    visitor_goals_per_game.min_by do |team, goals_per_game|
+      goals_per_game
+    end.first
   end
 
   def lowest_scoring_home_team
+    home_goals_per_game.min_by do |team, goals_per_game|
+      goals_per_game
+    end.first
   end
 
   def winningest_team
