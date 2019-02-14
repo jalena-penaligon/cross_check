@@ -54,7 +54,6 @@ class GameStatsTest < MiniTest::Test
   end
 
   def test_calculate_total_games_by_season
-  binding.pry
     expected = {20122013 => 2}
     assert_equal expected, @v_small_data.count_of_games_by_season
 
@@ -71,16 +70,16 @@ class GameStatsTest < MiniTest::Test
     # }
     # assert_equal expected, @data.count_of_games_by_season
   end
-  #
-  # def test_calculate_average_goals_per_game
-  #   skip
-  #   assert_equal 6.0, @v_small_data.average_goals_per_game
-  #   assert_equal 6.0, @small_data.average_goals_per_game
-  #   assert_equal 6.0, @data.average_goals_per_game
-  # end
-  #
+
+  def test_calculate_average_goals_per_game
+    assert_equal 6.0, @v_small_data.average_goals_per_game
+    assert_equal 4.65, @small_data.average_goals_per_game
+    # assert_equal 5.44, @data.average_goals_per_game
+  end
+
   # def test_calculate_average_goals_per_season
   #   skip
+  # binding.pry
   #   expected = {20122013: 6.0}
   #   assert_equal expected, @v_small_data.average_goals_by_season
   #
