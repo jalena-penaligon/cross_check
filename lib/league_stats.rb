@@ -77,4 +77,57 @@ module LeagueStats
       goals_allowed_per_game
     end.first
   end
+
+  def count_home_games
+    games = Hash.new(0)
+    @data.each do |game_team|
+      if game_team[:hoa] == "home"
+        games[game_team[:teamname]] += 1
+      end
+    end
+    games
+  end
+
+  def count_away_games
+    games = Hash.new(0)
+    @data.each do |game_team|
+      if game_team[:hoa] == "away"
+        games[game_team[:teamname]] += 1
+      end
+    end
+    games
+  end
+
+
+  def visitor_goals
+    visitor_goals = Hash.new(0)
+    @data.each do |game_team|
+      if game_team[:hoa] == "away"
+        visitor_goals[game_team[:teamname]] += game_team[:goals]
+      end
+    end
+    visitor_goals
+  end
+
+  def highest_scoring_visitor
+
+  end
+
+  def highest_scoring_home_team
+  end
+
+  def lowest_scoring_visitor
+  end
+
+  def lowest_scoring_home_team
+  end
+
+  def winningest_team
+  end
+
+  def best_fans
+  end
+
+  def worst_fans
+  end
 end
