@@ -74,4 +74,10 @@ class TeamStatsTest < Minitest::Test
     assert_equal 3, @small_data.biggest_team_blowout(16)
     assert_equal 8, @data.biggest_team_blowout(24)
   end
+
+  def test_worst_loss
+    assert_equal -3, @v_small_data.worst_loss(3)
+    assert_equal -3, @small_data.worst_loss(17)
+    assert_equal -7, @data.worst_loss(27)
+  end
 end
