@@ -109,6 +109,16 @@ module LeagueStats
     visitor_goals
   end
 
+  def home_goals
+    home_goals = Hash.new(0)
+    @data.each do |game_team|
+      if game_team[:hoa] == "home"
+        home_goals[game_team[:teamname]] += game_team[:goals]
+      end
+    end
+    home_goals
+  end
+
   def highest_scoring_visitor
 
   end
