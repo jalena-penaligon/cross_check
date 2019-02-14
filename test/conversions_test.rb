@@ -10,29 +10,22 @@ class ConversionsTest < MiniTest::Test
     def test_it_can_convert_values_to_boolean
       simple_hash = {won: "False", season:"3", name:"Blackhawks"}
 
-      actual = @stat_parser.convert_to_boolean(simple_hash)
+      simple_hash_2 = {won: "True", season:"3", name:"Blackhawks"}
+      actual = @stat_parser.convert_won_to_boolean(simple_hash)
       expected = {won:false, season: "3", name: "Blackhawks"}
+
+      actual_2 = @stat_parse.convert_won_to_boolean(simple_hash_2)
+      expected_2 = {won:true, season:"3", name:"Blackhawks"}
       assert_equal expected, actual
-    end
-
-    def test_it_can_convert_values_to_int
-      simple_hash = {game_id: "0", season:"3", shots:"5", name:"Blackhawks"}
-
-      actual = @stat_parser.convert_to_int(simple_hash)
-      expected = {game_id: 0, shots: 5, season: 3, name: "Blackhawks"}
-      assert_equal expected, actual
-    end
-
-    def test_it_can_convert_values_to_floats
-      simple_hash = { faceoffwinpercentage:"52.5", shots:"5", name:"Blackhawks"}
-
-      actual = @stat_parser.convert_to_float(simple_hash)
-      expected = {faceoffwinpercentage:52.5, shots: "5", name: "Blackhawks"}
-      assert_equal expected, actual
+      assert_equal expected_2, actual_2
     end
 
     def test_it_can_delete_keys
-        simple_hash = {nil => 0, link:3, shots:5}
+        simple_hash = {nil=>0, venue_time_zone_id: "A", venue_time_zone_offset: -4,
+                    home_rink_side_start: "left", franchiseid: 2, venue_link: "link",
+                    venue: "Garden", abbreviation: "NJD", link: "Http",
+                    shortname: "NewJersey", away_team_id: 4, home_team_id: 6,
+                    outcome: "ShotsOT", shots:5}
 
         actual = @stat_parser.delete_keys(simple_hash)
         expected = {shots:5}
