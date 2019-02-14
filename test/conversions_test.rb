@@ -6,7 +6,7 @@ class ConversionsTest < MiniTest::Test
     def setup
       @stat_parser = StatParser.new([],[])
     end
-    
+
     def test_it_can_convert_values_to_boolean
       simple_hash = {won: "False", season:"3", name:"Blackhawks"}
 
