@@ -71,4 +71,10 @@ module LeagueStats
       goals_allowed_per_game
     end.first
   end
+
+  def worst_defense
+    goals_allowed_per_game.max_by do |team, goals_allowed_per_game|
+      goals_allowed_per_game
+    end.first
+  end
 end
