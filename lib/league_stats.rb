@@ -243,14 +243,15 @@ module LeagueStats
       difference[team] = (away_wins[team] - wins_percentage)
     end
 
-    worst_fans = difference.max_by do |team, difference|
+    worst_fans = difference.select do |team, difference|
+      difference > 0
+    end.max_by do |team, difference|
       difference
     end
 
-    if worst_fans[1] < 0
-      return nil
-    else
-      return worst_fans.first
+    if worst_fans == nil
+      return []
     end
+
   end
 end
