@@ -129,11 +129,7 @@ module LeagueStats
   def goals_allowed
     goals = Hash.new(0)
     @data.each do |game_team|
-      if game_team[:hoa] == "away"
-        goals[game_team[:teamname]] += game_team[:home_goals]
-      elsif game_team[:hoa] == "home"
-        goals[game_team[:teamname]] += game_team[:away_goals]
-      end
+      goals[game_team[:teamname]] += game_team[:opponent_goals]
     end
     goals
   end
