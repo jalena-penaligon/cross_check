@@ -24,40 +24,26 @@ class SeasonStatsTest < MiniTest::Test
   end
 
   def test_biggest_bust
-    #Name of the team with the biggest decrease between preseason and regular season win percentage.
-    #String return.
-    assert_equal , @v_small_data.biggest_bust
-    assert_equal , @small_data.biggest_bust
-    assert_equal , @data.biggest_bust
+    assert_equal "Blackhawks", @data.biggest_bust("20142015")
+    assert_equal "Kings", @data.biggest_bust("20132014")
   end
 
   def test_biggest_surprise
-    #Name of the team with the biggest increase between preseason and regular season win percentage.
-    #String return.
-    assert_equal , @v_small_data.biggest_surprise
-    assert_equal , @small_data.biggest_surprise
-    assert_equal , @data.biggest_surprise
+    assert_equal "Lightning", @data.biggest_surprise("20132014")
+    assert_equal "Jets", @data.biggest_surprise("20142015")
   end
 
   def test_winningest_coach
-    #Name of the Coach with the best win percentage for the season
-    #String return.
-    assert_equal , @v_small_data.winningest_coach
-    assert_equal , @small_data.winningest_coach
-    assert_equal , @data.winningest_coach
+    assert_equal "Claude Julien", @data.winningest_coach("20132014")
+    assert_equal "Alain Vigneault", @data.winningest_coach("20142015")
   end
 
   def test_worst_coach
-    #	Name of the Coach with the worst win percentage for the season
-    #String return.
-    assert_equal , @v_small_data.worst_coach
-    assert_equal , @small_data.worst_coach
-    assert_equal , @data.worst_coach
+    assert_equal "Peter Laviolette", @data.worst_coach("20132014")
+    assert_equal "Craig MacTavish", @data.worst_coach("20142015")
   end
 
   def test_most_accurate_team
-    #Name of the Team with the best ratio of shots to goals for the season
-    #String return.
     assert_equal , @v_small_data.most_accurate_team
     assert_equal , @small_data.most_accurate_team
     assert_equal , @data.most_accurate_team
