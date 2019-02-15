@@ -24,10 +24,6 @@ module LeagueStats
     games
   end
 
-  def count_home_games
-    count_games_by_location("home")
-  end
-
   def count_away_games
     count_games_by_location("away")
   end
