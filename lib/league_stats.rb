@@ -155,45 +155,45 @@ module LeagueStats
   def calculate_max_by(attribute)
     attribute.max_by do |team, num|
       num
-    end
+    end.first
   end
 
   def calculate_min_by(attribute)
     attribute.min_by do |team, num|
       num
-    end
+    end.first
   end
 
   def best_offense
-    calculate_max_by(goals_per_game_by_team).first
+    calculate_max_by(goals_per_game_by_team)
   end
 
   def worst_offense
-    calculate_min_by(goals_per_game_by_team).first
+    calculate_min_by(goals_per_game_by_team)
   end
 
   def best_defense
-    calculate_min_by(goals_allowed_per_game).first
+    calculate_min_by(goals_allowed_per_game)
   end
 
   def worst_defense
-    calculate_max_by(goals_allowed_per_game).first
+    calculate_max_by(goals_allowed_per_game)
   end
 
   def highest_scoring_visitor
-    calculate_max_by(visitor_goals_per_game).first
+    calculate_max_by(visitor_goals_per_game)
   end
 
   def highest_scoring_home_team
-    calculate_max_by(home_goals_per_game).first
+    calculate_max_by(home_goals_per_game)
   end
 
   def lowest_scoring_visitor
-    calculate_min_by(visitor_goals_per_game).first
+    calculate_min_by(visitor_goals_per_game)
   end
 
   def lowest_scoring_home_team
-    calculate_min_by(home_goals_per_game).first
+    calculate_min_by(home_goals_per_game)
   end
 
   def winningest_team
@@ -209,9 +209,7 @@ module LeagueStats
       winning_percentage[team] = (games_won /= games_played[team].to_f)
     end
 
-    winning_percentage.max_by do |team, wins|
-      wins
-    end.first
+    calculate_max_by(winning_percentage).first
   end
 
   def best_fans
