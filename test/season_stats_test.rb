@@ -1,0 +1,79 @@
+require './test/test_helper'
+require './lib/stat_tracker'
+require './lib/stat_parser'
+require 'pry'
+
+class SeasonStatsTest < MiniTest::Test
+
+  def setup
+    v_small_data_paths = {games: './data/game_very_small.csv',
+                          teams: './data/team_info.csv',
+                          game_teams: './data/game_teams_stats_very_small.csv'}
+
+    small_data_paths = {games: './data/game_small.csv',
+                        teams: './data/team_info.csv',
+                        game_teams: './data/game_teams_stats_small.csv'}
+
+    data_paths = {games: './data/game.csv',
+                  teams: './data/team_info.csv',
+                  game_teams: './data/game_teams_stats.csv'}
+
+    @v_small_data = StatTracker.from_csv(v_small_data_paths)
+    @small_data = StatTracker.from_csv(small_data_paths)
+    @data = StatTracker.from_csv(data_paths)
+  end
+
+  def test_biggest_bust
+    assert_equal , @v_small_data.biggest_bust
+    assert_equal , @small_data.biggest_bust
+    assert_equal , @data.biggest_bust
+  end
+
+  def test_biggest_surprise
+    assert_equal , @v_small_data.biggest_surprise
+    assert_equal , @small_data.biggest_surprise
+    assert_equal , @data.biggest_surprise
+  end
+
+  def test_winningest_coach
+    assert_equal , @v_small_data.winningest_coach
+    assert_equal , @small_data.winningest_coach
+    assert_equal , @data.winningest_coach
+  end
+
+  def test_worst_coach
+    assert_equal , @v_small_data.worst_coach
+    assert_equal , @small_data.worst_coach
+    assert_equal , @data.worst_coach
+  end
+
+  def test_most_accurate_team
+    assert_equal , @v_small_data.most_accurate_team
+    assert_equal , @small_data.most_accurate_team
+    assert_equal , @data.most_accurate_team
+  end
+
+  def test_least_accurate_team
+    assert_equal , @v_small_data.least_accurate_team
+    assert_equal , @small_data.least_accurate_team
+    assert_equal , @data.least_accurate_team
+  end
+
+  def test_most_hits
+    assert_equal , @v_small_data.most_hits
+    assert_equal , @small_data.most_hits
+    assert_equal , @data.most_hits
+  end
+
+  def test_least_hits
+    assert_equal , @v_small_data.least_hits
+    assert_equal , @small_data.least_hits
+    assert_equal , @data.least_hits
+  end
+
+  def test_power_play_goal_percentage
+    assert_equal , @v_small_data.power_play_goal_percentage
+    assert_equal , @small_data.power_play_goal_percentage
+    assert_equal , @data.power_play_goal_percentage
+  end
+end
