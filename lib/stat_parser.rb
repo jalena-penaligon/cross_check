@@ -31,11 +31,13 @@ class StatParser
     else
       id = game_team_hash[:away_team_id]
     end
-
+    puts id
+    puts team_info
     return find_team(id, team_info)
   end
 
   def find_team(team_id, team_info)
+
     team =  team_info.find do |hash|
       hash[:team_id] == team_id
     end
