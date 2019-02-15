@@ -114,10 +114,14 @@ module LeagueStats
     goals_per_game
   end
 
+  def calculate_max_by(attribute)
+    attribute.max_by do |team, num|
+      num
+    end
+  end
+
   def best_offense
-    goals_per_game_by_team.max_by do |team, goals_per_game|
-      goals_per_game
-    end.first
+    calculate_max_by(goals_per_game_by_team).first
   end
 
   def worst_offense
