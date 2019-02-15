@@ -10,8 +10,28 @@ class StatParser
 
   def parse_data
     merged_data = merge_data
+    merged_data = add_opponent_data(merged_data, @array_raw_data[2])
     converted_data = convert_data_types(merged_data)
     return converted_data
+  end
+
+  def add_opponent_data(merged_data, team_info)
+    merged_data.map do |hash|
+      opponent_name = find_team(hash[:team_id], team_info)
+      opponent_goals = find_opponent_goals(hash)
+    end
+  end
+
+  def find_team(team_id, team_info))
+    return team_info.find{|hash| hash[:team_id] == team_id}
+  end
+
+  def find_opponent_goals(hash)
+    if hash[:hoa] == "away"
+      return hash[:home_goals]
+    else
+      return hash[:away_goals]
+    end
   end
 
   def merge_data
