@@ -1,6 +1,5 @@
 require './test/test_helper'
 require './lib/stat_tracker'
-require './lib/stat_parser'
 require 'pry'
 
 class TeamStatsTest < Minitest::Test
@@ -32,7 +31,7 @@ class TeamStatsTest < Minitest::Test
                 abbreviation: "NYR",
                 link: "/api/v1/teams/3"
                 }
-    assert_equal expected, @v_small_data.team_info
+    assert_equal expected, @v_small_data.team_info(3)
 
     expected = {
                 team_id: 16,
@@ -42,7 +41,7 @@ class TeamStatsTest < Minitest::Test
                 abbreviation: "CHI",
                 link: "/api/v1/teams/16"
                 }
-    assert_equal expected, @small_data.team_info
+    assert_equal expected, @small_data.team_info(16)
 
     expected = {
                 team_id: 18,
@@ -52,7 +51,7 @@ class TeamStatsTest < Minitest::Test
                 abbreviation: "NSH",
                 link: "/api/v1/teams/18"
                 }
-    assert_equal expected, @data.team_info
+    assert_equal expected, @data.team_info(18)
   end
 
   def test_best_season
@@ -158,7 +157,7 @@ class TeamStatsTest < Minitest::Test
     expected = {
                 20122013 => {
                   preseason: {
-                              win_percentage: 
+                              win_percentage:
                               total_goals_scored:
                               total_goals_against:
                               average_goals_scored:
