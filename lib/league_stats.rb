@@ -42,14 +42,18 @@ module LeagueStats
     goals
   end
 
-  def count_away_wins
+  def wins_by_location(hoa)
     games = Hash.new(0)
     @data.each do |game_team|
-      if game_team[:hoa] == "away" && game_team[:won] == true
+      if game_team[:hoa] == hoa && game_team[:won] == true
         games[game_team[:teamname]] += 1
       end
     end
     games
+  end
+
+  def count_away_wins
+    wins_by_location("away")
   end
 
   def count_home_wins
