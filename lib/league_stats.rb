@@ -114,22 +114,6 @@ module LeagueStats
     goals_per_game
   end
 
-  def calculate_max_by(attribute)
-    attribute.max_by do |team, num|
-      num
-    end
-  end
-
-  def best_offense
-    calculate_max_by(goals_per_game_by_team).first
-  end
-
-  def worst_offense
-    goals_per_game_by_team.min_by do |team, goals_per_game|
-      goals_per_game
-    end.first
-  end
-
   def goals_allowed
     goals = Hash.new(0)
     @data.each do |game_team|
@@ -148,6 +132,22 @@ module LeagueStats
     goals_allowed_per_game
   end
 
+  def calculate_max_by(attribute)
+    attribute.max_by do |team, num|
+      num
+    end
+  end
+
+  def best_offense
+    calculate_max_by(goals_per_game_by_team).first
+  end
+
+  def worst_offense
+    goals_per_game_by_team.min_by do |team, goals_per_game|
+      goals_per_game
+    end.first
+  end
+
   def best_defense
     goals_allowed_per_game.min_by do |team, goals_allowed_per_game|
       goals_allowed_per_game
@@ -155,9 +155,7 @@ module LeagueStats
   end
 
   def worst_defense
-    goals_allowed_per_game.max_by do |team, goals_allowed_per_game|
-      goals_allowed_per_game
-    end.first
+    calculate_max_by(goals_allowed_per_game).first
   end
 
   def home_goals_per_game
