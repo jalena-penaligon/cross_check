@@ -57,17 +57,11 @@ module LeagueStats
   end
 
   def count_home_wins
-    games = Hash.new(0)
-    @data.each do |game_team|
-      if game_team[:hoa] == "home" && game_team[:won] == true
-        games[game_team[:teamname]] += 1
-      end
-    end
-    games
+    wins_by_location("home")
   end
 
   def away_win_percentage
-    wins = count_away_wins
+    wins = wins_by_location("away")
     num_games = count_games_by_location("away")
 
     percentage = Hash.new(0)
