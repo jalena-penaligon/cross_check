@@ -24,54 +24,72 @@ class SeasonStatsTest < MiniTest::Test
   end
 
   def test_biggest_bust
+    #Name of the team with the biggest decrease between preseason and regular season win percentage.
+    #String return.
     assert_equal , @v_small_data.biggest_bust
     assert_equal , @small_data.biggest_bust
     assert_equal , @data.biggest_bust
   end
 
   def test_biggest_surprise
+    #Name of the team with the biggest increase between preseason and regular season win percentage.
+    #String return.
     assert_equal , @v_small_data.biggest_surprise
     assert_equal , @small_data.biggest_surprise
     assert_equal , @data.biggest_surprise
   end
 
   def test_winningest_coach
+    #Name of the Coach with the best win percentage for the season
+    #String return.
     assert_equal , @v_small_data.winningest_coach
     assert_equal , @small_data.winningest_coach
     assert_equal , @data.winningest_coach
   end
 
   def test_worst_coach
+    #	Name of the Coach with the worst win percentage for the season
+    #String return.
     assert_equal , @v_small_data.worst_coach
     assert_equal , @small_data.worst_coach
     assert_equal , @data.worst_coach
   end
 
   def test_most_accurate_team
+    #Name of the Team with the best ratio of shots to goals for the season
+    #String return.
     assert_equal , @v_small_data.most_accurate_team
     assert_equal , @small_data.most_accurate_team
     assert_equal , @data.most_accurate_team
   end
 
   def test_least_accurate_team
+    #Name of the Team with the worst ratio of shots to goals for the season
+    #String return.
     assert_equal , @v_small_data.least_accurate_team
     assert_equal , @small_data.least_accurate_team
     assert_equal , @data.least_accurate_team
   end
 
   def test_most_hits
+    #Name of the Team with the most hits in the season
+    #String return.
     assert_equal , @v_small_data.most_hits
     assert_equal , @small_data.most_hits
     assert_equal , @data.most_hits
   end
 
   def test_least_hits
+    #	Name of the Team with the least hits in the season
+    #String return.
     assert_equal , @v_small_data.least_hits
     assert_equal , @small_data.least_hits
     assert_equal , @data.least_hits
   end
 
   def test_power_play_goal_percentage
+    #Percentage of goals that were power play goals for the season (rounded to the nearest 100th)
+    #Float return.
     assert_equal , @v_small_data.power_play_goal_percentage
     assert_equal , @small_data.power_play_goal_percentage
     assert_equal , @data.power_play_goal_percentage
