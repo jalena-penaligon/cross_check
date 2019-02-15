@@ -190,8 +190,8 @@ module LeagueStats
   end
 
   def worst_fans
-    home_wins = home_win_percentage
-    away_wins = away_win_percentage
+    home_wins = win_percentage_by_location("home")
+    away_wins = win_percentage_by_location("away")
     difference = {}
     home_wins.each do |team, wins_percentage|
       difference[team] = (away_wins[team] - wins_percentage)
