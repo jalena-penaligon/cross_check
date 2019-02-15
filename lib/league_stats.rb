@@ -52,9 +52,9 @@ module LeagueStats
     games
   end
 
-  def away_win_percentage
-    wins = wins_by_location("away")
-    num_games = count_games_by_location("away")
+  def win_percentage_by_location(hoa)
+    wins = wins_by_location(hoa)
+    num_games = count_games_by_location(hoa)
 
     percentage = Hash.new(0)
     wins.each do |team, wins|
@@ -63,15 +63,12 @@ module LeagueStats
     percentage
   end
 
-  def home_win_percentage
-    wins = wins_by_location("home")
-    num_games = count_games_by_location("home")
+  def away_win_percentage
+    win_percentage_by_location("away")
+  end
 
-    percentage = Hash.new(0)
-    wins.each do |team, wins|
-      percentage[team] = (wins /= num_games[team].to_f).round(3)
-    end
-    percentage
+  def home_win_percentage
+    win_percentage_by_location("home")
   end
 
   def goals_per_game_by_team
