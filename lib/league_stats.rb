@@ -24,10 +24,6 @@ module LeagueStats
     games
   end
 
-  def count_away_games
-    count_games_by_location("away")
-  end
-
   def total_team_goals
     teams = Hash.new(0)
     @data.each do |game_team|
