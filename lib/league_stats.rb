@@ -173,9 +173,7 @@ module LeagueStats
   end
 
   def best_defense
-    goals_allowed_per_game.min_by do |team, goals_allowed_per_game|
-      goals_allowed_per_game
-    end.first
+    calculate_min_by(goals_allowed_per_game).first
   end
 
   def worst_defense
