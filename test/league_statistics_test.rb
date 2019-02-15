@@ -106,19 +106,18 @@ class LeagueStatisticsTest < MiniTest::Test
 
   def test_count_home_wins
     expected = {"Rangers"=>1, "Bruins"=>5,"Red Wings"=>2, "Blackhawks"=>3, "Senators"=>2, "Canadiens"=>1}
-    assert_equal expected, @small_data.count_home_wins
+    assert_equal expected, @small_data.wins_by_location("home")
 
     expected = {"Bruins"=>2}
-    assert_equal expected, @v_small_data.count_home_wins
-  end
+    assert_equal expected, @v_small_data.wins_by_location("home")
 
-  def test_count_away_wins
     expected = {"Bruins"=>3, "Red Wings"=>1, "Blackhawks"=>1, "Senators"=>1}
-    assert_equal expected, @small_data.count_away_wins
+    assert_equal expected, @small_data.wins_by_location("away")
 
     expected = {}
-    assert_equal expected, @v_small_data.count_away_wins
+    assert_equal expected, @v_small_data.wins_by_location("away")
   end
+
 
   def test_calculate_home_win_percentage
     expected = {"Rangers" => 0.5, "Bruins"=> 1.0, "Red Wings" => 0.667, "Blackhawks"=> 0.75, "Senators"=> 1.0, "Canadiens" => 0.5}
