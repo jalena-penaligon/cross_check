@@ -103,6 +103,12 @@ class StatParserTest < MiniTest::Test
       assert_equal expected, actual
   end
 
+  def test_it_can_find_team
+    simple_team_info = [{team:1,name:"A"},{team:2,name:"B"}]
+    stat_parser = StatParser.new([],[])
+
+    assert_equal "A", stat_parser.find_team(1)
+  end
   def test_it_adds_opponent_data
     simple_merged_data = [
       {game_id: 1, team_id: 1, goals:2, hoa: "away",away_team_id: 1,
