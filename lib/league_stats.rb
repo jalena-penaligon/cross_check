@@ -93,7 +93,7 @@ module LeagueStats
 
   def home_win_percentage
     wins = count_home_wins
-    num_games = count_home_games
+    num_games = count_games_by_location("home")
 
     percentage = Hash.new(0)
     wins.each do |team, wins|
