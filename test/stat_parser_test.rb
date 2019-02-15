@@ -103,6 +103,29 @@ class StatParserTest < MiniTest::Test
       assert_equal expected, actual
   end
 
+  def test_it_adds_opponent_data
+    simple_merged_data = [
+      {game_id: 1, team_id: 1, goals:2, hoa: "away",away_team_id: 1,
+      home_team_id: 2, away_goals: 2, home_goals: 3},
+      {game_id: 1, team_id: 2, goals:3, hoa: "home", away_team_id: 2,
+      home_team_id: 2, away_goals: 2, home_goals: 3}
+    ]
+    simple_team_info = [{team:1,name:"A"},{team:2,name:"B"}]
+
+    expected = [
+      {game_id: 1, team_id: 1, goals:2, hoa: "away",away_team_id: 1,
+      home_team_id: 2, away_goals: 2, home_goals: 3,
+      opponent: "B", opponent_goals: 3},
+      {game_id: 1, team_id: 2, goals:3, hoa: "home", away_team_id: 2,
+      home_team_id: 2, away_goals: 2, home_goals: 3,
+      opponent: "A", opponent_goals: 2}
+    ]
+
+    stat_parser = StatParser.new([],[])
+    actual = stat_parser.add_opponent_data(simple_merged_data, simple_team_info)
+
+    assert_equal expected, actual
+  end
 
   def test_it_parses_data
 
