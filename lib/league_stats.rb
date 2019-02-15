@@ -193,9 +193,7 @@ module LeagueStats
   end
 
   def lowest_scoring_home_team
-    home_goals_per_game.min_by do |team, goals_per_game|
-      goals_per_game
-    end.first
+    calculate_min_by(home_goals_per_game).first
   end
 
   def winningest_team
