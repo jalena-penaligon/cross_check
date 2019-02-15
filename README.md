@@ -17,6 +17,7 @@
   - Opponent goals
   - ?Margin?
   - ?More?
+  - ?home_goals and away_goals become unneeded?
 
 **Data Row**
 - All symbols
