@@ -120,7 +120,7 @@ module LeagueStats
     home_games = count_games_by_location("home")
     home_goals_per_game = Hash.new
 
-    home_goals.each do |team, goals|
+    count_goals_by_location("home").each do |team, goals|
       home_goals_per_game[team] = (goals /= home_games[team].to_f)
     end
     home_goals_per_game
