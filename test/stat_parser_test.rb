@@ -103,11 +103,26 @@ class StatParserTest < MiniTest::Test
       assert_equal expected, actual
   end
 
-  def test_it_can_find_team
-    simple_team_info = [{team:1,name:"A"},{team:2,name:"B"}]
+  def test_it_can_find_opponent_name
+    simple_team_info = [{team_id: 1,teamname:"A"},{team_id: 2,teamname:"B"}]
+
+    simple_hash_1 ={game_id: 1, team_id: 1, goals:2, hoa: "away",away_team_id: 1,
+          home_team_id: 2, away_goals: 2, home_goals: 3}
+
+    simple_hash_2 ={game_id: 1, team_id: 2, goals:3, hoa: "home", away_team_id: 2,
+          home_team_id: 2, away_goals: 2, home_goals: 3}
     stat_parser = StatParser.new([],[])
 
-    assert_equal "A", stat_parser.find_team(1)
+    assert_equal "B", stat_parser.find_opponent(simple_hash_1, simple_team_info)
+    assert_equal "A", stat_parser.find_opponent(simple_hash_2, simple_team_info)
+    
+  end
+
+  def test_it_can_find_team
+    simple_team_info = [{team_id: 1,teamname:"A"},{team_id: 2,teamname:"B"}]
+    stat_parser = StatParser.new([],[])
+
+    assert_equal "A", stat_parser.find_team(1, simple_team_info)
   end
 
   def test_it_can_find_opponent_goals
@@ -120,6 +135,7 @@ class StatParserTest < MiniTest::Test
 
     assert_equal 3, stat_parser.find_opponent_goals(simple_hash_1)
     assert_equal 2, stat_parser.find_opponent_goals(simple_hash_2)
+  end
 
   def test_it_adds_opponent_data
     simple_merged_data = [
@@ -128,7 +144,7 @@ class StatParserTest < MiniTest::Test
       {game_id: 1, team_id: 2, goals:3, hoa: "home", away_team_id: 2,
       home_team_id: 2, away_goals: 2, home_goals: 3}
     ]
-    simple_team_info = [{team:1,name:"A"},{team:2,name:"B"}]
+    simple_team_info = [{team_id: 1,teamname:"A"},{team_id: 2,teamname:"B"}]
 
     expected = [
       {game_id: 1, team_id: 1, goals:2, hoa: "away",away_team_id: 1,
