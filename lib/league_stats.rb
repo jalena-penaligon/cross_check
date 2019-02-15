@@ -32,14 +32,18 @@ module LeagueStats
     teams
   end
 
-  def visitor_goals
-    visitor_goals = Hash.new(0)
+  def count_goals_by_location(hoa)
+    goals = Hash.new(0)
     @data.each do |game_team|
-      if game_team[:hoa] == "away"
-        visitor_goals[game_team[:teamname]] += game_team[:goals]
+      if game_team[:hoa] == hoa
+        goals[game_team[:teamname]] += game_team[:goals]
       end
     end
-    visitor_goals
+    goals
+  end
+
+  def visitor_goals
+    count_goals_by_location("away")
   end
 
   def home_goals
