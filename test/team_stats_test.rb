@@ -24,7 +24,16 @@ class TeamStatsTest < Minitest::Test
     end
 
   def test_team_info_with_respective_team_attributes
+    expected = {
+                team_id: 18,
+                franchise_id: 34,
+                short_name: "Nashville",
+                team_name: "Predators",
+                abbreviation: "NSH",
+                link: "/api/v1/teams/18"
+                }
 
+    assert_equal expected, @data.team_info
   end
 
   def test_best_season
@@ -79,5 +88,11 @@ class TeamStatsTest < Minitest::Test
     assert_equal -3, @v_small_data.worst_loss(3)
     assert_equal -3, @small_data.worst_loss(17)
     assert_equal -7, @data.worst_loss(27)
+  end
+
+  def test_head_to_head
+    assert_equal , @v_small_data.head_to_head()
+    assert_equal , @small_data.head_to_head()
+    assert_equal , @data.head_to_head()
   end
 end
