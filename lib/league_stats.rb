@@ -42,10 +42,6 @@ module LeagueStats
     goals
   end
 
-  def visitor_goals
-    count_goals_by_location("away")
-  end
-
   def home_goals
     count_goals_by_location("home")
   end
