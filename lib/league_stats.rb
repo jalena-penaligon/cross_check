@@ -52,14 +52,6 @@ module LeagueStats
     games
   end
 
-  def count_away_wins
-    wins_by_location("away")
-  end
-
-  def count_home_wins
-    wins_by_location("home")
-  end
-
   def away_win_percentage
     wins = wins_by_location("away")
     num_games = count_games_by_location("away")
