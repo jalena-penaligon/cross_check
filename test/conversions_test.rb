@@ -25,7 +25,7 @@ class ConversionsTest < MiniTest::Test
                     home_rink_side_start: "left", franchiseid: 2, venue_link: "link",
                     venue: "Garden", abbreviation: "NJD", link: "Http",
                     shortname: "NewJersey", away_team_id: 4, home_team_id: 6,
-                    outcome: "ShotsOT", shots:5}
+                    outcome: "ShotsOT", shots:5, home_goals: 3, away_goals: 5}
 
         actual = @stat_parser.delete_keys(simple_hash)
         expected = {:franchiseid=>2, :venue_link=>"link", :abbreviation=>"NJD", :shortname=>"NewJersey", shots:5}
