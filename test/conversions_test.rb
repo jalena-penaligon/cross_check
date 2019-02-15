@@ -14,7 +14,7 @@ class ConversionsTest < MiniTest::Test
       actual = @stat_parser.convert_won_to_boolean(simple_hash)
       expected = {won:false, season: "3", name: "Blackhawks"}
 
-      actual_2 = @stat_parse.convert_won_to_boolean(simple_hash_2)
+      actual_2 = @stat_parser.convert_won_to_boolean(simple_hash_2)
       expected_2 = {won:true, season:"3", name:"Blackhawks"}
       assert_equal expected, actual
       assert_equal expected_2, actual_2
@@ -28,7 +28,7 @@ class ConversionsTest < MiniTest::Test
                     outcome: "ShotsOT", shots:5}
 
         actual = @stat_parser.delete_keys(simple_hash)
-        expected = {shots:5}
+        expected = {:franchiseid=>2, :venue_link=>"link", :abbreviation=>"NJD", :shortname=>"NewJersey", shots:5}
         assert_equal expected, actual
     end
 
