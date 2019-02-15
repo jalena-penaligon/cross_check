@@ -12,19 +12,14 @@
 - Modules for `iteration 4`
 - Modules for `iteration 5`
 
-- WP -- Adding more to each `Data Row`
-  - Opponent name
-  - Opponent goals
-  - ?Margin?
-  - ?More?
-  - ?home_goals and away_goals become unneeded?
-
 **Data Row**
-- All symbols
+- All symbols for keys
 - converted to int/float/bool when appropriate
+- `opponent` and `opponent_goals` added
+- `franchiseid`, `shortname`, and `abbreviation` undeleted.
 
 {game_id, team_id, hoa, won, settled_in, head_coach,
- goals, shots, hits, pim, powerplaygoals, powerplayopportunities, faceoffwinpercentage, giveaways, takeaways, teamname, season, type, date_time, venue_time_zone_tz, home_goals, away_goals}
+ goals, shots, hits, pim, powerplaygoals, powerplayopportunities, faceoffwinpercentage, giveaways, takeaways, teamname, season, type, date_time, venue_time_zone_tz, opponent, opponent_goals, franchiseid, shortname, abbreviation}
 
 **Class Structure**
 ```
