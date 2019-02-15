@@ -14,14 +14,18 @@ module LeagueStats
     games
   end
 
-  def count_home_games
+  def count_games_by_location(hoa)
     games = Hash.new(0)
     @data.each do |game_team|
-      if game_team[:hoa] == "home"
+      if game_team[:hoa] == hoa
         games[game_team[:teamname]] += 1
       end
     end
     games
+  end
+
+  def count_home_games
+    count_games_by_location("home")
   end
 
   def count_away_games
@@ -196,17 +200,13 @@ module LeagueStats
     calculate_min_by(home_goals_per_game)
   end
 
-  def games_won_per_team
+  def winningest_team
     games_won = Hash.new(0)
     @data.each do |game_team|
       if game_team[:won] == true
         games_won[game_team[:teamname]] += 1
       end
     end
-  end
-
-  def winningest_team
-    wins = games_won_per_team
     games_played = games_per_team
     winning_percentage = Hash.new(0)
     games_won.each do |team, games_won|
