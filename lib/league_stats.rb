@@ -209,7 +209,7 @@ module LeagueStats
       winning_percentage[team] = (games_won /= games_played[team].to_f)
     end
 
-    calculate_max_by(winning_percentage).first
+    calculate_max_by(winning_percentage)
   end
 
   def best_fans
@@ -219,7 +219,7 @@ module LeagueStats
     home_wins.each do |team, wins_percentage|
       difference[team] = (wins_percentage - away_wins[team])
     end
-    calculate_max_by(difference).first
+    calculate_max_by(difference)
   end
 
   def worst_fans
