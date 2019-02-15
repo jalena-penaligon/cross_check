@@ -183,9 +183,7 @@ module LeagueStats
   end
 
   def highest_scoring_home_team
-    home_goals_per_game.max_by do |team, goals_per_game|
-      goals_per_game
-    end.first
+    calculate_max_by(home_goals_per_game).first
   end
 
   def lowest_scoring_visitor
