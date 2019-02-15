@@ -119,20 +119,18 @@ class LeagueStatisticsTest < MiniTest::Test
   end
 
 
-  def test_calculate_home_win_percentage
+  def test_calculate_win_percentage_by_location
     expected = {"Rangers" => 0.5, "Bruins"=> 1.0, "Red Wings" => 0.667, "Blackhawks"=> 0.75, "Senators"=> 1.0, "Canadiens" => 0.5}
-    assert_equal expected, @small_data.home_win_percentage
+    assert_equal expected, @small_data.win_percentage_by_location("home")
 
     expected = {"Bruins" => 1.0}
-    assert_equal expected, @v_small_data.home_win_percentage
-  end
+    assert_equal expected, @v_small_data.win_percentage_by_location("home")
 
-  def test_count_away_win_percentage
     expected = {"Bruins"=> 0.75, "Red Wings" => 0.25, "Blackhawks"=> 0.333, "Senators"=> 0.5}
-    assert_equal expected, @small_data.away_win_percentage
+    assert_equal expected, @small_data.win_percentage_by_location("away")
 
     expected = {}
-    assert_equal expected, @v_small_data.away_win_percentage
+    assert_equal expected, @v_small_data.win_percentage_by_location("away")
   end
 
   def test_highest_scoring_visitor
