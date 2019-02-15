@@ -25,14 +25,33 @@ class TeamStatsTest < Minitest::Test
 
   def test_team_info_with_respective_team_attributes
     expected = {
-                team_id: 18,
-                franchise_id: 34,
-                short_name: "Nashville",
-                team_name: "Predators",
-                abbreviation: "NSH",
-                link: "/api/v1/teams/18"
+                team_id: 3,
+                franchise_id: 10,
+                short_name: "NY Rangers",
+                team_name: "Rangers",
+                abbreviation: "NYR",
+                link: "/api/v1/teams/3"
                 }
+    assert_equal expected, @v_small_data.team_info
 
+    expected = {
+                team_id: 16,
+                franchise_id: 11,
+                short_name: "Chicago",
+                team_name: "Blackhawks",
+                abbreviation: "CHI",
+                link: "/api/v1/teams/16"
+                }
+    assert_equal expected, @small_data.team_info
+    
+    expected = {
+      team_id: 18,
+      franchise_id: 34,
+      short_name: "Nashville",
+      team_name: "Predators",
+      abbreviation: "NSH",
+      link: "/api/v1/teams/18"
+    }
     assert_equal expected, @data.team_info
   end
 
