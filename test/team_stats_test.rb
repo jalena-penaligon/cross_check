@@ -43,15 +43,15 @@ class TeamStatsTest < Minitest::Test
                 link: "/api/v1/teams/16"
                 }
     assert_equal expected, @small_data.team_info
-    
+
     expected = {
-      team_id: 18,
-      franchise_id: 34,
-      short_name: "Nashville",
-      team_name: "Predators",
-      abbreviation: "NSH",
-      link: "/api/v1/teams/18"
-    }
+                team_id: 18,
+                franchise_id: 34,
+                short_name: "Nashville",
+                team_name: "Predators",
+                abbreviation: "NSH",
+                link: "/api/v1/teams/18"
+                }
     assert_equal expected, @data.team_info
   end
 
@@ -110,8 +110,40 @@ class TeamStatsTest < Minitest::Test
   end
 
   def test_head_to_head
+    expected = {
+                "Blackhawks" => 0.53,
+                "Blue Jackets" => 0.46,
+                "Blues" => 0.37,
+                "Bruins" => 0.7,
+                "Canadians" => 0.5,
+                "Canucks" => 0.42,
+                "Capitals" => 0.3,
+                "Coyotes" => 0.56,
+                "Devils" => 0.7,
+                "Ducks" => 0.39,
+                "Flames" => 0.42,
+                "Flyers" => 0.4,
+                "Golden Knights" => 0.33,
+                "Hurricanes" => 0.5,
+                "Islanders" => 0.5,
+                "Jets" => 0.5,
+                "Kings" => 0.28,
+                "Lightning" => 0.4,
+                "Maple Leafs" => 0.5,
+                "Oilers" => 0.4,
+                "Panthers" => 0.5,
+                "Penguins" => 0.5,
+                "Predators" => 0.38,
+                "Rangers" => 0.5,
+                "Red Wings" => 0.46,
+                "Sabres" => 0.7,
+                "Senators" => 0.4,
+                "Sharks" => 0.39,
+                "Stars" => 0.59,
+                "Wild" => 0.42,
+                }
+    assert_equal expected, @data.head_to_head(21)
     assert_equal , @v_small_data.head_to_head()
     assert_equal , @small_data.head_to_head()
-    assert_equal , @data.head_to_head()
   end
 end
