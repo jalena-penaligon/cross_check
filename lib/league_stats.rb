@@ -196,13 +196,17 @@ module LeagueStats
     calculate_min_by(home_goals_per_game)
   end
 
-  def winningest_team
+  def games_won_per_team
     games_won = Hash.new(0)
     @data.each do |game_team|
       if game_team[:won] == true
         games_won[game_team[:teamname]] += 1
       end
     end
+  end
+
+  def winningest_team
+    wins = games_won_per_team
     games_played = games_per_team
     winning_percentage = Hash.new(0)
     games_won.each do |team, games_won|
@@ -239,6 +243,5 @@ module LeagueStats
     if worst_fans == nil
       return []
     end
-
   end
 end
