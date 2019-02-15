@@ -109,6 +109,14 @@ class StatParserTest < MiniTest::Test
 
     assert_equal "A", stat_parser.find_team(1)
   end
+
+  def test_it_can_find_opponent_goals
+    simple_hash ={game_id: 1, team_id: 1, goals:2, hoa: "away",away_team_id: 1,
+          home_team_id: 2, away_goals: 2, home_goals: 3}
+    stat_parser = StatParser.new([],[])
+
+    assert_equal 3, stat_parser.find_opponent_goals(simple_hash)
+
   def test_it_adds_opponent_data
     simple_merged_data = [
       {game_id: 1, team_id: 1, goals:2, hoa: "away",away_team_id: 1,
