@@ -158,6 +158,12 @@ module LeagueStats
     end
   end
 
+  def calculate_min_by(attribute)
+    attribute.min_by do |team, num|
+      num
+    end
+  end
+
   def best_offense
     calculate_max_by(goals_per_game_by_team).first
   end
@@ -223,7 +229,6 @@ module LeagueStats
     home_wins.each do |team, wins_percentage|
       difference[team] = (wins_percentage - away_wins[team])
     end
-
     calculate_max_by(difference).first
   end
 
