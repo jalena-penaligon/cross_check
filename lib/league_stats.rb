@@ -42,10 +42,6 @@ module LeagueStats
     goals
   end
 
-  def home_goals
-    count_goals_by_location("home")
-  end
-
   def count_away_wins
     games = Hash.new(0)
     @data.each do |game_team|
