@@ -15,43 +15,6 @@ class StatParser
     return converted_data
   end
 
-  def add_opponent_data(merged_data, team_info)
-    merged_data.map do |hash|
-      opponent_name = find_opponent(hash, team_info)
-      opponent_goals = find_opponent_goals(hash)
-      to_merge = {opponent: opponent_name,
-                  opponent_goals: opponent_goals}
-      hash.merge(to_merge)
-    end
-  end
-
-  def find_opponent(game_team_hash, team_info)
-    if game_team_hash[:hoa] == "away"
-      id = game_team_hash[:home_team_id]
-    else
-      id = game_team_hash[:away_team_id]
-    end
-    puts id
-    puts team_info
-    return find_team(id, team_info)
-  end
-
-  def find_team(team_id, team_info)
-
-    team =  team_info.find do |hash|
-      hash[:team_id] == team_id
-    end
-    return team[:teamname]
-  end
-
-  def find_opponent_goals(hash)
-    if hash[:hoa] == "away"
-      return hash[:home_goals]
-    else
-      return hash[:away_goals]
-    end
-  end
-
   def merge_data
     #[game_team, game, team] = @array_raw_data
     current_data = @array_raw_data[0]
@@ -61,6 +24,16 @@ class StatParser
     end
 
     return current_data
+  end
+  
+  def add_opponent_data(merged_data, team_info)
+    merged_data.map do |hash|
+      opponent_name = find_opponent(hash, team_info)
+      opponent_goals = find_opponent_goals(hash)
+      to_merge = {opponent: opponent_name,
+                  opponent_goals: opponent_goals}
+      hash.merge(to_merge)
+    end
   end
 
   def convert_data_types(array_of_hashes)
@@ -73,6 +46,30 @@ class StatParser
     end
 
     return converted_values
+  end
+
+  def find_opponent(game_team_hash, team_info)
+    if game_team_hash[:hoa] == "away"
+      id = game_team_hash[:home_team_id]
+    else
+      id = game_team_hash[:away_team_id]
+    end
+    return find_team(id, team_info)
+  end
+
+  def find_team(team_id, team_info)
+    team =  team_info.find do |hash|
+      hash[:team_id] == team_id
+    end
+    return team[:teamname]
+  end
+
+  def find_opponent_goals(hash)
+    if hash[:hoa] == "away"
+      return hash[:home_goals]
+    else
+      return hash[:away_goals]
+    end
   end
 
   def merge_hash_arrays(left_array, right_array, merge_key)
