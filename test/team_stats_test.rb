@@ -153,4 +153,26 @@ class TeamStatsTest < Minitest::Test
     }
     assert_equal expected, @data.head_to_head(21)
   end
+
+  def test_seasonal_summary
+    expected = {
+                20122013 => {
+                  preseason: {
+                              win_percentage: 
+                              total_goals_scored:
+                              total_goals_against:
+                              average_goals_scored:
+                              average_goals_against:
+                              }
+                  regular_season:{
+                                  win_percentage:
+                                  total_goals_scored:
+                                  total_goals_against:
+                                  average_goals_scored:
+                                  average_goals_against:
+                                  }
+                                }
+                              }
+    assert_equal expected, @data.seasonal_summary(3)
+  end
 end
