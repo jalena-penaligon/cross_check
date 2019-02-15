@@ -92,20 +92,18 @@ class LeagueStatisticsTest < MiniTest::Test
     assert_equal expected, @v_small_data.home_goals
   end
 
-  def test_count_home_games
+  def test_count_games_by_location
     expected = {"Rangers"=>2, "Bruins"=>5, "Penguins"=>2, "Red Wings"=>3, "Blackhawks"=>4, "Senators"=>2, "Canadiens"=>2}
-    assert_equal expected, @small_data.count_home_games
+    assert_equal expected, @small_data.count_games_by_location("home")
 
     expected = {"Bruins"=>2}
-    assert_equal expected, @v_small_data.count_home_games
-  end
+    assert_equal expected, @v_small_data.count_games_by_location("home")
 
-  def test_count_away_games
     expected = {"Rangers"=>3, "Bruins"=>4, "Penguins"=>2, "Red Wings"=>4, "Blackhawks"=>3, "Senators"=>2, "Canadiens"=>2}
-    assert_equal expected, @small_data.count_away_games
+    assert_equal expected, @small_data.count_games_by_location("away")
 
     expected = {"Rangers"=>2}
-    assert_equal expected, @v_small_data.count_away_games
+    assert_equal expected, @v_small_data.count_games_by_location("away")
   end
 
   def test_count_home_wins
