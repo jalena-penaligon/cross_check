@@ -72,7 +72,7 @@ module LeagueStats
   end
 
   def home_win_percentage
-    wins = count_home_wins
+    wins = wins_by_location("home")
     num_games = count_games_by_location("home")
 
     percentage = Hash.new(0)
