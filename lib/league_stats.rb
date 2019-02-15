@@ -137,7 +137,7 @@ module LeagueStats
   end
 
   def visitor_goals_per_game
-    visitor_games = count_away_games
+    visitor_games = count_games_by_location("away")
     visitor_goals_per_game = Hash.new
 
     visitor_goals.each do |team, goals|
