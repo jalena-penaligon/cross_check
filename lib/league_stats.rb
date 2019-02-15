@@ -131,7 +131,7 @@ module LeagueStats
   end
 
   def home_goals_per_game
-    home_games = count_home_games
+    home_games = count_games_by_location("home")
     home_goals_per_game = Hash.new
 
     home_goals.each do |team, goals|
