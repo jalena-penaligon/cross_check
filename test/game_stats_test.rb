@@ -53,23 +53,23 @@ class GameStatsTest < MiniTest::Test
   #   assert_equal 0.45, @data.percentage_visitor_wins
   # end
   #
-  # def test_calculate_total_games_by_season
-  #   expected = {20122013 => 2}
-  #   assert_equal expected, @v_small_data.count_of_games_by_season
-  #
-  #   expected = {20122013 => 20}
-  #   assert_equal expected, @small_data.count_of_games_by_season
-  #
-  #   expected = {
-  #               20122013 => 806,
-  #               20132014 => 1323,
-  #               20142015 => 1319,
-  #               20152016 => 1321,
-  #               20162017 => 1317,
-  #               20172018 => 1355
-  #              }
-  #   assert_equal expected, @data.count_of_games_by_season
-  # end
+  def test_calculate_total_games_by_season
+    expected = {20122013 => 2}
+    assert_equal expected, @v_small_data.count_of_games_by_season
+
+    expected = {20122013 => 20}
+    assert_equal expected, @small_data.count_of_games_by_season
+
+    expected = {
+                20122013 => 806,
+                20132014 => 1323,
+                20142015 => 1319,
+                20152016 => 1321,
+                20162017 => 1317,
+                20172018 => 1355
+               }
+    assert_equal expected, @data.count_of_games_by_season
+  end
   #
   # def test_calculate_average_goals_per_game
   #   assert_equal 6.0, @v_small_data.average_goals_per_game

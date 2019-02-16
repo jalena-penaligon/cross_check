@@ -35,15 +35,27 @@ module GameStats
     percent_home_wins = ((number_visitor_wins.count) / total_number_of_games).round(2)
   end
 
+  # def count_of_games_by_season
+  #   seasons = Hash.new(0)
+  #   @data.each do |game_team_info|
+  #     seasons[game_team_info[:season]] += 1
+  #   end
+  #
+  #   seasons.each do |key, value|
+  #     seasons[key] = value/2
+  #   end
+  # end
+
   def count_of_games_by_season
     seasons = Hash.new(0)
-    @data.each do |game_team_info|
-      seasons[game_team_info[:season]] += 1
+    unique_seasons = find_unique_seasons
+    unique_seasons.each do |seasonid|
+      games = @data.select do |game_team_info|
+        game_team_info[:season] == seasonid
+      end
+      seasons[seasonid] = total_number_of_games(games)
     end
-
-    seasons.each do |key, value|
-      seasons[key] = value/2
-    end
+    return seasons
   end
 
   def average_goals_per_game(data_to_use = nil)
@@ -74,7 +86,7 @@ module GameStats
     if data_to_use == nil
       data_to_use = @data
     end
-    total_number_of_games = ((@data.count)/2).to_f
+    total_number_of_games = ((data_to_use.count)/2).to_f
   end
 
   def find_unique_seasons
