@@ -61,14 +61,18 @@ module LeagueStats
     percentage
   end
 
-  def goals_per_game_by_team
-    games = games_per_team
+  def goals_scored_per_game(game_type, goal_type)
+    games = game_type
     goals_per_game = Hash.new
 
-    total_team_goals.each do |team, goals|
-      goals_per_game[team] = (goals /= games[team].to_f)
+    goal_type.each do |team, goals|
+      goals_per_game[team] = (goals /= games[team].to_f).round(3)
     end
     goals_per_game
+  end
+
+  def goals_per_game_by_team
+    goals_scored_per_game(games_per_team, total_team_goals)
   end
 
   def goals_allowed
@@ -80,13 +84,7 @@ module LeagueStats
   end
 
   def goals_allowed_per_game
-    games = games_per_team
-    goals_allowed_per_game = Hash.new
-
-    goals_allowed.each do |team, goals|
-      goals_allowed_per_game[team] = (goals /= games[team].to_f)
-    end
-    goals_allowed_per_game
+    goals_scored_per_game(games_per_team, goals_allowed)
   end
 
   def goals_per_game_by_location(hoa)
