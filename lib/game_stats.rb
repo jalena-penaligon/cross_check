@@ -2,30 +2,29 @@ module GameStats
 
   def highest_total_score
     high_score = @data.max_by do |hash|
-      (hash[:away_goals] + hash[:home_goals])
+      (hash[:goals] + hash[:opponent_goals])
     end
-    total_score = high_score[:away_goals] + high_score[:home_goals]
+    total_score = high_score[:opponent_goals] + high_score[:goals]
   end
 
   def lowest_total_score
     low_score = @data.min_by do |hash|
-      (hash[:away_goals] + hash[:home_goals])
+      (hash[:goals] + hash[:opponent_goals])
     end
-    total_score = low_score[:away_goals] + low_score[:home_goals]
+    total_score = low_score[:opponent_goals] + low_score[:goals]
   end
 
   def biggest_blowout
     blowout_score = @data.max_by do |hash|
-      (hash[:away_goals] - hash[:home_goals]).abs
+      (hash[:goals] - hash[:opponent_goals]).abs
     end
-  total_score = (blowout_score[:away_goals] - blowout_score[:home_goals]).abs
+    total_score = (blowout_score[:goals] - blowout_score[:opponent_goals]).abs
   end
 
   def percentage_home_wins
     number_home_wins = @data.select do |hash|
       (hash[:hoa] == "home") && (hash[:won] == true)
     end
-    total_number_of_games = ((@data.count)/2).to_f
     percent_home_wins = ((number_home_wins.count) / total_number_of_games).round(2)
   end
 
@@ -33,7 +32,6 @@ module GameStats
     number_visitor_wins = @data.select do |hash|
       hash[:hoa] == "away" && hash[:won] == true
     end
-    total_number_of_games = ((@data.count)/2).to_f
     percent_home_wins = ((number_visitor_wins.count) / total_number_of_games).round(2)
   end
 
@@ -52,7 +50,6 @@ module GameStats
     if data_to_use == nil
       data_to_use = @data
     end
-    total_number_of_games = ((data_to_use.count)/2).to_f
     total_goals = data_to_use.sum do |key, value|
       key[:goals]
     end
@@ -73,5 +70,12 @@ module GameStats
     average_goals_in_season[season_id] = average_goals_per_game(games_in_season)
     end
     return average_goals_in_season
+  end
+
+  def total_number_of_games(data_to_use = nil)
+    if data_to_use == nil
+      data_to_use = @data
+    end
+    total_number_of_games = ((@data.count)/2).to_f
   end
 end
