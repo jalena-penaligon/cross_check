@@ -1,9 +1,7 @@
 module LeagueStats
 
   def count_of_teams
-    @data.map do |game_team|
-      game_team[:team_id]
-    end.uniq.count
+    games_per_team.keys.count
   end
 
   def games_per_team
