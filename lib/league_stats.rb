@@ -88,13 +88,9 @@ module LeagueStats
   end
 
   def goals_per_game_by_location(hoa)
-    games = count_games_by_location(hoa)
-    goals_per_game = Hash.new
-
-    count_goals_by_location(hoa).each do |team, goals|
-      goals_per_game[team] = (goals /= games[team].to_f).round(3)
-    end
-    goals_per_game
+    game_type = count_games_by_location(hoa)
+    goal_type = count_goals_by_location(hoa)
+    goals_scored_per_game(game_type, goal_type)
   end
 
   def home_goals_per_game
