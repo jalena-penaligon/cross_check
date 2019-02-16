@@ -96,7 +96,7 @@ module LeagueStats
     goals_per_game = Hash.new
 
     count_goals_by_location(hoa).each do |team, goals|
-      goals_per_game[team] = (goals /= games[team].to_f)
+      goals_per_game[team] = (goals /= games[team].to_f).round(3)
     end
     goals_per_game
   end
@@ -142,11 +142,11 @@ module LeagueStats
   end
 
   def highest_scoring_home_team
-    calculate_max_by(home_goals_per_game)
+    calculate_max_by(goals_per_game_by_location("home"))
   end
 
   def lowest_scoring_visitor
-    calculate_min_by(visitor_goals_per_game)
+    calculate_min_by(goals_per_game_by_location("away"))
   end
 
   def lowest_scoring_home_team
