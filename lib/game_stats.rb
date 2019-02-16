@@ -35,17 +35,6 @@ module GameStats
     percent_home_wins = ((number_visitor_wins.count) / total_number_of_games).round(2)
   end
 
-  # def count_of_games_by_season
-  #   seasons = Hash.new(0)
-  #   @data.each do |game_team_info|
-  #     seasons[game_team_info[:season]] += 1
-  #   end
-  #
-  #   seasons.each do |key, value|
-  #     seasons[key] = value/2
-  #   end
-  # end
-
   def count_of_games_by_season
     seasons = Hash.new(0)
     unique_seasons = find_unique_seasons
