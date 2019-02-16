@@ -94,4 +94,10 @@ class GameStatsTest < MiniTest::Test
                 }
     assert_equal expected, @data.average_goals_by_season
   end
+
+  def test_total_number_of_games
+    assert_equal 2, @v_small_data.total_number_of_games
+    assert_equal 20, @small_data.total_number_of_games
+    assert_equal 7441, @data.total_number_of_games
+  end
 end
