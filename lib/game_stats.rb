@@ -1,86 +1,57 @@
 module GameStats
 
+
   def highest_total_score
-    high_score = @data.max_by do |hash|
-      (hash[:goals] + hash[:opponent_goals])
-    end
-    total_score = high_score[:opponent_goals] + high_score[:goals]
+    game_aggregate(:goals, :opponent_goals, :+).max
   end
 
   def lowest_total_score
-    low_score = @data.min_by do |hash|
-      (hash[:goals] + hash[:opponent_goals])
-    end
-    total_score = low_score[:opponent_goals] + low_score[:goals]
+    lowest = game_aggregate(:goals, :opponent_goals, :+).min
+    return 1 if lowest == 0
+    return lowest
   end
 
-  def biggest_blowout
-    blowout_score = @data.max_by do |hash|
-      (hash[:goals] - hash[:opponent_goals]).abs
-    end
-    total_score = (blowout_score[:goals] - blowout_score[:opponent_goals]).abs
+  def biggest_blowout(data = nil)
+    data = @data if data == nil
+    game_aggregate(:goals, :opponent_goals, :-, data).map{|diff| diff.abs}.max
   end
 
-  def percentage_home_wins
-    number_home_wins = @data.select do |hash|
-      (hash[:hoa] == "home") && (hash[:won] == true)
-    end
-    percent_home_wins = ((number_home_wins.count) / total_number_of_games).round(2)
+
+  def percentage_home_wins(data = nil)
+    data = @data if data == nil
+    data = subset_data(:hoa, "home", data)
+    return winning_percentage(data)
   end
 
-  def percentage_visitor_wins
-    number_visitor_wins = @data.select do |hash|
-      hash[:hoa] == "away" && hash[:won] == true
-    end
-    percent_home_wins = ((number_visitor_wins.count) / total_number_of_games).round(2)
+  def percentage_visitor_wins(data = nil)
+    data = @data if data == nil
+    data = subset_data(:hoa, "away", data)
+    return winning_percentage(data)
+  end
+
+  def home_vs_away_win_pct(data = nil)
+    data = @data if data == nil
+    return percentage_home_wins(data) - percentage_visitor_wins(data)
+  end
+
+  def average_goals_allowed_per_game(data = nil)
+    data = @data if data == nil
+    return average_of_id_per_game(:opponent_goals, data)
+  end
+
+  def average_goals_per_game(data = nil)
+    data = @data if data == nil
+    return average_of_id_per_game(:goals, data)
   end
 
   def count_of_games_by_season
-    seasons = Hash.new(0)
-    unique_seasons = find_unique_seasons
-    unique_seasons.each do |seasonid|
-      games = @data.select do |game_team_info|
-        game_team_info[:season] == seasonid
-      end
-      seasons[seasonid] = total_number_of_games(games)
-    end
-    return seasons
-  end
-
-  def average_goals_per_game(data_to_use = nil)
-    if data_to_use == nil
-      data_to_use = @data
-    end
-    total_goals = data_to_use.sum do |key, value|
-      key[:goals]
-    end
-    average_goals_per_game = (total_goals/total_number_of_games(data_to_use)).round(2)
+    seasons = game_grouping(:season)
+    return hash_aggregate(seasons, :total_games)
   end
 
   def average_goals_by_season
-    unique_seasons = find_unique_seasons
-
-    average_goals_in_season = Hash.new
-
-    unique_seasons.each do |season_id|
-      games_in_season = @data.find_all do |game_team_info|
-        game_team_info[:season] ==  season_id
-      end
-    average_goals_in_season[season_id] = average_goals_per_game(games_in_season)
-    end
-    return average_goals_in_season
+    seasons = game_grouping(:season)
+    return hash_aggregate(seasons, :average_goals_per_game)
   end
 
-  def total_number_of_games(data_to_use = nil)
-    if data_to_use == nil
-      data_to_use = @data
-    end
-    total_number_of_games = ((data_to_use.count)/2).to_f
-  end
-
-  def find_unique_seasons
-    @data.map do |game_team_info|
-      game_team_info[:season]
-    end.uniq
-  end
 end
