@@ -3,11 +3,12 @@ require 'pry'
 require './lib/league_stats'
 require './lib/stat_parser'
 require './lib/game_stats'
+require './lib/team_stats'
 
 
 class StatTracker
   include LeagueStats
-
+  include TeamStats
   include GameStats
 
   attr_accessor :data,
