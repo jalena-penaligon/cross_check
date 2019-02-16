@@ -63,14 +63,6 @@ module LeagueStats
     percentage
   end
 
-  def away_win_percentage
-    win_percentage_by_location("away")
-  end
-
-  def home_win_percentage
-    win_percentage_by_location("home")
-  end
-
   def goals_per_game_by_team
     games = games_per_team
     goals_per_game = Hash.new
@@ -99,24 +91,22 @@ module LeagueStats
     goals_allowed_per_game
   end
 
-  def home_goals_per_game
-    home_games = count_games_by_location("home")
-    home_goals_per_game = Hash.new
+  def goals_per_game_by_location(hoa)
+    games = count_games_by_location(hoa)
+    goals_per_game = Hash.new
 
-    count_goals_by_location("home").each do |team, goals|
-      home_goals_per_game[team] = (goals /= home_games[team].to_f)
+    count_goals_by_location(hoa).each do |team, goals|
+      goals_per_game[team] = (goals /= games[team].to_f)
     end
-    home_goals_per_game
+    goals_per_game
+  end
+
+  def home_goals_per_game
+    goals_per_game_by_location("home")
   end
 
   def visitor_goals_per_game
-    visitor_games = count_games_by_location("away")
-    visitor_goals_per_game = Hash.new
-
-    count_goals_by_location("away").each do |team, goals|
-      visitor_goals_per_game[team] = (goals /= visitor_games[team].to_f)
-    end
-    visitor_goals_per_game
+    goals_per_game_by_location("away")
   end
 
   def calculate_max_by(attribute)
