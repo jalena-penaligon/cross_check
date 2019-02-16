@@ -53,13 +53,11 @@ module GameStats
     total_goals = data_to_use.sum do |key, value|
       key[:goals]
     end
-    average_goals_per_game = (total_goals/total_number_of_games).round(2)
+    average_goals_per_game = (total_goals/total_number_of_games(data_to_use)).round(2)
   end
 
   def average_goals_by_season
-    unique_seasons = @data.map do |game_team_info|
-      game_team_info[:season]
-    end.uniq
+    unique_seasons = find_unique_seasons
 
     average_goals_in_season = Hash.new
 
@@ -77,5 +75,11 @@ module GameStats
       data_to_use = @data
     end
     total_number_of_games = ((@data.count)/2).to_f
+  end
+
+  def find_unique_seasons
+    @data.map do |game_team_info|
+      game_team_info[:season]
+    end.uniq
   end
 end
