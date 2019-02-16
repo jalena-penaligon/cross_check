@@ -36,7 +36,6 @@ module TeamStats
     subset = {team_id: team_id.to_i}
     group = :opponent
     agg = :winning_percentage
-    # binding.pry
     find_max(subset_group_and_aggregate(subset, group, agg))
   end
 
@@ -63,7 +62,6 @@ module TeamStats
     subset = {team_id: team_id.to_i}
     group = :opponent
     agg = :winning_percentage
-    binding.pry
     subset_group_and_aggregate(subset, group, agg)
   end
 
@@ -72,6 +70,10 @@ module TeamStats
   #   group = :opponent_name
   #   aggs = [:winning_percentage, :total_goals, :total_goals_against,
   #     :average_goals_per_game, :average_goals_allowed_per_game]
+  #
+  # end
+
+  # def team_info
   #
   # end
 

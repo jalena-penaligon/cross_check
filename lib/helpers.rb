@@ -12,6 +12,8 @@ module Helpers
 
   def multi_subset(ids_values, data = nil)
     data = @data if data == nil
+    return data if ids_values == nil
+    
     ids_values.each do |hashID, value|
       data = subset_data(hashID, value, data)
     end
@@ -26,6 +28,18 @@ module Helpers
   def total_goals(data = nil)
     data = @data if data == nil
     return find_total(:goals, data)
+  end
+
+  def total_hits(data = nil)
+    data = @data if data == nil
+    return find_total(:hits, data)
+  end
+
+  def shooting_percentage(data= nil)
+    data = @data if data == nil
+    shots = find_total(:shots, data)
+    goals = find_total(:goals, data)
+    return (goals.to_f/shots).round(4)
   end
 
   def total_goals_against(data = nil)

@@ -1,83 +1,84 @@
 module SeasonStats
 
-  def biggest_bust
+  def biggest_bust(season_id)
     # team with biggest decrease between "R" and "P"
 
+    find_max(pre_and_regular_season_difference(season_id))
   end
 
-  def biggest_surprise
+  def pre_and_regular_season_difference(season_id)
+    p_subset = {season: season_id.to_i, type: "P"}
+    r_subset = {season: season_id.to_i, type: "R"}
+    group = :teamname
+    aggregate = :winning_percentage
+
+    preseason = subset_group_and_aggregate(p_subset, group, aggregate)
+    reg_season = subset_group_and_aggregate(r_subset, group, aggregate)
+
+    diff = {}
+    preseason.each do |team, percentage|
+      diff[team] = percentage - reg_season[team]
+    end
+  end
+
+  def biggest_surprise(season_id)
     # team with biggest increase betwee "R" and "P"
+    find_min(pre_and_regular_season_difference(season_id))
   end
 
-  def winningest_coach
+  def winningest_coach(season_id)
     # coach with highest win pct for season
+    subset = {season: season_id.to_i}
+    group = :head_coach
+    agg = :winning_percentage
+    find_max(subset_group_and_aggregate(subset, group, agg))
   end
 
-  def worst_coach
+  def worst_coach(season_id)
     # coach with lowest win pct for season
+    subset = {season: season_id.to_i}
+    group = :head_coach
+    agg = :winning_percentage
+    find_min(subset_group_and_aggregate(subset, group, agg))
   end
 
-  def most_accurate_team
+  def most_accurate_team(season_id)
     # name of team w/ best shoot pct
+    subset = {season: season_id.to_i}
+    group = :teamname
+    agg = :shooting_percentage
+    find_max(subset_group_and_aggregate(subset, group, agg))
   end
 
-  def least_accurate_team
+  def least_accurate_team(season_id)
     # name of team w/ worst shoot pct
+    subset = {season: season_id.to_i}
+    group = :teamname
+    agg = :shooting_percentage
+    find_min(subset_group_and_aggregate(subset, group, agg))
   end
 
-  def most_hits
+  def most_hits(season_id)
     # name of team with most hits in season
+    subset = {season: season_id.to_i}
+    group = :teamname
+    agg = :total_hits
+    find_max(subset_group_and_aggregate(subset, group, agg))
   end
 
-  def least_hits(season)
+  def least_hits(season_id)
     # name of team with least hits in season
-    games = find_season_games(season)
-
+    subset = {season: season_id.to_i}
+    group = :teamname
+    agg = :total_hits
+    find_min(subset_group_and_aggregate(subset, group, agg))
   end
 
-  def power_play_goal_percentage(season)
-    # percentage of goals that were Power play goals (to 100ths)
-    games = find_season_games(season)
-    powerplaygoals = games.sum{ |hash| hash[:powerplaygoals]}
-    total_goals = games.sum{ |hash| hash[:goals]}
-    return (powerplaygoals.to_f / total_goals).round(2)
-  end
+  def power_play_goal_percentage(season_id)
+    data = subset_data( :season, season_id.to_i)
+    ppg = find_total(:powerplaygoals, data)
+    goals = total_goals(data)
 
-  def aggregate_stats_by_team
-
-  end
-
-  def find_season_games(season)
-    season = season.to_i
-    return @data.find_all{ |hash| hash[:season] == season}
-  end
-
-end
-
-class SSTest<MiniTest::Test
-
-  def test_it_can_find_season_games
-    simple_games_hash = [
-      {season: 1, game_id: 1},
-      {season: 1, game_id: 2},
-      {season: 1, game_id: 3},
-      {season: 1, game_id: 4},
-      {season: 2, game_id: 5},
-      {season: 2, game_id: 6},
-      {season: 2, game_id: 7},
-      {season: 2, game_id: 8}
-    ]
-
-    stat_tracker = StatTracker.new
-
-    expected = [
-      {season: 1, game_id: 1},
-      {season: 1, game_id: 2},
-      {season: 1, game_id: 3},
-      {season: 1, game_id: 4}
-    ]
-
-    actual = stat_tracker.fins_season_games(1)
-    assert_equal expected, actual
+    return (ppg.to_f/goals).round(2)
   end
 end

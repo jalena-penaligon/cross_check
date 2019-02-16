@@ -50,7 +50,7 @@ class SeasonStatsTest < MiniTest::Test
   def test_most_accurate_team
     assert_equal "Bruins", @v_small_data.most_accurate_team("20122013")
     assert_equal "Senators", @small_data.most_accurate_team("20122013")
-    assert_equal "Stars", @data.most_accurate_team("20152016")
+    assert_equal "Flames", @data.most_accurate_team("20142015")
   end
 
   def test_least_accurate_team
@@ -71,7 +71,7 @@ class SeasonStatsTest < MiniTest::Test
     assert_equal "Canucks", @data.least_hits("20152016")
   end
 
-  def test_power_play_goal_percentage.
+  def test_power_play_goal_percentage
     assert_equal 0.08, @v_small_data.power_play_goal_percentage("20122013")
     assert_equal 0.17, @small_data.power_play_goal_percentage("20122013")
     assert_equal 0.21, @data.power_play_goal_percentage("20172018")

@@ -5,12 +5,14 @@ require './lib/stat_parser'
 require './lib/game_stats'
 require './lib/helpers.rb'
 require './lib/team_stats.rb'
+require './lib/season_stats.rb'
 
 class StatTracker
   include LeagueStats
   include TeamStats
   include GameStats
   include Helpers
+  include SeasonStats
 
   attr_accessor :data,
                 :merge_ids
