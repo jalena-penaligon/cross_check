@@ -44,6 +44,14 @@ class LeagueStatisticsTest < MiniTest::Test
     assert_equal expected, @v_small_data.total_team_goals
   end
 
+  def test_goals_scored_per_game
+    expected = {"Rangers"=>2.0, "Bruins"=>3.111, "Penguins"=>0.5, "Red Wings"=>2.143, "Blackhawks"=>2.286, "Senators"=>3.5, "Canadiens"=>2.0}
+    assert_equal expected, @small_data.goals_scored_per_game(@small_data.total_team_goals)
+
+    expected = {"Rangers"=>2.0, "Bruins"=>4.0}
+    assert_equal expected, @v_small_data.goals_scored_per_game(@v_small_data.total_team_goals)
+  end
+
   def test_best_offense
     # assert_equal "Golden Knights", @data.best_offense
     assert_equal "Senators", @small_data.best_offense
