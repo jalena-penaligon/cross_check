@@ -78,6 +78,16 @@ module TeamStats
     percentage
   end
 
+  def goal_difference_by_game(team_id)
+    goals = Hash.new
+    @data.each do |game_team|
+      if game_team[:team_id] == team_id
+        goals[game_team[:game_id]] = game_team[:goals] - game_team[:opponent_goals]
+      end
+    end
+    goals
+  end
+
   def best_season(team_id)
     win_percentage_by_season(team_id).max_by do |season, winning_percentage|
       winning_percentage
@@ -134,4 +144,15 @@ module TeamStats
     end.first
   end
 
+  def biggest_team_blowout(team_id)
+    goal_difference_by_game(team_id).max_by do |game_id, point_difference|
+      point_difference
+    end.last
+  end
+
+  def worst_loss(team_id)
+    goal_difference_by_game(team_id).min_by do |game_id, point_difference|
+      point_difference
+    end.last
+  end
 end

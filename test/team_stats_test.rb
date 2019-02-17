@@ -142,18 +142,32 @@ class TeamStatsTest < Minitest::Test
     assert_equal "Bruins", @small_data.rival(3)
     # assert_equal "Blackhawks", @data.rival(5)
   end
-#
-#   def test_biggest_team_blowout
-#     assert_equal 3, @v_small_data.biggest_team_blowout(6)
-#     assert_equal 3, @small_data.biggest_team_blowout(16)
-#     assert_equal 8, @data.biggest_team_blowout(24)
-#   end
-#
-#   def test_worst_loss
-#     assert_equal -3, @v_small_data.worst_loss(3)
-#     assert_equal -3, @small_data.worst_loss(17)
-#     assert_equal -7, @data.worst_loss(27)
-#   end
+
+  def test_calculate_goal_difference_by_each_game
+    # binding.pry
+    expected = {2012030221 => -1, 2012030222 => -3}
+    assert_equal expected, @v_small_data.goal_difference_by_game(3)
+
+    expected = {
+      2012030121 => 2,
+      2012030122 => -2,
+      2012030123 => 5,
+      2012030124 => 1
+    }
+    assert_equal expected, @small_data.goal_difference_by_game(9)
+  end
+
+  def test_biggest_team_blowout
+    assert_equal 3, @v_small_data.biggest_team_blowout(6)
+    assert_equal 3, @small_data.biggest_team_blowout(16)
+    # assert_equal 8, @data.biggest_team_blowout(24)
+  end
+
+  def test_worst_loss
+    assert_equal -3, @v_small_data.worst_loss(3)
+    assert_equal -3, @small_data.worst_loss(17)
+    # assert_equal -7, @data.worst_loss(27)
+  end
 #
 #   def test_head_to_head
 #     expected = {"Rangers" => 1.0}
