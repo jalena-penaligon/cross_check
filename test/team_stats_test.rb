@@ -78,17 +78,17 @@ class TeamStatsTest < Minitest::Test
     assert_equal expected, @v_small_data.win_percentage_by_season(6)
   end
 
-#   def test_best_season
-#     assert_equal 20122013, @v_small_data.best_season(6)
-#     assert_equal 20122013, @small_data.best_season(5)
-#     assert_equal 20142015, @data.best_season(8)
-#   end
-#
-#   def test_worst_season
-#     assert_equal 20122013, @v_small_data.worst_season(3)
-#     assert_equal 20122013, @small_data.worst_season(16)
-#     assert_equal 20142015, @data.worst_season(5)
-#   end
+  def test_best_season
+    assert_equal 20122013, @v_small_data.best_season(6)
+    assert_equal 20122013, @small_data.best_season(16)
+    # assert_equal 20142015, @data.best_season(8)
+  end
+
+  def test_worst_season
+    assert_equal 20122013, @v_small_data.worst_season(6)
+    assert_equal 20122013, @small_data.worst_season(16)
+    # assert_equal 20142015, @data.worst_season(5)
+  end
 #
 #   def test_average_win_percentage
 #     assert_equal 1.0, @v_small_data.average_win_percentage(6)
