@@ -48,6 +48,9 @@ module TeamStats
   end
 
   def best_season(team_id)
+    win_percentage_by_season(team_id).max_by do |season, winning_percentage|
+      winning_percentage
+    end.first
   end
 
 end
