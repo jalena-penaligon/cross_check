@@ -16,4 +16,21 @@ module TeamStats
     team_info[team_id]
   end
 
+  def wins_per_season
+  end
+
+  def win_percentage_by_season
+    wins = count_away_wins
+    num_games = count_away_games
+
+    percentage = Hash.new(0)
+    wins.each do |team, wins|
+      percentage[team] = (wins /= num_games[team].to_f).round(3)
+    end
+    percentage
+  end
+
+  def best_season(team_id)
+  end
+
 end
