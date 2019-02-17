@@ -155,4 +155,8 @@ module TeamStats
       point_difference
     end.last
   end
+
+  def head_to_head(team_id)
+    win_percentage_by_opponent(team_id)
+  end
 end
