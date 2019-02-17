@@ -59,4 +59,12 @@ module TeamStats
     end.first
   end
 
+  def average_win_percentage(team_id)
+    win_percent = win_percentage_by_season(team_id)
+    total = win_percent.sum do |season, winning_percentage|
+      winning_percentage
+    end
+    total / win_percent.count
+  end
+
 end
