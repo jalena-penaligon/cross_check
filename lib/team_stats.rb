@@ -38,7 +38,7 @@ module TeamStats
 
   def win_percentage_by_season(team_id)
     wins = wins_per_season(team_id)
-    num_games = count_away_games
+    num_games = games_per_season(team_id)
 
     percentage = Hash.new(0)
     wins.each do |team, wins|

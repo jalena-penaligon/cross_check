@@ -72,10 +72,10 @@ class TeamStatsTest < Minitest::Test
 
   def test_calculate_team_win_percentage_by_season
     expected = {20122013 => 0.571}
-    assert_equal expected, @small_data.wins_per_season(16)
+    assert_equal expected, @small_data.win_percentage_by_season(16)
 
     expected = {20122013 => 1.0}
-    assert_equal expected, @v_small_data.wins_per_season(6)
+    assert_equal expected, @v_small_data.win_percentage_by_season(6)
   end
 
 #   def test_best_season
