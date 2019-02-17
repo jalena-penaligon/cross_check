@@ -47,6 +47,37 @@ module TeamStats
     percentage
   end
 
+  def games_by_opponent(team_id)
+    games = Hash.new(0)
+    @data.each do |game_team|
+      if game_team[:team_id] == team_id
+        games[game_team[:opponent]] += 1
+      end
+    end
+    games
+  end
+
+  def wins_by_opponent(team_id)
+    games = Hash.new(0)
+    @data.each do |game_team|
+      if game_team[:team_id] == team_id && game_team[:won] == true
+        games[game_team[:opponent]] += 1
+      end
+    end
+    games
+  end
+
+  def win_percentage_by_opponent(team_id)
+    games = games_by_opponent(team_id)
+    wins = wins_by_opponent(team_id)
+
+    percentage = Hash.new(0)
+    wins.each do |team, wins|
+      percentage[team] = (wins /= games[team].to_f).round(3)
+    end
+    percentage
+  end
+
   def best_season(team_id)
     win_percentage_by_season(team_id).max_by do |season, winning_percentage|
       winning_percentage
@@ -65,6 +96,42 @@ module TeamStats
       winning_percentage
     end
     total / win_percent.count
+  end
+
+  def most_goals_scored(team_id)
+    games = Hash.new(0)
+    @data.each do |game_team|
+      if game_team[:team_id] == team_id
+        games[game_team[:game_id]] = game_team[:goals]
+      end
+    end
+    games.max_by do |game_id, goals|
+      goals
+    end.last
+  end
+
+  def fewest_goals_scored(team_id)
+    games = Hash.new(0)
+    @data.each do |game_team|
+      if game_team[:team_id] == team_id
+        games[game_team[:game_id]] = game_team[:goals]
+      end
+    end
+    games.min_by do |game_id, goals|
+      goals
+    end.last
+  end
+
+  def favorite_opponent(team_id)
+    win_percentage_by_opponent(team_id).max_by do |opponent, win_percentage|
+      win_percentage
+    end.first
+  end
+
+  def rival(team_id)
+    win_percentage_by_opponent(team_id).min_by do |opponent, win_percentage|
+      win_percentage
+    end.first
   end
 
 end

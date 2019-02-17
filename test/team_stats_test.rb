@@ -109,39 +109,39 @@ class TeamStatsTest < Minitest::Test
 
   def test_count_games_played_against_each_opponent
     expected = {"Bruins" => 2}
-    assert_equal expected, @v_small_data.games_against_opponent(3)
+    assert_equal expected, @v_small_data.games_by_opponent(3)
 
     expected = {"Rangers" => 5, "Penguins" => 4}
-    assert_equal expected, @small_data.games_against_opponent(6)
+    assert_equal expected, @small_data.games_by_opponent(6)
   end
 
   def test_count_wins_against_each_opponent
     expected = {"Rangers" => 2}
-    assert_equal expected, @v_small_data.wins_against_opponent(6)
+    assert_equal expected, @v_small_data.wins_by_opponent(6)
 
     expected = {"Rangers" => 4, "Penguins" => 4}
-    assert_equal expected, @small_data.wins_against_opponent(6)
+    assert_equal expected, @small_data.wins_by_opponent(6)
   end
 
   def test_calculate_win_percentage_against_each_opponent
     expected = {"Rangers" => 1.0}
-    assert_equal expected, @v_small_data.win_percentage_against_opponent(6)
+    assert_equal expected, @v_small_data.win_percentage_by_opponent(6)
 
     expected = {"Rangers" => 0.8, "Penguins" => 1.0}
-    assert_equal expected, @small_data.win_percentage_against_opponent(6)
+    assert_equal expected, @small_data.win_percentage_by_opponent(6)
   end
-#
-#   def test_favorite_opponent
-#     assert_equal "Bruins", @v_small_data.favorite_opponent(3)
-#     assert_equal "Bruins", @small_data.favorite_opponent(5)
-#     assert_equal "Coyotes", @data.favorite_opponent(12)
-#   end
-#
-#   def test_rival
-#     assert_equal "Rangers", @v_small_data.rival(6)
-#     assert_equal "Bruins", @small_data.rival(3)
-#     assert_equal "Blackhawks", @data.rival(5)
-#   end
+
+  def test_favorite_opponent
+    assert_equal "Rangers", @v_small_data.favorite_opponent(6)
+    assert_equal "Penguins", @small_data.favorite_opponent(6)
+    # assert_equal "Coyotes", @data.favorite_opponent(12)
+  end
+
+  def test_rival
+    assert_equal "Rangers", @v_small_data.rival(6)
+    assert_equal "Bruins", @small_data.rival(3)
+    # assert_equal "Blackhawks", @data.rival(5)
+  end
 #
 #   def test_biggest_team_blowout
 #     assert_equal 3, @v_small_data.biggest_team_blowout(6)
