@@ -3,11 +3,14 @@ require 'pry'
 require './lib/league_stats'
 require './lib/stat_parser'
 require './lib/game_stats'
+require './lib/season_stats_WP.rb'
+require './lib/helpers.rb'
 
 
 class StatTracker
   include LeagueStats
-
+  include SeasonStatsWP
+  include Helpers
   include GameStats
 
   attr_accessor :data,
