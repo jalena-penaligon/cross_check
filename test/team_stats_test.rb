@@ -117,18 +117,18 @@ class TeamStatsTest < Minitest::Test
 
   def test_count_wins_against_each_opponent
     expected = {"Rangers" => 2}
-    assert_equal expected, @v_small_data.games_against_opponent(6)
+    assert_equal expected, @v_small_data.wins_against_opponent(6)
 
     expected = {"Rangers" => 4, "Penguins" => 4}
-    assert_equal expected, @small_data.games_against_opponent(6)
+    assert_equal expected, @small_data.wins_against_opponent(6)
   end
 
   def test_calculate_win_percentage_against_each_opponent
     expected = {"Rangers" => 1.0}
-    assert_equal expected, @v_small_data.games_against_opponent(6)
+    assert_equal expected, @v_small_data.win_percentage_against_opponent(6)
 
     expected = {"Rangers" => 0.8, "Penguins" => 1.0}
-    assert_equal expected, @small_data.games_against_opponent(6)
+    assert_equal expected, @small_data.win_percentage_against_opponent(6)
   end
 #
 #   def test_favorite_opponent
