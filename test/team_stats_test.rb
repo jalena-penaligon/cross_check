@@ -89,24 +89,47 @@ class TeamStatsTest < Minitest::Test
     assert_equal 20122013, @small_data.worst_season(16)
     # assert_equal 20142015, @data.worst_season(5)
   end
-#
-#   def test_average_win_percentage
-#     assert_equal 1.0, @v_small_data.average_win_percentage(6)
-#     assert_equal 0.75, @small_data.average_win_percentage(9)
-#     assert_equal 0.447, @data.average_win_percentage(21)
-#   end
-#
-#   def test_most_goals_scored
-#     assert_equal 2, @v_small_data.most_goals_scored(3)
-#     assert_equal 4, @small_data.most_goals_scored(17)
-#     assert_equal 8, @data.most_goals_scored(2)
-#   end
-#
-#   def test_fewest_goals_scored
-#     assert_equal 3, @v_small_data.fewest_goals_scored(6)
-#     assert_equal 1, @small_data.fewest_goals_scored(8)
-#     assert_equal 0, @data.fewest_goals_scored(7)
-#   end
+
+  def test_average_win_percentage
+    assert_equal 1.0, @v_small_data.average_win_percentage(6)
+    assert_equal 0.75, @small_data.average_win_percentage(9)
+    # assert_equal 0.447, @data.average_win_percentage(21)
+  end
+
+  def test_most_goals_scored
+    assert_equal 2, @v_small_data.most_goals_scored(3)
+    assert_equal 4, @small_data.most_goals_scored(17)
+  end
+
+  def test_fewest_goals_scored
+    assert_equal 3, @v_small_data.fewest_goals_scored(6)
+    assert_equal 1, @small_data.fewest_goals_scored(8)
+    # assert_equal 0, @data.fewest_goals_scored(7)
+  end
+
+  def test_count_games_played_against_each_opponent
+    expected = {"Bruins" => 2}
+    assert_equal expected, @v_small_data.games_against_opponent(3)
+
+    expected = {"Rangers" => 5, "Penguins" => 4}
+    assert_equal expected, @small_data.games_against_opponent(6)
+  end
+
+  def test_count_wins_against_each_opponent
+    expected = {"Rangers" => 2}
+    assert_equal expected, @v_small_data.games_against_opponent(6)
+
+    expected = {"Rangers" => 4, "Penguins" => 4}
+    assert_equal expected, @small_data.games_against_opponent(6)
+  end
+
+  def test_calculate_win_percentage_against_each_opponent
+    expected = {"Rangers" => 1.0}
+    assert_equal expected, @v_small_data.games_against_opponent(6)
+
+    expected = {"Rangers" => 0.8, "Penguins" => 1.0}
+    assert_equal expected, @small_data.games_against_opponent(6)
+  end
 #
 #   def test_favorite_opponent
 #     assert_equal "Bruins", @v_small_data.favorite_opponent(3)
