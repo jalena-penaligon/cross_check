@@ -16,6 +16,16 @@ module TeamStats
     team_info[team_id]
   end
 
+  def games_per_season(team_id)
+    games = Hash.new(0)
+    @data.each do |game_team|
+      if game_team[:team_id] == team_id
+        games[game_team[:season]] += 1
+      end
+    end
+    games
+  end
+
   def wins_per_season(team_id)
     games = Hash.new(0)
     @data.each do |game_team|
@@ -26,8 +36,8 @@ module TeamStats
     games
   end
 
-  def win_percentage_by_season
-    wins = count_away_wins
+  def win_percentage_by_season(team_id)
+    wins = wins_per_season(team_id)
     num_games = count_away_games
 
     percentage = Hash.new(0)

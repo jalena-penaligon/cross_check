@@ -56,10 +56,10 @@ class TeamStatsTest < Minitest::Test
 
   def test_count_team_games_by_season
     expected = {20122013 => 7}
-    assert_equal expected, @small_data.wins_per_season(16)
+    assert_equal expected, @small_data.games_per_season(16)
 
     expected = {20122013 => 2}
-    assert_equal expected, @v_small_data.wins_per_season(6)
+    assert_equal expected, @v_small_data.games_per_season(6)
   end
 
   def test_count_team_wins_by_season
