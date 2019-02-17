@@ -26,10 +26,51 @@ module TeamStats
     games
   end
 
+  def preseason_games_per_season(team_id)
+    games = Hash.new(0)
+    @data.each do |game_team|
+      if game_team[:team_id] == team_id && game_team[:type] == "P"
+        games[game_team[:season]] += 1
+      end
+    end
+    games
+  end
+
+  def regular_games_per_season(team_id)
+    games = Hash.new(0)
+    @data.each do |game_team|
+      if game_team[:team_id] == team_id && game_team[:type] == "R"
+        games[game_team[:season]] += 1
+      end
+    end
+    games
+  end
+
+
   def wins_per_season(team_id)
     games = Hash.new(0)
     @data.each do |game_team|
       if game_team[:team_id] == team_id && game_team[:won] == true
+        games[game_team[:season]] += 1
+      end
+    end
+    games
+  end
+
+  def preseason_wins_per_season(team_id)
+    games = Hash.new(0)
+    @data.each do |game_team|
+      if game_team[:team_id] == team_id && game_team[:won] == true && game_team[:type] == "P"
+        games[game_team[:season]] += 1
+      end
+    end
+    games
+  end
+
+  def regular_wins_per_season(team_id)
+    games = Hash.new(0)
+    @data.each do |game_team|
+      if game_team[:team_id] == team_id && game_team[:won] == true && game_team[:type] = "R"
         games[game_team[:season]] += 1
       end
     end
@@ -42,7 +83,29 @@ module TeamStats
 
     percentage = Hash.new(0)
     wins.each do |team, wins|
-      percentage[team] = (wins /= num_games[team].to_f).round(3)
+      percentage[team] = (wins /= num_games[team].to_f).round(2)
+    end
+    percentage
+  end
+
+  def preseason_win_percentage_by_season(team_id)
+    wins = preseason_wins_per_season(team_id)
+    num_games = preseason_games_per_season(team_id)
+
+    percentage = Hash.new(0)
+    wins.each do |team, wins|
+      percentage[team] = (wins /= num_games[team].to_f).round(2)
+    end
+    percentage
+  end
+
+  def regular_win_percentage_by_season(team_id)
+    wins = regular_wins_per_season(team_id)
+    num_games = regular_games_per_season(team_id)
+
+    percentage = Hash.new(0)
+    wins.each do |team, wins|
+      percentage[team] = (wins /= num_games[team].to_f).round(2)
     end
     percentage
   end
@@ -73,7 +136,7 @@ module TeamStats
 
     percentage = Hash.new(0)
     wins.each do |team, wins|
-      percentage[team] = (wins /= games[team].to_f).round(3)
+      percentage[team] = (wins /= games[team].to_f).round(2)
     end
     percentage
   end
@@ -105,7 +168,7 @@ module TeamStats
     total = win_percent.sum do |season, winning_percentage|
       winning_percentage
     end
-    total / win_percent.count
+    (total / win_percent.count).round(3)
   end
 
   def most_goals_scored(team_id)
@@ -158,5 +221,19 @@ module TeamStats
 
   def head_to_head(team_id)
     win_percentage_by_opponent(team_id)
+  end
+
+  def seasonal_summary(team_id)
+    summary = Hash.new
+    @data.each do |game_team|
+      if game_team[:team_id] == team_id
+        values = {
+          preseason: {win_percentage: preseason_win_percentage_by_season(team_id)},
+          regular_season: {win_percentage: regular_win_percentage_by_season(team_id)}
+        }
+        summary[game_team[:season]] = values
+      end
+    end
+    summary
   end
 end
