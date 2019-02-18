@@ -40,23 +40,23 @@ class SeasonStatsTest < MiniTest::Test
   #   assert_equal "Alain Vigneault", @data.winningest_coach("20142015")
   # end
   #
-  # def test_worst_coach
-  #   assert_equal "John Tortorella", @v_small_data.worst_coach("20122013")
-  #   assert_equal "Dan Bylsma", @small_data.worst_coach("20122013")
-  #   assert_equal "Peter Laviolette", @data.worst_coach("20132014")
-  #   assert_equal "Craig MacTavish", @data.worst_coach("20142015")
-  # end
-  #
+  def test_worst_coach
+    assert_equal "John Tortorella", @v_small_data.worst_coach("20122013")
+    assert_equal "Dan Bylsma", @small_data.worst_coach("20122013")
+    assert_equal "Peter Laviolette", @data.worst_coach("20132014")
+    assert_equal "Craig MacTavish", @data.worst_coach("20142015")
+  end
+
   def test_most_accurate_team
     assert_equal "Bruins", @v_small_data.most_accurate_team("20122013")
     assert_equal "Senators", @small_data.most_accurate_team("20122013")
-    # assert_equal "Stars", @data.most_accurate_team("20152016")
+    assert_equal "Stars", @data.most_accurate_team("20152016")
   end
 
   def test_least_accurate_team
     assert_equal "Rangers", @v_small_data.least_accurate_team("20122013")
     assert_equal "Penguins", @small_data.least_accurate_team("20122013")
-    # assert_equal "Avalanche", @data.least_accurate_team("20162017")
+    assert_equal "Avalanche", @data.least_accurate_team("20162017")
   end
 
   # def test_most_hits
