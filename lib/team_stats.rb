@@ -224,16 +224,6 @@ module TeamStats
   end
 
   def seasonal_summary(team_id)
-    summary = Hash.new
-    @data.each do |game_team|
-      if game_team[:team_id] == team_id
-        values = {
-          preseason: {win_percentage: preseason_win_percentage_by_season(team_id)},
-          regular_season: {win_percentage: regular_win_percentage_by_season(team_id)}
-        }
-        summary[game_team[:season]] = values
-      end
-    end
-    summary
+  
   end
 end
