@@ -22,23 +22,23 @@ class SeasonStatsTest < MiniTest::Test
     @small_data = StatTracker.from_csv(small_data_paths)
     @data = StatTracker.from_csv(data_paths)
   end
-  # 
-  # def test_biggest_bust
-  #   assert_equal "Blackhawks", @data.biggest_bust("20142015")
-  #   assert_equal "Kings", @data.biggest_bust("20132014")
-  # end
-  #
-  # def test_biggest_surprise
-  #   assert_equal "Lightning", @data.biggest_surprise("20132014")
-  #   assert_equal "Jets", @data.biggest_surprise("20142015")
-  # end
-  #
-  # def test_winningest_coach
-  #   assert_equal "Claude Julien", @v_small_data.winningest_coach("20122013")
-  #   assert_equal "Claude Julien", @small_data.winningest_coach("20122013")
-  #   assert_equal "Claude Julien", @data.winningest_coach("20132014")
-  #   assert_equal "Alain Vigneault", @data.winningest_coach("20142015")
-  # end
+
+  def test_biggest_bust
+    assert_equal "Blackhawks", @data.biggest_bust("20142015")
+    assert_equal "Kings", @data.biggest_bust("20132014")
+  end
+
+  def test_biggest_surprise
+    assert_equal "Lightning", @data.biggest_surprise("20132014")
+    assert_equal "Jets", @data.biggest_surprise("20142015")
+  end
+
+  def test_winningest_coach
+    assert_equal "Claude Julien", @v_small_data.winningest_coach("20122013")
+    assert_equal "Claude Julien", @small_data.winningest_coach("20122013")
+    assert_equal "Claude Julien", @data.winningest_coach("20132014")
+    assert_equal "Alain Vigneault", @data.winningest_coach("20142015")
+  end
   #
   # def test_worst_coach
   #   assert_equal "John Tortorella", @v_small_data.worst_coach("20122013")
@@ -58,7 +58,7 @@ class SeasonStatsTest < MiniTest::Test
   #   assert_equal "Penguins", @small_data.least_accurate_team("20122013")
   #   assert_equal "Avalanche", @data.least_accurate_team("20162017")
   # end
-
+  #
   def test_most_hits
     assert_equal "Bruins", @v_small_data.most_hits("20122013")
     assert_equal "Bruins", @small_data.most_hits("20122013")
