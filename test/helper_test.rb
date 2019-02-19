@@ -72,6 +72,19 @@ class HelpersTest < MiniTest::Test
     assert_equal expected, actual
   end
 
+  def test_find_max
+    aggregated_data = {2=>5, 3=>11}
+    expected_value = 11
+    expected_name = 3
+
+    actual_value = @stat_tracker.find_max(aggregated_data, "value")
+    actual_name = @stat_tracker.find_max(aggregated_data, "name")
+
+    assert_equal expected_value, actual_value
+    assert_equal expected_name, actual_name
+
+  end
+
 
 
 end
