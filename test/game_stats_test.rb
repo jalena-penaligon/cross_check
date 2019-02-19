@@ -94,20 +94,4 @@ class GameStatsTest < MiniTest::Test
                 }
     assert_equal expected, @data.average_goals_by_season
   end
-
-  def test_total_number_of_games
-    assert_equal 2, @v_small_data.total_number_of_games
-    assert_equal 20, @small_data.total_number_of_games
-    assert_equal 7441, @data.total_number_of_games
-  end
-
-  def test_find_unique_seasons
-    assert_equal [20122013], @v_small_data.find_unique_seasons
-    assert_equal [20122013], @small_data.find_unique_seasons
-
-    expected = [20122013, 20132014, 20142015, 20152016, 20162017, 20172018]
-    expected.each do |seasonid|
-      assert @data.find_unique_seasons.include?(seasonid)
-    end
-  end
 end
