@@ -12,6 +12,8 @@ module GameStats
       (hash[:goals] + hash[:opponent_goals])
     end
     total_score = low_score[:opponent_goals] + low_score[:goals]
+    return 1 if total_score == 0
+    return total_score
   end
 
   def biggest_blowout
@@ -21,12 +23,11 @@ module GameStats
     total_score = (blowout_score[:goals] - blowout_score[:opponent_goals]).abs
   end
 
-  def percent_home_wins(data = nil)
+  def percentage_home_wins(data = nil)
     data = @data if data == nil
     data = subset_data(:hoa, "home", data)
     (winning_percentage(data)).round(2)
   end
-
 
   def percentage_visitor_wins(data = nil)
     data = @data if data == nil
@@ -47,7 +48,7 @@ module GameStats
     end
     hashID = :goals
     total_goals = (find_total(hashID, data)).to_f
-    average = total_goals/total_games(data)
+    average = (total_goals/total_games(data)).round(2)
   end
 
   def average_goals_by_season(data = nil)
