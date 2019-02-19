@@ -96,5 +96,14 @@ class HelpersTest < MiniTest::Test
     assert_equal expected_name, actual_name
   end
 
+  def test_find_total
+    full_array = [{a:1, goals:2}, {a:1, goals:3}, {a:1, goals:5}, {a:1, goals:6},
+                  {a:2, goals:4}, {a:2, goals:5}, {a:2, goals:6}, {a:2, goals:6} ]
+
+    expected = 37
+    actual = @stat_tracker.find_total(:goals, full_array)
+
+    assert_equal expected, actual
+  end
 
 end
