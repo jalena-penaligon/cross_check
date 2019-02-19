@@ -4,6 +4,7 @@ require './lib/league_stats'
 require './lib/stat_parser'
 require './lib/game_stats'
 require './lib/season_stats_WP.rb'
+require './lib/season_stats_JP.rb'
 require './lib/season_stats_SH.rb'
 require './lib/helpers.rb'
 
@@ -11,6 +12,7 @@ require './lib/helpers.rb'
 class StatTracker
   include LeagueStats
   include SeasonStatsWP
+  include SeasonStatsJP
   include Helpers
   include GameStats
   include SeasonStatsSH
