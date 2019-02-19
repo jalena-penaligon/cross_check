@@ -37,4 +37,18 @@ class HelpersTest < MiniTest::Test
 
     assert_equal expected, actual
   end
+
+  def test_hash_aggregate
+    grouped_info = {1 => [{a:1, goals:2}, {a:1, goals:3}, {a:1, goals:5}, {a:1, goals:6}],
+                   2 => [{a:2, goals:4}, {a:2, goals:5}, {a:2, goals:6}, {a:2, goals:6}]}
+
+    expected = {1 => 16, 2 => 21}
+
+    actual = @stat_tracker.hash_aggregate(grouped_info, :total_goals)
+
+    assert_equal expected, actual
+  end
+
+
+
 end
