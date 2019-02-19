@@ -49,6 +49,17 @@ class HelpersTest < MiniTest::Test
     assert_equal expected, actual
   end
 
+  def test_group_and_aggregate
+    full_array = [{a:1, goals:2}, {a:1, goals:3}, {a:1, goals:5}, {a:1, goals:6},
+                  {a:2, goals:4}, {a:2, goals:5}, {a:2, goals:6}, {a:2, goals:6} ]
+
+    expected = {1 => 16, 2 => 21}
+
+    actual = @stat_tracker.group_and_aggregate(:a, :total_goals, full_array)
+
+    assert_equal expected, actual
+  end
+
 
 
 end
