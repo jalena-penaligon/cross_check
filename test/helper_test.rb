@@ -82,9 +82,19 @@ class HelpersTest < MiniTest::Test
 
     assert_equal expected_value, actual_value
     assert_equal expected_name, actual_name
-
   end
 
+  def test_find_min
+    aggregated_data = {2=>5, 3=>11}
+    expected_value = 5
+    expected_name = 2
+
+    actual_value = @stat_tracker.find_min(aggregated_data, "value")
+    actual_name = @stat_tracker.find_min(aggregated_data, "name")
+
+    assert_equal expected_value, actual_value
+    assert_equal expected_name, actual_name
+  end
 
 
 end
