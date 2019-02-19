@@ -26,4 +26,15 @@ class HelpersTest < MiniTest::Test
 
     assert_equal expected, actual
   end
+
+  def test_game_grouping
+    full_array = [{a:1, b:2}, {a:1, b:3}, {a:1, b:5}, {a:1, b:6},
+                  {a:2, b:4}, {a:2, b:5}, {a:2, b:6}, {a:2, b:6} ]
+
+    expected = {1 => [{a:1, b:2}, {a:1, b:3}, {a:1, b:5}, {a:1, b:6}],
+                2 => [{a:2, b:4}, {a:2, b:5}, {a:2, b:6}, {a:2, b:6}]}
+    actual = @stat_tracker.game_grouping(:a, full_array)
+
+    assert_equal expected, actual
+  end
 end
