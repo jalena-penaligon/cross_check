@@ -1,5 +1,5 @@
 require 'pry'
-require './lib/conversions'
+require_relative './conversions'
 
 class StatParser
   include Conversions
@@ -25,7 +25,7 @@ class StatParser
 
     return current_data
   end
-  
+
   def add_opponent_data(merged_data, team_info)
     merged_data.map do |hash|
       opponent_name = find_opponent(hash, team_info)
