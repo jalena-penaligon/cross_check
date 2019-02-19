@@ -1,74 +1,91 @@
 module LeagueStats
 
+  def divide(value1, value2)
+    result = Hash.new(0)
+    value1.each do |team, num|
+      result[team] = (num /= value2[team].to_f).round(2)
+    end
+    result
+  end
+
+  def subtract(value1, value2)
+    result = Hash.new(0)
+    value1.each do |team, num|
+      result[team] = (num - value2[team])
+    end
+    result
+  end
+
+  def total_games(data = nil)
+    data = @data if data == nil
+    data.uniq do |hash|
+      hash[:game_id]
+    end.length
+  end
+
+  def total_goals(data= nil)
+    data = @data if data == nil
+    find_total(:goals, data)
+  end
+
+  def total_goals_allowed(data= nil)
+    data = @data if data == nil
+    find_total(:opponent_goals, data)
+  end
+
   def count_of_teams
-    games_per_team.keys.count
+    game_grouping(:team_id).length
   end
 
   def games_per_team
-    games = Hash.new(0)
-    @data.each do |game_team|
-      games[game_team[:teamname]] += 1
-    end
-    games
+    group_id = :teamname
+    aggregate = :total_games
+    group_and_aggregate(group_id, aggregate)
   end
 
   def count_games_by_location(hoa)
-    games = Hash.new(0)
-    @data.each do |game_team|
-      if game_team[:hoa] == hoa
-        games[game_team[:teamname]] += 1
-      end
-    end
-    games
+    subset = {hoa: hoa}
+    group = :teamname
+    agg = :total_games
+
+    subset_group_and_aggregate(subset, group, agg)
   end
 
   def total_team_goals
-    teams = Hash.new(0)
-    @data.each do |game_team|
-      teams[game_team[:teamname]] += game_team[:goals]
-    end
-    teams
+    group_id = :teamname
+    aggregate = :total_goals
+
+    group_and_aggregate(group_id, aggregate)
   end
 
   def count_goals_by_location(hoa)
-    goals = Hash.new(0)
-    @data.each do |game_team|
-      if game_team[:hoa] == hoa
-        goals[game_team[:teamname]] += game_team[:goals]
-      end
-    end
-    goals
+    subset = {hoa: hoa}
+    group = :teamname
+    agg = :total_goals
+
+    subset_group_and_aggregate(subset, group, agg)
   end
 
   def wins_by_location(hoa)
-    games = Hash.new(0)
-    @data.each do |game_team|
-      if game_team[:hoa] == hoa && game_team[:won] == true
-        games[game_team[:teamname]] += 1
-      end
-    end
-    games
+    subset = {hoa: hoa, won: true}
+    group = :teamname
+    agg = :total_games
+
+    subset_group_and_aggregate(subset, group, agg)
   end
 
   def win_percentage_by_location(hoa)
     wins = wins_by_location(hoa)
-    num_games = count_games_by_location(hoa)
+    games = count_games_by_location(hoa)
 
-    percentage = Hash.new(0)
-    wins.each do |team, wins|
-      percentage[team] = (wins /= num_games[team].to_f).round(3)
-    end
-    percentage
+    divide(wins, games)
   end
 
   def goals_scored_per_game(game_type, goal_type)
     games = game_type
-    goals_per_game = Hash.new
+    goals = goal_type
 
-    goal_type.each do |team, goals|
-      goals_per_game[team] = (goals /= games[team].to_f).round(3)
-    end
-    goals_per_game
+    divide(goals, games)
   end
 
   def goals_per_game_by_team
@@ -76,11 +93,9 @@ module LeagueStats
   end
 
   def goals_allowed
-    goals = Hash.new(0)
-    @data.each do |game_team|
-      goals[game_team[:teamname]] += game_team[:opponent_goals]
-    end
-    goals
+    group_id = :teamname
+    aggregate = :total_goals_allowed
+    group_and_aggregate(group_id, aggregate)
   end
 
   def goals_allowed_per_game
@@ -97,96 +112,64 @@ module LeagueStats
     goals_per_game_by_location("home")
   end
 
-  def visitor_goals_per_game
-    goals_per_game_by_location("away")
-  end
-
-  def calculate_max_by(attribute)
-    attribute.max_by do |team, num|
-      num
-    end.first
-  end
-
-  def calculate_min_by(attribute)
-    attribute.min_by do |team, num|
-      num
-    end.first
-  end
-
   def best_offense
-    calculate_max_by(goals_per_game_by_team)
+    find_max(goals_per_game_by_team)
   end
 
   def worst_offense
-    calculate_min_by(goals_per_game_by_team)
+    find_min(goals_per_game_by_team)
   end
 
   def best_defense
-    calculate_min_by(goals_allowed_per_game)
+    find_min(goals_allowed_per_game)
   end
 
   def worst_defense
-    calculate_max_by(goals_allowed_per_game)
+    find_max(goals_allowed_per_game)
   end
 
   def highest_scoring_visitor
-    calculate_max_by(visitor_goals_per_game)
+    find_max(goals_per_game_by_location("away"))
   end
 
   def highest_scoring_home_team
-    calculate_max_by(goals_per_game_by_location("home"))
+    find_max(goals_per_game_by_location("home"))
   end
 
   def lowest_scoring_visitor
-    calculate_min_by(goals_per_game_by_location("away"))
+    find_min(goals_per_game_by_location("away"))
   end
 
   def lowest_scoring_home_team
-    calculate_min_by(home_goals_per_game)
+    find_min(home_goals_per_game)
   end
 
   def winningest_team
-    games_won = Hash.new(0)
-    @data.each do |game_team|
-      if game_team[:won] == true
-        games_won[game_team[:teamname]] += 1
-      end
-    end
-    games_played = games_per_team
-    winning_percentage = Hash.new(0)
-    games_won.each do |team, games_won|
-      winning_percentage[team] = (games_won /= games_played[team].to_f)
-    end
+    subset = {won: true}
+    group = :teamname
+    agg = :total_games
+    games_won = subset_group_and_aggregate(subset, group, agg)
+    games_played = group_and_aggregate(group, agg)
 
-    calculate_max_by(winning_percentage)
+    find_max(divide(games_won, games_played))
   end
 
   def best_fans
     home_wins = win_percentage_by_location("home")
     away_wins = win_percentage_by_location("away")
-    difference = {}
-    home_wins.each do |team, wins_percentage|
-      difference[team] = (wins_percentage - away_wins[team])
-    end
-    calculate_max_by(difference)
+
+    find_max(subtract(home_wins, away_wins))
   end
 
   def worst_fans
     home_wins = win_percentage_by_location("home")
     away_wins = win_percentage_by_location("away")
-    difference = {}
-    home_wins.each do |team, wins_percentage|
-      difference[team] = (away_wins[team] - wins_percentage)
-    end
+    difference = subtract(away_wins, home_wins)
 
-    worst_fans = difference.select do |team, difference|
-      difference > 0
-    end.max_by do |team, difference|
-      difference
-    end
-
-    if worst_fans == nil
+    if difference.values.all? {|num| num < 0}
       return []
+    else difference.values.any? {|num| num > 0}
+      find_max(difference)
     end
   end
 end
