@@ -160,10 +160,10 @@ class StatParserTest < MiniTest::Test
     expected = [
       {game_id: 1, team_id: 1, goals:2, hoa: "away",away_team_id: 1,
       home_team_id: 2, away_goals: 2, home_goals: 3,
-      opponent: "B", opponent_goals: 3},
+      opponent: "B", opponent_goals: 3, opponent_id: 2},
       {game_id: 1, team_id: 2, goals:3, hoa: "home", away_team_id: 1,
       home_team_id: 2, away_goals: 2, home_goals: 3,
-      opponent: "A", opponent_goals: 2}
+      opponent: "A", opponent_goals: 2, opponent_id: 1}
     ]
 
     stat_parser = StatParser.new([],[])
