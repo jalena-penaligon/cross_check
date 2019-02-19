@@ -9,10 +9,7 @@ module SeasonStatsJP
 
   def total_wins(data = nil)
     data = @data if data == nil
-    games = Hash.new(0)
-    data.select do |hash|
-      hash[:won] == true
-    end.length
+    total_games(subset_data(:won, true, data))
   end
 
   def games_by_type(season, type, data = nil)
@@ -54,7 +51,7 @@ module SeasonStatsJP
 
     difference = Hash.new(0)
     preseason.each do |team, win_percent|
-      difference[team] = (win_percent -= regular[team]).round(4)
+      difference[team] = (win_percent -= regular[team]).round(2)
     end
     difference
   end
