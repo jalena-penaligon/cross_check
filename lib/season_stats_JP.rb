@@ -54,7 +54,7 @@ module SeasonStatsJP
 
     difference = Hash.new(0)
     preseason.each do |team, win_percent|
-      difference[team] = (win_percent -= regular[team]).round(2)
+      difference[team] = (win_percent -= regular[team]).round(4)
     end
     difference
   end
@@ -65,13 +65,6 @@ module SeasonStatsJP
 
   def biggest_surprise(season)
     find_min(win_percentage_difference(season))
-  end
-
-  def total_win_percentage
-    games = total_games
-    wins = total_wins
-
-    calculate_win_percentage(games, wins)
   end
 
   def games_by_coach(season)
