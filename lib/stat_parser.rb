@@ -33,7 +33,8 @@ class StatParser
 
       opponent_goals = find_opponent_goals(hash)
       to_merge = {opponent: opponent_name,
-                  opponent_goals: opponent_goals}
+                  opponent_goals: opponent_goals,
+                  opponent_id: opponent_id}
       hash.merge(to_merge)
     end
   end
