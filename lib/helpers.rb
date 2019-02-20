@@ -76,8 +76,9 @@ module Helpers
   # Combining the Above
   ################
 
-  def subset_group_and_aggregate(subsets, group_id, aggregate)
-    data = multi_subset(subsets)
+  def subset_group_and_aggregate(subsets, group_id, aggregate, data = nil)
+    data = @data if data == nil
+    data = multi_subset(subsets,data)
     return group_and_aggregate(group_id, aggregate, data)
   end
 
