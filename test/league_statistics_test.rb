@@ -27,46 +27,6 @@ class LeagueStatisticsTest < MiniTest::Test
     assert_equal 7, @small_data.count_of_teams
     assert_equal 32, @data.count_of_teams
   end
-#
-  def test_count_games_played_per_team
-    expected = {"Rangers"=>5, "Bruins"=>9, "Penguins"=>4, "Red Wings"=>7, "Blackhawks"=>7, "Senators"=>4, "Canadiens"=>4}
-    assert_equal expected, @small_data.games_per_team
-
-    expected = {"Rangers"=>2, "Bruins"=>2}
-    assert_equal expected, @v_small_data.games_per_team
-  end
-
-  def test_sum_goals_for_all_teams
-    expected = {"Rangers"=>10, "Bruins"=>28, "Penguins"=>2, "Red Wings"=>15, "Blackhawks"=>16, "Senators"=>14, "Canadiens"=>8}
-    assert_equal expected, @small_data.total_team_goals
-
-    expected = {"Rangers"=>4, "Bruins"=>8}
-    assert_equal expected, @v_small_data.total_team_goals
-  end
-
-  def test_goals_scored_per_game
-    game_type = @small_data.games_per_team
-    goal_type = @small_data.total_team_goals
-    expected = {"Rangers"=>2.0, "Bruins"=>3.11, "Penguins"=>0.5, "Red Wings"=>2.14, "Blackhawks"=>2.29, "Senators"=>3.5, "Canadiens"=>2.0}
-    assert_equal expected, @small_data.goals_scored_per_game(game_type, goal_type)
-
-    game_type = @v_small_data.games_per_team
-    goal_type = @v_small_data.total_team_goals
-    expected = {"Rangers"=>2.0, "Bruins"=>4.0}
-    assert_equal expected, @v_small_data.goals_scored_per_game(game_type, goal_type)
-  end
-
-  def test_goals_allowed_per_game
-    game_type = @small_data.games_per_team
-    goal_type = @small_data.goals_allowed
-    expected = {"Rangers"=>3.2, "Bruins"=>1.33, "Penguins"=>3.0, "Red Wings"=>2.29, "Blackhawks"=>2.14, "Senators"=>2.0, "Canadiens"=>3.5}
-    assert_equal expected, @small_data.goals_scored_per_game(game_type, goal_type)
-
-    game_type = @v_small_data.games_per_team
-    goal_type = @v_small_data.goals_allowed
-    expected = {"Rangers"=>4.0, "Bruins"=>2.0}
-    assert_equal expected, @v_small_data.goals_scored_per_game(game_type, goal_type)
-  end
 
   def test_best_offense
     assert_equal "Golden Knights", @data.best_offense
@@ -80,14 +40,6 @@ class LeagueStatisticsTest < MiniTest::Test
     assert_equal "Rangers", @v_small_data.worst_offense
   end
 
-  def test_sum_oppontent_goals_for_all_teams
-    expected = {"Rangers"=>16, "Bruins"=>12, "Penguins"=>12, "Red Wings"=>16, "Blackhawks"=>15, "Senators"=>8, "Canadiens"=>14}
-    assert_equal expected, @small_data.goals_allowed
-
-    expected = {"Rangers"=>8, "Bruins"=>4}
-    assert_equal expected, @v_small_data.goals_allowed
-  end
-
   def test_best_defense
     assert_equal "Kings", @data.best_defense
     assert_equal "Bruins", @small_data.best_defense
@@ -98,77 +50,6 @@ class LeagueStatisticsTest < MiniTest::Test
     assert_equal "Sabres", @data.worst_defense
     assert_equal "Canadiens", @small_data.worst_defense
     assert_equal "Rangers", @v_small_data.worst_defense
-  end
-
-  def test_goals_by_location
-    expected = {"Rangers"=>5, "Bruins"=>14, "Penguins"=>1, "Red Wings"=>7, "Blackhawks"=>5, "Senators"=>5, "Canadiens"=>3}
-    assert_equal expected, @small_data.count_goals_by_location("away")
-
-    expected = {"Rangers"=>4}
-    assert_equal expected, @v_small_data.count_goals_by_location("away")
-
-    expected = {"Rangers"=>5, "Bruins"=>14, "Penguins"=>1, "Red Wings"=>8, "Blackhawks"=>11, "Senators"=>9, "Canadiens"=>5}
-    assert_equal expected, @small_data.count_goals_by_location("home")
-
-    expected = {"Bruins"=>8}
-    assert_equal expected, @v_small_data.count_goals_by_location("home")
-  end
-
-  def test_count_games_by_location
-    expected = {"Rangers"=>2, "Bruins"=>5, "Penguins"=>2, "Red Wings"=>3, "Blackhawks"=>4, "Senators"=>2, "Canadiens"=>2}
-    assert_equal expected, @small_data.count_games_by_location("home")
-
-    expected = {"Bruins"=>2}
-    assert_equal expected, @v_small_data.count_games_by_location("home")
-
-    expected = {"Rangers"=>3, "Bruins"=>4, "Penguins"=>2, "Red Wings"=>4, "Blackhawks"=>3, "Senators"=>2, "Canadiens"=>2}
-    assert_equal expected, @small_data.count_games_by_location("away")
-
-    expected = {"Rangers"=>2}
-    assert_equal expected, @v_small_data.count_games_by_location("away")
-  end
-
-  def test_goals_per_game_by_location
-    expected = {"Rangers"=>2.0}
-    assert_equal expected, @v_small_data.goals_per_game_by_location("away")
-
-    expected = {"Rangers"=>1.67, "Bruins"=>3.5, "Penguins"=>0.5, "Red Wings"=>1.75, "Blackhawks"=>1.67, "Senators"=>2.5, "Canadiens"=>1.5}
-    assert_equal expected, @small_data.goals_per_game_by_location("away")
-
-    expected = {"Bruins"=>4.0}
-    assert_equal expected, @v_small_data.goals_per_game_by_location("home")
-
-    expected = {"Bruins"=>2.8, "Rangers"=>2.5, "Penguins"=>0.5, "Blackhawks"=>2.75, "Red Wings"=>2.67, "Canadiens"=>2.5, "Senators"=>4.5}
-    assert_equal expected, @small_data.goals_per_game_by_location("home")
-  end
-
-  def test_count_home_wins
-    expected = {"Rangers"=>1, "Bruins"=>5,"Red Wings"=>2, "Blackhawks"=>3, "Senators"=>2, "Canadiens"=>1}
-    assert_equal expected, @small_data.wins_by_location("home")
-
-    expected = {"Bruins"=>2}
-    assert_equal expected, @v_small_data.wins_by_location("home")
-
-    expected = {"Bruins"=>3, "Red Wings"=>1, "Blackhawks"=>1, "Senators"=>1}
-    assert_equal expected, @small_data.wins_by_location("away")
-
-    expected = {}
-    assert_equal expected, @v_small_data.wins_by_location("away")
-  end
-
-
-  def test_calculate_win_percentage_by_location
-    expected = {"Rangers" => 0.5, "Bruins"=> 1.0, "Red Wings" => 0.67, "Blackhawks"=> 0.75, "Senators"=> 1.0, "Canadiens" => 0.5}
-    assert_equal expected, @small_data.win_percentage_by_location("home")
-
-    expected = {"Bruins" => 1.0}
-    assert_equal expected, @v_small_data.win_percentage_by_location("home")
-
-    expected = {"Bruins"=> 0.75, "Red Wings" => 0.25, "Blackhawks"=> 0.33, "Senators"=> 0.5}
-    assert_equal expected, @small_data.win_percentage_by_location("away")
-
-    expected = {}
-    assert_equal expected, @v_small_data.win_percentage_by_location("away")
   end
 
   def test_highest_scoring_visitor
@@ -204,7 +85,6 @@ class LeagueStatisticsTest < MiniTest::Test
   def test_best_fans
     assert_equal "Flyers", @data.best_fans
     assert_equal "Rangers", @small_data.best_fans
-    assert_equal "Bruins", @v_small_data.best_fans
   end
 
   def test_worst_fans
@@ -212,4 +92,5 @@ class LeagueStatisticsTest < MiniTest::Test
     assert_equal [], @small_data.worst_fans
     assert_equal [], @v_small_data.worst_fans
   end
+
 end
