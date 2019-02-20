@@ -3,19 +3,15 @@ require 'pry'
 require_relative './league_stats'
 require_relative './stat_parser'
 require_relative './game_stats'
-require_relative './season_stats_WP.rb'
-require_relative './season_stats_JP.rb'
-require_relative './season_stats_SH.rb'
-require_relative './helpers.rb'
+require_relative './season_stats'
+require_relative './helpers'
 
 
 class StatTracker
   include LeagueStats
-  include SeasonStatsWP
-  include SeasonStatsJP
+  include SeasonStats
   include Helpers
   include GameStats
-  include SeasonStatsSH
 
   attr_accessor :data,
                 :merge_ids
