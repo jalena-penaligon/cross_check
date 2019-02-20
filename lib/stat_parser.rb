@@ -1,5 +1,5 @@
 require 'pry'
-require './lib/conversions'
+require_relative './conversions'
 
 class StatParser
   include Conversions
@@ -25,13 +25,16 @@ class StatParser
 
     return current_data
   end
-  
+
   def add_opponent_data(merged_data, team_info)
     merged_data.map do |hash|
-      opponent_name = find_opponent(hash, team_info)
+      opponent_id = find_opponent_id(hash)
+      opponent_name = find_team(opponent_id, team_info)
+
       opponent_goals = find_opponent_goals(hash)
       to_merge = {opponent: opponent_name,
-                  opponent_goals: opponent_goals}
+                  opponent_goals: opponent_goals,
+                  opponent_id: opponent_id}
       hash.merge(to_merge)
     end
   end
@@ -48,13 +51,13 @@ class StatParser
     return converted_values
   end
 
-  def find_opponent(game_team_hash, team_info)
+  def find_opponent_id(game_team_hash)
     if game_team_hash[:hoa] == "away"
       id = game_team_hash[:home_team_id]
     else
       id = game_team_hash[:away_team_id]
     end
-    return find_team(id, team_info)
+    return id
   end
 
   def find_team(team_id, team_info)

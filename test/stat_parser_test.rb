@@ -103,9 +103,7 @@ class StatParserTest < MiniTest::Test
       assert_equal expected, actual
   end
 
-  def test_it_can_find_opponent_name
-    simple_team_info = [{team_id: 1,teamname:"A"},{team_id: 2,teamname:"B"}]
-
+  def test_it_can_find_opponent_id
     simple_hash_1 ={game_id: 1, team_id: 1, goals:2, hoa: "away",away_team_id: 1,
           home_team_id: 2, away_goals: 2, home_goals: 3}
 
@@ -113,9 +111,8 @@ class StatParserTest < MiniTest::Test
           home_team_id: 2, away_goals: 2, home_goals: 3}
     stat_parser = StatParser.new([],[])
 
-    assert_equal "B", stat_parser.find_opponent(simple_hash_1, simple_team_info)
-    assert_equal "A", stat_parser.find_opponent(simple_hash_2, simple_team_info)
-
+    assert_equal 2, stat_parser.find_opponent_id(simple_hash_1)
+    assert_equal 1, stat_parser.find_opponent_id(simple_hash_2)
   end
 
   def test_it_can_find_team
@@ -149,10 +146,10 @@ class StatParserTest < MiniTest::Test
     expected = [
       {game_id: 1, team_id: 1, goals:2, hoa: "away",away_team_id: 1,
       home_team_id: 2, away_goals: 2, home_goals: 3,
-      opponent: "B", opponent_goals: 3},
+      opponent: "B", opponent_goals: 3, opponent_id: 2},
       {game_id: 1, team_id: 2, goals:3, hoa: "home", away_team_id: 1,
       home_team_id: 2, away_goals: 2, home_goals: 3,
-      opponent: "A", opponent_goals: 2}
+      opponent: "A", opponent_goals: 2, opponent_id: 1}
     ]
 
     stat_parser = StatParser.new([],[])
@@ -171,7 +168,7 @@ class StatParserTest < MiniTest::Test
       season: 20122013,  type: "P",  date_time: "2013-05-16",
       venue_time_zone_tz: "EDT",  franchiseid: 10, shortname: "NY Rangers",
       teamname: "Rangers", abbreviation: "NYR", opponent: "Bruins",
-      opponent_goals: 3},
+      opponent_goals: 3, opponent_id: 6},
       {game_id: 2012030221,  team_id: 6,  hoa: "home",  won: true,
       settled_in: "OT", head_coach: "Claude Julien",  goals: 3,  shots: 48,
       hits: 51,  pim: 6, powerplayopportunities: 4,
@@ -179,7 +176,7 @@ class StatParserTest < MiniTest::Test
       season: 20122013,  type: "P",  date_time: "2013-05-16",
       venue_time_zone_tz: "EDT",  franchiseid: 6, shortname: "Boston",
       teamname: "Bruins", abbreviation: "BOS",  opponent: "Rangers",
-      opponent_goals: 2},
+      opponent_goals: 2, opponent_id: 3},
       {game_id: 2012030222,  team_id: 3,  hoa: "away", won: false,
       settled_in: "REG",  head_coach: "John Tortorella",  goals: 2, shots: 37,
       hits: 33,  pim: 11,  powerplayopportunities: 5,
@@ -187,15 +184,15 @@ class StatParserTest < MiniTest::Test
       season: 20122013,  type: "P", date_time: "2013-05-19",
       venue_time_zone_tz: "EDT",  franchiseid: 10, shortname: "NY Rangers",
       teamname: "Rangers", abbreviation: "NYR", opponent:"Bruins",
-      opponent_goals: 5},
+      opponent_goals: 5, opponent_id: 6},
       {game_id: 2012030222,  team_id: 6,  hoa: "home",  won: true,
       settled_in: "REG", head_coach: "Claude Julien",  goals: 5,  shots: 32,
-      hits: 36,  pim: 19, powerplayopportunities: 1, 
+      hits: 36,  pim: 19, powerplayopportunities: 1,
       powerplaygoals: 0, faceoffwinpercentage: 48.3,  giveaways: 16,  takeaways: 6,
       season: 20122013, type: "P",  date_time: "2013-05-19",
       venue_time_zone_tz: "EDT",  franchiseid: 6, shortname: "Boston",
       teamname: "Bruins",  abbreviation: "BOS",  opponent: "Rangers",
-      opponent_goals: 2}
+      opponent_goals: 2, opponent_id:3}
     ]
 
       assert_equal expected_data, @stat_parser.parse_data
