@@ -95,14 +95,4 @@ module LeagueStats
     end
   end
 
-  ##HELPER METHOD
-
-  def home_vs_away_percent_difference(data = nil)
-    data = @data if data == nil
-    home = winning_percentage(subset_data(:hoa, "home", data))
-    away = winning_percentage(subset_data(:hoa, "away", data))
-
-    difference = home - away
-  end
-
 end

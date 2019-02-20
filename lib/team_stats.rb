@@ -79,18 +79,14 @@ module TeamStats
 
   def biggest_team_blowout(team_id)
     subset = {team_id: team_id.to_i, won: true}
-    group = :game_id
-    agg = :goal_difference
-
-    find_max(subset_group_and_aggregate(subset, group, agg), "value")
+    data = multi_subset(subset, @data)
+    biggest_blowout(data)
   end
 
   def worst_loss(team_id)
     subset = {team_id: team_id.to_i, won: false}
-    group = :game_id
-    agg = :goal_difference
-
-    find_min(subset_group_and_aggregate(subset, group, agg), "value").abs
+    data = multi_subset(subset, @data)
+    biggest_blowout(data)
   end
 
   def head_to_head(team_id)
@@ -129,29 +125,4 @@ module TeamStats
     hash
   end
 
-  ######################
-  ### HELPER METHODS###
-  ######################
-  
-  def goal_difference(data = nil)
-    data = @data if data == nil
-    goals = total_goals(data)
-    opponent_goals = goals_allowed(data)
-    difference = goals - opponent_goals
-  end
-
-  def goals_allowed(data = nil)
-    data = @data if data == nil
-    find_total(:opponent_goals, data)
-  end
-
-  def average_goals_scored(data = nil)
-    data = @data if data == nil
-    total_goals(data) / total_games(data).to_f
-  end
-
-  def average_goals_against(data = nil)
-    data = @data if data == nil
-    goals_allowed(data) / total_games(data).to_f
-  end
 end
