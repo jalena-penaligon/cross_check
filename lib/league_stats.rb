@@ -7,7 +7,7 @@ module LeagueStats
   def best_offense
     subsets = nil
     group_id = :teamname
-    aggregate = :average_goals_per_game
+    aggregate = :average_goals_scored
 
     find_max(subset_group_and_aggregate(subsets, group_id, aggregate, data = nil))
   end
@@ -15,7 +15,7 @@ module LeagueStats
   def worst_offense
     subsets = nil
     group_id = :teamname
-    aggregate = :average_goals_per_game
+    aggregate = :average_goals_scored
 
     find_min(subset_group_and_aggregate(subsets, group_id, aggregate, data = nil))
   end
@@ -39,7 +39,7 @@ module LeagueStats
   def highest_scoring_visitor
     subsets = {hoa: "away"}
     group = :teamname
-    aggregate = :average_goals_per_game
+    aggregate = :average_goals_scored
 
     find_max(subset_group_and_aggregate(subsets, group, aggregate, data = nil))
   end
@@ -47,7 +47,7 @@ module LeagueStats
   def highest_scoring_home_team
     subsets = {hoa: "home"}
     group = :teamname
-    aggregate = :average_goals_per_game
+    aggregate = :average_goals_scored
 
     find_max(subset_group_and_aggregate(subsets, group, aggregate, data = nil))
   end
@@ -55,7 +55,7 @@ module LeagueStats
   def lowest_scoring_visitor
     subsets = {hoa: "away"}
     group = :teamname
-    aggregate = :average_goals_per_game
+    aggregate = :average_goals_scored
 
     find_min(subset_group_and_aggregate(subsets, group, aggregate, data = nil))
   end
@@ -63,7 +63,7 @@ module LeagueStats
   def lowest_scoring_home_team
     subsets = {hoa: "home"}
     group = :teamname
-    aggregate = :average_goals_per_game
+    aggregate = :average_goals_scored
 
     find_min(subset_group_and_aggregate(subsets, group, aggregate, data = nil))
   end
