@@ -36,7 +36,7 @@ module GameStats
   end
 
   def count_of_games_by_season(data = nil)
-    data = @data if data = nil
+    data = @data if data == nil
     group_id = :season
     aggregate = :total_games
     group_and_aggregate(group_id, aggregate, data)
