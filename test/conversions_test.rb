@@ -28,7 +28,7 @@ class ConversionsTest < MiniTest::Test
                     outcome: "ShotsOT", shots:5, home_goals: 3, away_goals: 5}
 
         actual = @stat_parser.delete_keys(simple_hash)
-        expected = {:franchiseid=>2, :venue_link=>"link", :abbreviation=>"NJD", :shortname=>"NewJersey", shots:5}
+        expected = {:franchiseid=>2, :link=>"Http", :abbreviation=>"NJD", :shortname=>"NewJersey", shots:5}
         assert_equal expected, actual
     end
 
