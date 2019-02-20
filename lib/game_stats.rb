@@ -16,7 +16,8 @@ module GameStats
     return total_score
   end
 
-  def biggest_blowout
+  def biggest_blowout(data = nil)
+    data = @data if data == nil
     blowout_score = @data.max_by do |hash|
       (hash[:goals] - hash[:opponent_goals]).abs
     end
@@ -42,18 +43,13 @@ module GameStats
     group_and_aggregate(group_id, aggregate, data)
   end
 
-  def average_goals_per_game(data = nil)
-    if data == nil
-      data = @data
-    end
-    hashID = :goals
-    total_goals = (find_total(hashID, data)).to_f
-    average = (total_goals/total_games(data)).round(2)
+  def average_goals_per_game
+    average_goals_scored.round(2)
   end
 
   def average_goals_by_season(data = nil)
     data = @data if data == nil
-    aggregate = :average_goals_per_game
+    aggregate = :average_goals_scored
     subset_group_and_aggregate(nil, :season, aggregate)
   end
 end
