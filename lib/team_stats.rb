@@ -129,6 +129,10 @@ module TeamStats
     hash
   end
 
+  ######################
+  ### HELPER METHODS###
+  ######################
+  
   def goal_difference(data = nil)
     data = @data if data == nil
     goals = total_goals(data)
@@ -150,5 +154,4 @@ module TeamStats
     data = @data if data == nil
     goals_allowed(data) / total_games(data).to_f
   end
-
 end
