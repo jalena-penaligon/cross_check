@@ -1,4 +1,4 @@
-class SeasonStats
+module SeasonStats
 
   def biggest_bust(season)
     subset = {season: season.to_i}
@@ -72,7 +72,9 @@ class SeasonStats
 
   def win_percentage_difference(data = nil)
     data = @data if data == nil
-    preseason = winning_percentage(subset_data(:type, "P", data))
+    preseason_data = subset_data(:type, "P", data)
+    return 0 if preseason_data.length == 0
+    preseason = winning_percentage(preseason_data)
     regular = winning_percentage(subset_data(:type, "R", data))
 
     difference = preseason - regular
