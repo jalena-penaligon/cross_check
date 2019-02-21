@@ -24,8 +24,8 @@ class TeamStatsTest < Minitest::Test
 
   def test_team_info_with_respective_team_attributes
     expected = {
-                team_id: 3,
-                franchise_id: 10,
+                team_id: "3",
+                franchise_id: "10",
                 short_name: "NY Rangers",
                 team_name: "Rangers",
                 abbreviation: "NYR",
@@ -34,8 +34,8 @@ class TeamStatsTest < Minitest::Test
     assert_equal expected, @v_small_data.team_info("3")
 
     expected = {
-                team_id: 16,
-                franchise_id: 11,
+                team_id: "16",
+                franchise_id: "11",
                 short_name: "Chicago",
                 team_name: "Blackhawks",
                 abbreviation: "CHI",
@@ -44,8 +44,8 @@ class TeamStatsTest < Minitest::Test
     assert_equal expected, @small_data.team_info("16")
 
     expected = {
-                team_id: 18,
-                franchise_id: 34,
+                team_id: "18",
+                franchise_id: "34",
                 short_name: "Nashville",
                 team_name: "Predators",
                 abbreviation: "NSH",
@@ -55,15 +55,15 @@ class TeamStatsTest < Minitest::Test
   end
 
   def test_best_season
-    assert_equal 20122013, @v_small_data.best_season("6")
-    assert_equal 20122013, @small_data.best_season("5")
-    assert_equal 20142015, @data.best_season("8")
+    assert_equal "20122013", @v_small_data.best_season("6")
+    assert_equal "20122013", @small_data.best_season("5")
+    assert_equal "20142015", @data.best_season("8")
   end
 
   def test_worst_season
-    assert_equal 20122013, @v_small_data.worst_season("3")
-    assert_equal 20122013, @small_data.worst_season("16")
-    assert_equal 20142015, @data.worst_season("5")
+    assert_equal "20122013", @v_small_data.worst_season("3")
+    assert_equal "20122013", @small_data.worst_season("16")
+    assert_equal "20142015", @data.worst_season("5")
   end
 
   def test_average_win_percentage
