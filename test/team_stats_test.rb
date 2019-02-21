@@ -21,7 +21,7 @@ class TeamStatsTest < Minitest::Test
       @small_data = StatTracker.from_csv(small_data_paths)
       @data = StatTracker.from_csv(data_paths)
     end
-
+  
   def test_team_info_with_respective_team_attributes
     expected = {
                 team_id: "3",

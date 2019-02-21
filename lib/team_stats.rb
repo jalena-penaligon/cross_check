@@ -94,7 +94,10 @@ module TeamStats
     group = :opponent_id
     agg = :rounded_winning_percentage
     record = subset_group_and_aggregate(subset, group, agg)
-
+    record.keys.each do |opponent_id|
+      record[team_info(opponent_id)["team_name"]] = record.delete(opponent_id)
+    end
+    return record
   end
 
   def summary(data)
