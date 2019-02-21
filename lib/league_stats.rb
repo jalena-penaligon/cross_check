@@ -32,7 +32,6 @@ module LeagueStats
     subsets = nil
     group_id = :team_id
     aggregate = :average_goals_against
-    int = subset_group_and_aggregate(subsets, group_id, aggregate, data = nil)
     id = find_max(subset_group_and_aggregate(subsets, group_id, aggregate, data = nil))
     team_info(id)["team_name"]
   end

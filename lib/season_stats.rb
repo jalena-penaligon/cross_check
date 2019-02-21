@@ -33,7 +33,7 @@ module SeasonStats
   def power_play_goal_percentage(season_id)
     data = subset_data( :season, season_id.to_i)
     ppg = find_total(:powerplaygoals, data)
-    goals = total_goals(data)
+    goals = find_total(:gt_goals, data)
 
     return (ppg.to_f/goals).round(2)
   end
