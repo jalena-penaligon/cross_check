@@ -21,35 +21,35 @@ class TeamStatsTest < Minitest::Test
       @small_data = StatTracker.from_csv(small_data_paths)
       @data = StatTracker.from_csv(data_paths)
     end
-  
+
   def test_team_info_with_respective_team_attributes
     expected = {
-                team_id: "3",
-                franchise_id: "10",
-                short_name: "NY Rangers",
-                team_name: "Rangers",
-                abbreviation: "NYR",
-                link: "/api/v1/teams/3"
+                "team_id" =>"3",
+                "franchise_id" =>"10",
+                "short_name"=> "NY Rangers",
+                "team_name" =>"Rangers",
+                "abbreviation" =>"NYR",
+                "link"=>"/api/v1/teams/3"
                 }
     assert_equal expected, @v_small_data.team_info("3")
 
     expected = {
-                team_id: "16",
-                franchise_id: "11",
-                short_name: "Chicago",
-                team_name: "Blackhawks",
-                abbreviation: "CHI",
-                link: "/api/v1/teams/16"
+                "team_id"=> "16",
+                "franchise_id"=> "11",
+                "short_name"=> "Chicago",
+                "team_name"=> "Blackhawks",
+                "abbreviation"=> "CHI",
+                "link"=> "/api/v1/teams/16"
                 }
     assert_equal expected, @small_data.team_info("16")
 
     expected = {
-                team_id: "18",
-                franchise_id: "34",
-                short_name: "Nashville",
-                team_name: "Predators",
-                abbreviation: "NSH",
-                link: "/api/v1/teams/18"
+                "team_id"=> "18",
+                "franchise_id"=> "34",
+                "short_name"=> "Nashville",
+                "team_name"=> "Predators",
+                "abbreviation"=> "NSH",
+                "link"=> "/api/v1/teams/18"
                 }
     assert_equal expected, @data.team_info("18")
   end
@@ -119,115 +119,143 @@ class TeamStatsTest < Minitest::Test
     assert_equal expected, @small_data.head_to_head("6")
 
     expected = {
-      "Blackhawks" => 0.54,
-      "Blue Jackets" => 0.46,
-      "Blues" => 0.37,
-      "Bruins" => 0.7,
-      "Canadiens" => 0.5,
-      "Canucks" => 0.42,
-      "Capitals" => 0.3,
-      "Coyotes" => 0.56,
-      "Devils" => 0.7,
-      "Ducks" => 0.39,
-      "Flames" => 0.42,
-      "Flyers" => 0.4,
-      "Golden Knights" => 0.33,
-      "Hurricanes" => 0.5,
-      "Islanders" => 0.5,
-      "Jets" => 0.5,
-      "Kings" => 0.28,
-      "Lightning" => 0.4,
-      "Maple Leafs" => 0.5,
-      "Oilers" => 0.4,
-      "Panthers" => 0.5,
-      "Penguins" => 0.5,
-      "Predators" => 0.38,
-      "Rangers" => 0.5,
-      "Red Wings" => 0.46,
+      "Blues" => 0.47,
+      "Jets" => 0.55,
+      "Avalanche" => 0.63,
+      "Flames" => 0.44,
+      "Red Wings" => 0.29,
+      "Blue Jackets" => 0.6,
+      "Stars" => 0.52,
+      "Blackhawks" => 0.42,
+      "Wild" => 0.44,
+      "Devils" => 0.5,
+      "Canadiens" => 0.6,
+      "Canucks" => 0.5,
+      "Rangers" => 0.4,
+      "Lightning" => 0.7,
+      "Capitals" => 0.7,
+      "Sharks" => 0.6,
+      "Oilers" => 0.78,
+      "Ducks" => 0.48,
+      "Penguins" => 0.31,
+      "Islanders" => 0.4,
+      "Kings" => 0.61,
       "Sabres" => 0.7,
-      "Senators" => 0.4,
-      "Sharks" => 0.39,
-      "Stars" => 0.59,
-      "Wild" => 0.42,
+      "Coyotes" => 0.67,
+      "Bruins" => 0.5,
+      "Panthers" => 0.5,
+      "Maple Leafs" => 0.4,
+      "Senators" => 0.7,
+      "Hurricanes" => 0.3,
+      "Golden Knights" => 0.33,
+      "Flyers" => 0.5
     }
-    assert_equal expected, @data.head_to_head("21")
+    assert_equal expected, @data.head_to_head("18")
   end
 
   def test_seasonal_summary
     expected = {
-                20122013 => {
-                  preseason: nil,
-                  regular_season:{
-                              win_percentage: 0.33,
-                              total_goals_scored: 114,
-                              total_goals_against: 152,
-                              average_goals_scored: 2.38,
-                              average_goals_against: 3.17
-                            }
-                          },
-                20132014 => {
-                  preseason: {
-                              win_percentage: 0.43,
-                              total_goals_scored: 20,
-                              total_goals_against: 22,
-                              average_goals_scored: 2.86,
-                              average_goals_against: 3.14
-                            },
-                  regular_season:{
-                              win_percentage: 0.63,
-                              total_goals_scored: 245,
-                              total_goals_against: 220,
-                              average_goals_scored: 2.99,
-                              average_goals_against: 2.68
-                                  }
-                              },
-                20142015 => {
-                  preseason: nil,
-                  regular_season:{
-                              win_percentage: 0.48,
-                              total_goals_scored: 209,
-                              total_goals_against: 227,
-                              average_goals_scored: 2.55,
-                              average_goals_against: 2.77
-                                  }
-                              },
-                20152016 => {
-                  preseason: nil,
-                  regular_season:{
-                              win_percentage: 0.48,
-                              total_goals_scored: 212,
-                              total_goals_against: 240,
-                              average_goals_scored: 2.59,
-                              average_goals_against: 2.93
-                                  }
-                              },
-                20162017 => {
-                  preseason: nil,
-                  regular_season:{
-                              win_percentage: 0.27,
-                              total_goals_scored: 165,
-                              total_goals_against: 278,
-                              average_goals_scored: 2.01,
-                              average_goals_against: 3.39
-                                  }
-                              },
-                20172018 => {
-                  preseason: {
-                              win_percentage: 0.33,
-                              total_goals_scored: 15,
-                              total_goals_against: 22,
-                              average_goals_scored: 2.5,
-                              average_goals_against: 3.67
-                            },
-                  regular_season:{
-                              win_percentage: 0.52,
-                              total_goals_scored: 255,
-                              total_goals_against: 237,
-                              average_goals_scored: 3.11,
-                              average_goals_against: 2.89
-                                  }
-                              }
-                            }
-    assert_equal expected, @data.seasonal_summary("21")
+      "20162017" => {
+        preseason: {
+          :win_percentage=>0.64,
+          :total_goals_scored=>60,
+          :total_goals_against=>48,
+          :average_goals_scored=>2.73,
+          :average_goals_against=>2.18},
+          :regular_season => {
+            :win_percentage=>0.5,
+            :total_goals_scored=>240,
+            :total_goals_against=>224,
+            :average_goals_scored=>2.93,
+            :average_goals_against=>2.73
+          }
+        },
+        "20172018" => {
+          preseason: {
+            :win_percentage=>0.54,
+            :total_goals_scored=>41,
+            :total_goals_against=>42,
+            :average_goals_scored=>3.15,
+            :average_goals_against=>3.23
+          },
+          :regular_season=>
+          {:win_percentage=>0.65,
+            :total_goals_scored=>267,
+            :total_goals_against=>211,
+            :average_goals_scored=>3.26,
+            :average_goals_against=>2.57
+          }
+        },
+        "20132014" => {
+          preseason: {
+            :win_percentage=>0.0,
+            :total_goals_scored=>0,
+            :total_goals_against=>0,
+            :average_goals_scored=>0.0,
+            :average_goals_against=>0.0
+          },
+          :regular_season=>
+          {
+            :win_percentage=>0.46,
+            :total_goals_scored=>216,
+            :total_goals_against=>242,
+            :average_goals_scored=>2.63,
+            :average_goals_against=>2.95
+          }
+        },
+        "20122013" => {
+          preseason: {
+            :win_percentage=>0.0,
+            :total_goals_scored=>0,
+            :total_goals_against=>0,
+            :average_goals_scored=>0.0,
+            :average_goals_against=>0.0
+          },
+          :regular_season=>
+          {
+            :win_percentage=>0.33,
+            :total_goals_scored=>111,
+            :total_goals_against=>139,
+            :average_goals_scored=>2.31,
+            :average_goals_against=>2.9
+          }
+        },
+        "20142015" => {
+          preseason: {
+            :win_percentage=>0.33,
+            :total_goals_scored=>21,
+            :total_goals_against=>19,
+            :average_goals_scored=>3.5,
+            :average_goals_against=>3.17
+          },
+          :regular_season=>
+          {
+            :win_percentage=>0.57,
+            :total_goals_scored=>232,
+            :total_goals_against=>208,
+            :average_goals_scored=>2.83,
+            :average_goals_against=>2.54
+          }
+        },
+        "20152016" => {
+          preseason: {
+            :win_percentage=>0.5,
+            :total_goals_scored=>31,
+            :total_goals_against=>43,
+            :average_goals_scored=>2.21,
+            :average_goals_against=>3.07
+          },
+          :regular_season=>
+          {
+            :win_percentage=>0.5,
+            :total_goals_scored=>228,
+            :total_goals_against=>215,
+            :average_goals_scored=>2.78,
+            :average_goals_against=>2.62
+          }
+        }
+      }
+      
+    assert_equal expected, @data.seasonal_summary("18")
   end
 end

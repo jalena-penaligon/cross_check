@@ -74,7 +74,7 @@ class GameStatsTest < MiniTest::Test
   def test_calculate_average_goals_per_game
     assert_equal 6.0, @v_small_data.average_goals_per_game
     assert_equal 4.65, @small_data.average_goals_per_game
-    assert_equal 5.44, @data.average_goals_per_game
+    assert_equal 5.54, @data.average_goals_per_game
   end
 
   def test_calculate_average_goals_per_season
@@ -85,12 +85,12 @@ class GameStatsTest < MiniTest::Test
     assert_equal expected, @small_data.average_goals_by_season
 
     expected = {
-                  "20122013" => 5.28,
-                  "20132014" => 5.36,
-                  "20142015" => 5.30,
-                  "20152016" => 5.33,
-                  "20162017" => 5.43,
-                  "20172018" => 5.86
+                  "20122013" => 5.4,
+                  "20132014" => 5.5,
+                  "20142015" => 5.43,
+                  "20152016" => 5.41,
+                  "20162017" => 5.51,
+                  "20172018" => 5.94
                 }
     assert_equal expected, @data.average_goals_by_season
   end

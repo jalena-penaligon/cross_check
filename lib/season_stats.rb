@@ -42,8 +42,6 @@ module SeasonStats
     subsets = {season: season_id.to_i}
     group_id = :teamname
     aggregate = :shooting_percentage
-    int = subset_group_and_aggregate(subsets, group_id, aggregate)
-    binding.pry
     find_max(subset_group_and_aggregate(subsets, group_id, aggregate))
   end
 
