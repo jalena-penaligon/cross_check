@@ -54,19 +54,19 @@ class GameStatsTest < MiniTest::Test
   end
 
   def test_calculate_total_games_by_season
-    expected = {20122013 => 2}
+    expected = {"20122013" => 2}
     assert_equal expected, @v_small_data.count_of_games_by_season
 
-    expected = {20122013 => 20}
+    expected = {"20122013" => 20}
     assert_equal expected, @small_data.count_of_games_by_season
 
     expected = {
-                20122013 => 806,
-                20132014 => 1323,
-                20142015 => 1319,
-                20152016 => 1321,
-                20162017 => 1317,
-                20172018 => 1355
+                "20122013" => 806,
+                "20132014" => 1323,
+                "20142015" => 1319,
+                "20152016" => 1321,
+                "20162017" => 1317,
+                "20172018" => 1355
                }
     assert_equal expected, @data.count_of_games_by_season
   end
@@ -78,19 +78,19 @@ class GameStatsTest < MiniTest::Test
   end
 
   def test_calculate_average_goals_per_season
-    expected = {20122013 => 6.0}
+    expected = {"20122013" => 6.0}
     assert_equal expected, @v_small_data.average_goals_by_season
 
-    expected = {20122013 => 4.65}
+    expected = {"20122013" => 4.65}
     assert_equal expected, @small_data.average_goals_by_season
 
     expected = {
-                  20122013 => 5.28,
-                  20132014 => 5.36,
-                  20142015 => 5.30,
-                  20152016 => 5.33,
-                  20162017 => 5.43,
-                  20172018 => 5.86
+                  "20122013" => 5.28,
+                  "20132014" => 5.36,
+                  "20142015" => 5.30,
+                  "20152016" => 5.33,
+                  "20162017" => 5.43,
+                  "20172018" => 5.86
                 }
     assert_equal expected, @data.average_goals_by_season
   end
