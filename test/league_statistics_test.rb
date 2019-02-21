@@ -47,7 +47,7 @@ class LeagueStatisticsTest < MiniTest::Test
   end
 
   def test_worst_defense
-    assert_equal "Sabres", @data.worst_defense
+    assert_equal "Coyotes", @data.worst_defense
     assert_equal "Canadiens", @small_data.worst_defense
     assert_equal "Rangers", @v_small_data.worst_defense
   end
@@ -83,7 +83,7 @@ class LeagueStatisticsTest < MiniTest::Test
   end
 
   def test_best_fans
-    assert_equal "Flyers", @data.best_fans
+    assert_equal "Coyotes", @data.best_fans
     assert_equal "Rangers", @small_data.best_fans
   end
 

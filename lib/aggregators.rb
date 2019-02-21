@@ -35,7 +35,7 @@ module Aggregators
 
   def shooting_percentage(data = nil)
     data = @data if data == nil
-    total_goals(data)/total_shots(data).to_f
+    find_total(:gt_goals, data)/total_shots(data).to_f
   end
 
   def total_shots(data = nil)
