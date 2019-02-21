@@ -4,12 +4,12 @@ module TeamStats
     team_info = {}
     @data.each do |game_team|
       info = {
-        team_id: game_team[:team_id].to_s,
-        franchise_id: game_team[:franchiseid].to_s,
-        short_name: game_team[:shortname],
-        team_name: game_team[:teamname],
-        abbreviation: game_team[:abbreviation],
-        link: game_team[:link]
+        "team_id" => game_team[:team_id].to_s,
+        "franchise_id" => game_team[:franchiseid].to_s,
+        "short_name" => game_team[:shortname],
+        "team_name" => game_team[:teamname],
+        "abbreviation" => game_team[:abbreviation],
+        "link" => game_team[:link]
       }
       team_info[game_team[:team_id]] = info
     end
@@ -91,19 +91,20 @@ module TeamStats
 
   def head_to_head(team_id)
     subset = {team_id: team_id.to_i}
-    group = :opponent
+    group = :opponent_id
     agg = :rounded_winning_percentage
-    subset_group_and_aggregate(subset, group, agg)
+    record = subset_group_and_aggregate(subset, group, agg)
+
   end
 
   def summary(data)
-    summary = {
-      win_percentage: winning_percentage(data).round(2),
-      total_goals_scored: total_goals(data),
-      total_goals_against: goals_allowed(data),
-      average_goals_scored: average_goals_scored(data).round(2),
-      average_goals_against: average_goals_against(data).round(2)
-    }
+      summary = {
+        win_percentage: winning_percentage(data).round(2),
+        total_goals_scored: total_goals(data),
+        total_goals_against: goals_allowed(data),
+        average_goals_scored: average_goals_scored(data).round(2),
+        average_goals_against: average_goals_against(data).round(2)
+      }
   end
 
   def seasonal_summary(team_id)
@@ -119,8 +120,17 @@ module TeamStats
       aggregate = :summary
       season_summary = subset_group_and_aggregate(subsets, group_id, aggregate)
       season_summary[:preseason] = season_summary.delete("P")
+      if season_summary[:preseason] == nil
+        season_summary[:preseason] = {
+          win_percentage: 0.0,
+          total_goals_scored: 0,
+          total_goals_against: 0,
+          average_goals_scored: 0.0,
+          average_goals_against: 0.0
+        }
+      end
       season_summary[:regular_season] = season_summary.delete("R")
-      hash[season] = season_summary
+      hash[season.to_s] = season_summary
     end
     hash
   end
