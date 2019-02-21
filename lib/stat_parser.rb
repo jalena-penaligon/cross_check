@@ -33,10 +33,12 @@ class StatParser
 
       opponent_goals = find_opponent_goals(hash)
       own_goals = find_own_goals(hash)
+      game_team_goals = hash[:goals]
       to_merge = {opponent: opponent_name,
                   opponent_goals: opponent_goals,
                   opponent_id: opponent_id,
-                  goals: own_goals}
+                  goals: own_goals,
+                  gt_goals: game_team_goals}
       hash.merge(to_merge)
     end
   end
