@@ -49,4 +49,10 @@ module Helpers
     return hash_aggregate(groups, aggregate)
   end
 
+  def string_conversion(hash)
+    hash.keys.each do |season|
+      hash[season.to_s] = hash.delete(season)
+    end
+  end
+
 end

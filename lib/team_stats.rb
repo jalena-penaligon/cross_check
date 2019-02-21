@@ -4,8 +4,8 @@ module TeamStats
     team_info = {}
     @data.each do |game_team|
       info = {
-        team_id: game_team[:team_id],
-        franchise_id: game_team[:franchiseid],
+        team_id: game_team[:team_id].to_s,
+        franchise_id: game_team[:franchiseid].to_s,
         short_name: game_team[:shortname],
         team_name: game_team[:teamname],
         abbreviation: game_team[:abbreviation],
@@ -29,7 +29,7 @@ module TeamStats
     group = :season
     agg = :winning_percentage
 
-    find_max(subset_group_and_aggregate(subsets, group, agg))
+    find_max(subset_group_and_aggregate(subsets, group, agg)).to_s
   end
 
   def worst_season(team_id)
@@ -37,7 +37,7 @@ module TeamStats
     group = :season
     agg = :winning_percentage
 
-    find_min(subset_group_and_aggregate(subsets, group, agg))
+    find_min(subset_group_and_aggregate(subsets, group, agg)).to_s
   end
 
   def average_win_percentage(team_id)
@@ -92,7 +92,7 @@ module TeamStats
   def head_to_head(team_id)
     subset = {team_id: team_id.to_i}
     group = :opponent
-    agg = :winning_percentage
+    agg = :rounded_winning_percentage
     subset_group_and_aggregate(subset, group, agg)
   end
 
@@ -124,5 +124,4 @@ module TeamStats
     end
     hash
   end
-
 end
