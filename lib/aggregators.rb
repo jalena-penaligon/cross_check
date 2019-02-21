@@ -28,6 +28,11 @@ module Aggregators
     total_wins(data)/total_games(data).to_f
   end
 
+  def rounded_winning_percentage(data = nil)
+    data = @data if data == nil
+    winning_percentage(data).round(2)
+  end
+
   def shooting_percentage(data = nil)
     data = @data if data == nil
     total_goals(data)/total_shots(data).to_f
@@ -65,7 +70,7 @@ module Aggregators
 
   def average_goals_scored(data = nil)
     data = @data if data == nil
-    total_goals(data) / total_games(data).to_f
+    (total_goals(data) / total_games(data).to_f).round(2)
   end
 
   def average_goals_against(data = nil)
