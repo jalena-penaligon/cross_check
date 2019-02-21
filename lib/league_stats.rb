@@ -78,15 +78,16 @@ module LeagueStats
 
   def best_fans
     subset = nil
-    group = :teamname
+    group = :team_id
     agg = :home_vs_away_percent_difference
 
-    find_max(subset_group_and_aggregate(subset, group, agg))
+    team_id = find_max(subset_group_and_aggregate(subset, group, agg))
+    team_info(team_id)["team_name"]
   end
 
   def worst_fans
     subset = nil
-    group = :teamname
+    group = :team_id
     agg = :home_vs_away_percent_difference
 
     win_percent = subset_group_and_aggregate(subset, group, agg)
