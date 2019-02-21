@@ -32,9 +32,11 @@ class StatParser
       opponent_name = find_team(opponent_id, team_info)
 
       opponent_goals = find_opponent_goals(hash)
+      own_goals = find_own_goals(hash)
       to_merge = {opponent: opponent_name,
                   opponent_goals: opponent_goals,
-                  opponent_id: opponent_id}
+                  opponent_id: opponent_id,
+                  goals: own_goals}
       hash.merge(to_merge)
     end
   end
@@ -60,12 +62,21 @@ class StatParser
     return id
   end
 
+  def find_own_goals(hash)
+    if hash[:hoa] == "home"
+      return hash[:home_goals]
+    else
+      return hash[:away_goals]
+    end
+  end
+
   def find_team(team_id, team_info)
     team =  team_info.find do |hash|
       hash[:team_id] == team_id
     end
     return team[:teamname]
   end
+
 
   def find_opponent_goals(hash)
     if hash[:hoa] == "away"
